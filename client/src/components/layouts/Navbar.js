@@ -8,8 +8,11 @@ const Navbar = () => {
           DnD5
         </a>
         <ul id='nav-mobile' className='right hide-on-med-and-down'>
-          <li>
-            <a href='sass.html'>+Character</a>
+          <li className='align-center'>
+            <a href='sass.html' className='align-center'>
+              <i className='material-icons'>add</i>
+              Character
+            </a>
           </li>
           <li>
             <a href='badges.html'>Dungeon Master</a>
