@@ -1,11 +1,48 @@
 {
-  "users": [
+  "players": [
     {
-      "name": "Seppo"
+      "id": 1,
+      "name": "Seppo",
+      "race": "Dragonborn",
+      "class": "Barbarian",
+      "skill": 99,
+      "role": "player"
     },
     {
-      "name": "Anneli"
+      "id": 2,
+      "name": "Anneli",
+      "race": "Aasimar",
+      "class": "Bard",
+      "skill": 50,
+      "role": "player"
+    },
+    {
+      "id": 3,
+      "name": "Jarmo",
+      "race": "Dwarf",
+      "class": "Cleric",
+      "skill": 1,
+      "role": "player"
+    },
+    {
+      "id": 4,
+      "name": "DragonSlayer666",
+      "race": "Elf",
+      "class": "Druid",
+      "skill": 15,
+      "role": "dungeonmaster"
     }
   ],
-  "games": []
+  "games": [
+    {
+      "id": 1,
+      "name": "Kadonneiden renkaiden mysteeri",
+      "players": [1, 2, 3]
+    },
+    {
+      "id": 2,
+      "name": "Tuhatkasvo, naamiomiehen arvoitus",
+      "players": [2, 3, 4]
+    }
+  ]
 }

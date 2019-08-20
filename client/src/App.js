@@ -16,9 +16,11 @@ function App() {
     <Fragment>
       <Navbar />
       <SearchBar />
-      <h1>Welcome! Almost ready!</h1>
-      <Characters />
-      <Games />
+      <div className='container'>
+        <h1>Welcome! Almost ready!</h1>
+        <Characters />
+        <Games />
+      </div>
     </Fragment>
   );
 }
