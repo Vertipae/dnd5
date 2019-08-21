@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Characters = () => {
   const [players, setPlayers] = useState([]);
@@ -21,9 +22,11 @@ const Characters = () => {
           <h5>Characters</h5>
         </li>
         {players.map(player => (
-          <li className='collection-item' key={player.id}>
-            {player.name} {player.race} {player.class}
-          </li>
+          <Link to={`player/${player.id}`}>
+            <li className='collection-item' key={player.id}>
+              {player.name} {player.race} {player.class}
+            </li>
+          </Link>
         ))}
       </ul>
     </div>
