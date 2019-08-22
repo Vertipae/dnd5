@@ -23,10 +23,8 @@ const Games = () => {
         </li>
 
         {games.map(game => (
-          <Link to={`game/${game.id}`}>
-            <li className='collection-item' key={game.id}>
-              {game.name}
-            </li>
+          <Link key={game.id} to={`game/${game.id}`}>
+            <li className='collection-item'>{game.name}</li>
           </Link>
         ))}
       </ul>

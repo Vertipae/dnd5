@@ -3,15 +3,15 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Characters = () => {
-  const [players, setPlayers] = useState([]);
+  const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
-    getPlayers();
+    getCharacters();
   }, []);
 
-  const getPlayers = async () => {
-    const res = await axios.get("http://localhost:5000/players");
-    setPlayers(res.data);
+  const getCharacters = async () => {
+    const res = await axios.get("http://localhost:5000/characters");
+    setCharacters(res.data);
     console.log(res.data);
   };
 
@@ -21,10 +21,10 @@ const Characters = () => {
         <li className='collection-header brown lighten-5'>
           <h5>Characters</h5>
         </li>
-        {players.map(player => (
-          <Link to={`player/${player.id}`}>
-            <li className='collection-item' key={player.id}>
-              {player.name} {player.race} {player.class}
+        {characters.map(character => (
+          <Link key={character.id} to={`character/${character.id}`}>
+            <li className='collection-item'>
+              {character.name} {character.race} {character.class}
             </li>
           </Link>
         ))}

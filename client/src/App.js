@@ -35,7 +35,7 @@ function App() {
           />
 
           <Route exact path='/test' component={Test} />
-          <Route exact path='/player/:id' component={Character} />
+          <Route exact path='/character/:id' component={Character} />
           <Route exact path='/game/:id' component={Game} />
         </Switch>
       </Fragment>

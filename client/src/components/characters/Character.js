@@ -3,23 +3,23 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Character = ({ match }) => {
-  const [player, setPlayer] = useState({});
+  const [character, setCharacter] = useState({});
 
   useEffect(() => {
-    getPlayer(match.params.id);
+    getCharacter(match.params.id);
   }, []);
 
-  const getPlayer = async () => {
+  const getCharacter = async () => {
     const res = await axios.get(
-      `http://localhost:5000/players/${match.params.id}`
+      `http://localhost:5000/characters/${match.params.id}`
     );
-    setPlayer(res.data);
+    setCharacter(res.data);
     // console.log(res.data);
   };
 
   return (
     <div>
-      <p>Character{player.name}</p>
+      <p>Character{character.name}</p>
     </div>
   );
 };

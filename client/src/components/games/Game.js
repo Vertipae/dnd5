@@ -18,7 +18,10 @@ const Game = ({ match }) => {
 
   return (
     <div>
-      <p>Game {game.name}</p>
+      <p>
+        Game {game.name}
+        {/* {game.player} */}
+      </p>
     </div>
   );
 };
