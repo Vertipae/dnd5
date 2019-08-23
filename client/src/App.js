@@ -7,6 +7,7 @@ import Character from "./components/characters/Character";
 import Test from "./components/dungeonmaster/Test";
 import Games from "./components/games/Games";
 import Game from "./components/games/Game";
+import CreateCharacter from "./components/create-character/CreateCharacter";
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css/dist/js/materialize.min.js";
 import "./App.css";
@@ -37,6 +38,7 @@ function App() {
           <Route exact path='/test' component={Test} />
           <Route exact path='/character/:id' component={Character} />
           <Route exact path='/game/:id' component={Game} />
+          <Route exact path='/create-character' component={CreateCharacter} />
         </Switch>
       </Fragment>
     </Router>

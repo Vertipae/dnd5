@@ -7,6 +7,7 @@ const Characters = () => {
 
   useEffect(() => {
     getCharacters();
+    // eslint-disable-next-line
   }, []);
 
   const getCharacters = async () => {

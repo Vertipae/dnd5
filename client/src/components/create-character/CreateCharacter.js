@@ -1,35 +1,27 @@
-// Todo single character page
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 
-const Character = ({ match }) => {
-  const [character, setCharacter] = useState({});
-
-  useEffect(() => {
-    getCharacter(match.params.id);
-  }, []);
-
-  const getCharacter = async () => {
-    const res = await axios.get(
-      `http://localhost:5000/characters/${match.params.id}`
-    );
-    setCharacter(res.data);
-    // console.log(res.data);
-  };
-
+const CreateCharacter = () => {
   return (
     <form>
       <div className='container' style={{ marginTop: "50px" }}>
         <div className='row'>
           {/* <div className='divider' /> */}
           <div className='col s6'>
-            CHARACTER NAME: {character.name} {character.level}LEVEL
+            <div className='input-field col s4'>
+              <input id='characterName' type='text' />
+              <label>CHARACTER NAME:</label>
+            </div>
+            <div className='input-field col s4'>
+              <input id='level' type='text' />
+              <label>LEVEL:</label>
+            </div>
           </div>
+
           <div className='col s6 row'>
             <div className='col s4 center'>
               <label>Class Select</label>
-              <select className='browser-default'>
-                <option value='' disabled selected>
+              <select className='browser-default' defaultValue='0'>
+                <option value='0' disabled>
                   Classes
                 </option>
                 <option value='1'>Option 1</option>
@@ -39,8 +31,8 @@ const Character = ({ match }) => {
             </div>
             <div className='col s4 center'>
               <label>Background Select</label>
-              <select className='browser-default'>
-                <option value='' disabled selected>
+              <select className='browser-default' defaultValue='0'>
+                <option value='0' disabled>
                   Backgrounds
                 </option>
                 <option value='1'>Option 1</option>
@@ -56,8 +48,8 @@ const Character = ({ match }) => {
           <div className='col s6 row right'>
             <div className='col s4 center'>
               <label>Race Select</label>
-              <select className='browser-default'>
-                <option value='' disabled selected>
+              <select className='browser-default' defaultValue='0'>
+                <option value='0' disabled>
                   Races
                 </option>
                 <option value='1'>Option 1</option>
@@ -67,8 +59,8 @@ const Character = ({ match }) => {
             </div>
             <div className='col s4 center'>
               <label>Alignment Select</label>
-              <select className='browser-default'>
-                <option value='' disabled selected>
+              <select className='browser-default' defaultValue='0'>
+                <option value='0' disabled>
                   Alignments
                 </option>
                 <option value='1'>Option 1</option>
@@ -86,4 +78,4 @@ const Character = ({ match }) => {
   );
 };
 
-export default Character;
+export default CreateCharacter;

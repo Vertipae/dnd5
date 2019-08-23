@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -9,10 +10,10 @@ const Navbar = () => {
         </a>
         <ul id='nav-mobile' className='right hide-on-med-and-down'>
           <li className='align-center'>
-            <a href='sass.html' className='align-center'>
+            <Link to='/create-character' className='align-center'>
               <i className='material-icons'>add</i>
               Character
-            </a>
+            </Link>
           </li>
           <li>
             <a href='badges.html'>Dungeon Master</a>

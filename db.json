@@ -37,63 +37,63 @@
       "name": "Taistelu-Jaska",
       "race": "Dragonborn",
       "class": "Barbarian",
-      "skill": 99
+      "level": 99
     },
     {
       "id": 2,
       "race": "Aasimar",
       "name": "Bieberin Justin",
       "class": "Bard",
-      "skill": 50
+      "level": 50
     },
     {
       "id": 3,
       "name": "Silvennoinen",
       "race": "Dwarf",
       "class": "Cleric",
-      "skill": 1
+      "level": 1
     },
     {
       "id": 4,
       "name": "Karhu",
       "race": "Elf",
       "class": "Druid",
-      "skill": 15
+      "level": 15
     },
     {
       "id": 5,
       "name": "Fox Mulder",
       "race": "Dragonborn",
       "class": "Barbarian",
-      "skill": 99
+      "level": 99
     },
     {
       "id": 6,
       "name": "Dana Scully",
       "race": "Aasimar",
       "class": "Bard",
-      "skill": 50
+      "level": 50
     },
     {
       "id": 7,
       "name": "Terminator",
       "race": "Dwarf",
       "class": "Cleric",
-      "skill": 1
+      "level": 1
     },
     {
       "id": 8,
       "name": "Sarah Connor",
       "race": "Elf",
       "class": "Druid",
-      "skill": 15
+      "level": 15
     },
     {
       "id": 9,
       "name": "Lara Croft",
       "race": "Elf",
       "class": "Druid",
-      "skill": 15
+      "level": 15
     }
   ],
   "games": [

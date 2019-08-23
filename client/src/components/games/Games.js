@@ -7,6 +7,7 @@ const Games = () => {
 
   useEffect(() => {
     getGames();
+    // eslint-disable-next-line
   }, []);
 
   const getGames = async () => {
