@@ -1,25 +1,40 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+// Todo: Active/Current page
 
-const Navbar = () => {
+const Navbar = props => {
+  // console.log(props.location.pathname);
+
   return (
     <nav>
       <div className='nav-wrapper brown'>
-        <a href='#' className='brand-logo center'>
+        <Link to='/' className='brand-logo center'>
+          <i className='fas fa-dragon'></i>
           DnD5
-        </a>
+        </Link>
+        <Link to='/' style={{ marginLeft: "15px" }}>
+          <i className='fas fa-home'></i>
+        </Link>
         <ul id='nav-mobile' className='right hide-on-med-and-down'>
-          <li className='align-center'>
+          <li
+            className={`align-center ${
+              props.location.pathname === "/create-character" ? "active" : null
+            }`}
+          >
             <Link to='/create-character' className='align-center'>
               <i className='material-icons'>add</i>
               Character
             </Link>
           </li>
-          <li>
-            <a href='badges.html'>Dungeon Master</a>
+          <li
+            className={`${
+              props.location.pathname === "/dungeonmaster" ? "active" : null
+            }`}
+          >
+            <Link to='/dungeonmaster'>Dungeon Master</Link>
           </li>
           <li>
-            <a href='collapsible.html'>Logout</a>
+            <Link to='collapsible.html'>Logout</Link>
           </li>
         </ul>
       </div>
@@ -27,4 +42,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

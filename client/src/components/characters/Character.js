@@ -28,8 +28,8 @@ const Character = ({ match }) => {
           <div className='col s6 row'>
             <div className='col s4 center'>
               <label>Class Select</label>
-              <select className='browser-default'>
-                <option value='' disabled selected>
+              <select className='browser-default' defaultValue='0'>
+                <option value='0' disabled>
                   Classes
                 </option>
                 <option value='1'>Option 1</option>
@@ -39,8 +39,8 @@ const Character = ({ match }) => {
             </div>
             <div className='col s4 center'>
               <label>Background Select</label>
-              <select className='browser-default'>
-                <option value='' disabled selected>
+              <select className='browser-default' defaultValue='0'>
+                <option value='0' disabled>
                   Backgrounds
                 </option>
                 <option value='1'>Option 1</option>
@@ -56,8 +56,8 @@ const Character = ({ match }) => {
           <div className='col s6 row right'>
             <div className='col s4 center'>
               <label>Race Select</label>
-              <select className='browser-default'>
-                <option value='' disabled selected>
+              <select className='browser-default' defaultValue='0'>
+                <option value='0' disabled>
                   Races
                 </option>
                 <option value='1'>Option 1</option>
@@ -67,8 +67,8 @@ const Character = ({ match }) => {
             </div>
             <div className='col s4 center'>
               <label>Alignment Select</label>
-              <select className='browser-default'>
-                <option value='' disabled selected>
+              <select className='browser-default' defaultValue='0'>
+                <option value='0' disabled>
                   Alignments
                 </option>
                 <option value='1'>Option 1</option>
