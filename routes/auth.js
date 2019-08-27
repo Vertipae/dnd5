@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-// @route POST api/auth
+// @route GET api/auth
 // @desc Get logged in player
 // @access Private
 router.get("/", (req, res) => {

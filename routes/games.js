@@ -3,7 +3,7 @@ const router = express.Router();
 
 // @route GET api/games
 // @desc Get all users games
-// @access Private (Have to be logged in to see games that why private)
+// @access Private (Have to be logged in to see games)
 router.get("/", (req, res) => {
   res.send("Get all games");
 });
