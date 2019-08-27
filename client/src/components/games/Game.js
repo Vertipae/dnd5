@@ -6,6 +6,7 @@ const Game = ({ match }) => {
 
   useEffect(() => {
     getGame(match.params.id);
+    // eslint-disable-next-line
   }, []);
 
   const getGame = async () => {

@@ -13,7 +13,7 @@ const Characters = () => {
   const getCharacters = async () => {
     const res = await axios.get("http://localhost:5000/characters");
     setCharacters(res.data);
-    console.log(res.data);
+    // console.log(res.data);
   };
 
   return (

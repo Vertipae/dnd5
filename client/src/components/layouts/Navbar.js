@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-// Todo: Active/Current page
 
 const Navbar = props => {
   // console.log(props.location.pathname);

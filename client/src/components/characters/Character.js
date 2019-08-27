@@ -7,6 +7,7 @@ const Character = ({ match }) => {
 
   useEffect(() => {
     getCharacter(match.params.id);
+    // eslint-disable-next-line
   }, []);
 
   const getCharacter = async () => {
