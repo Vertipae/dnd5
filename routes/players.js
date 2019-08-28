@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const Player = require("../models/Player");
+
 // @route POST api/players
 // @desc Register a player
 // @access Public

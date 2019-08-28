@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const Character = require("../models/Character");
+
 // @route GET api/characters
 // @desc Get all players characters
 // @access Private (Have to be logged in to see characters)

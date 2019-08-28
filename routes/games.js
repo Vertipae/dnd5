@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const Game = require("../models/Game");
+
 // @route GET api/games
 // @desc Get all users games
 // @access Private (Have to be logged in to see games)
