@@ -8,6 +8,14 @@ const Player = require("../models/Player");
 // @access Public
 router.post("/", (req, res) => {
   res.send("Register a player");
+  console.log(req.body);
+  console.log("Whysocode");
+
+  const newPlayer = new Player({
+    username: req.body.username,
+    password: req.body.password
+  });
+  newPlayer.save();
 });
 
 // @route DELETE api/players
