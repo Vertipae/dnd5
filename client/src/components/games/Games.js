@@ -11,7 +11,8 @@ const Games = () => {
   }, []);
 
   const getGames = async () => {
-    const res = await axios.get("http://localhost:5000/games");
+    // const res = await axios.get("http://localhost:5000/games");
+    const res = await axios.get("http://localhost:5000/api/games");
     setGames(res.data);
     // console.log(res.data);
   };
@@ -24,7 +25,7 @@ const Games = () => {
         </li>
 
         {games.map(game => (
-          <Link key={game.id} to={`game/${game.id}`}>
+          <Link key={game._id} to={`game/${game._id}`}>
             <li className='collection-item'>{game.name}</li>
           </Link>
         ))}

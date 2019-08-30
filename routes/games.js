@@ -7,13 +7,18 @@ const Game = require("../models/Game");
 // @desc Get all users games
 // @access Private (Have to be logged in to see games)
 router.get("/", (req, res) => {
-  res.send("Get all games");
+  // res.send("Get all games");
+  Game.find().then(games => res.send(games));
 });
 
 // @route POST api/games
 // @desc Add new game
 // @access Private
 router.post("/", (req, res) => {
+  const newGame = new Game({
+    name: req.body.name
+  });
+  newGame.save();
   res.send("Add game");
 });
 

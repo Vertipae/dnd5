@@ -11,7 +11,8 @@ const Characters = () => {
   }, []);
 
   const getCharacters = async () => {
-    const res = await axios.get("http://localhost:5000/characters");
+    // const res = await axios.get("http://localhost:5000/characters");
+    const res = await axios.get("http://localhost:5000/api/characters");
     setCharacters(res.data);
     // console.log(res.data);
   };
@@ -23,7 +24,7 @@ const Characters = () => {
           <h5>Characters</h5>
         </li>
         {characters.map(character => (
-          <Link key={character.id} to={`character/${character.id}`}>
+          <Link key={character._id} to={`character/${character._id}`}>
             <li className='collection-item'>
               {character.name} {character.race} {character.class}
             </li>

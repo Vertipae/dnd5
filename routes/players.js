@@ -9,7 +9,6 @@ const Player = require("../models/Player");
 router.post("/", (req, res) => {
   res.send("Register a player");
   console.log(req.body);
-  console.log("Whysocode");
 
   const newPlayer = new Player({
     username: req.body.username,
