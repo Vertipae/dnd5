@@ -20,6 +20,7 @@ router.post("/", (req, res) => {
     race: req.body.race,
     class: req.body.class,
     level: req.body.level
+    // owner
   });
   newCharacter.save();
   res.send("Add character");

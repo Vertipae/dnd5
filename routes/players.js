@@ -7,14 +7,13 @@ const Player = require("../models/Player");
 // @desc Register a player
 // @access Public
 router.post("/", (req, res) => {
-  res.send("Register a player");
   console.log(req.body);
-
   const newPlayer = new Player({
     username: req.body.username,
     password: req.body.password
   });
   newPlayer.save();
+  res.send("Register a player");
 });
 
 // @route DELETE api/players
