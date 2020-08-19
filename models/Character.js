@@ -1,30 +1,30 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const CharacterSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   race: {
     type: String,
-    required: true
+    required: true,
   },
   class: {
     type: String,
-    required: true
+    required: true,
   },
   level: {
     type: Number,
-    required: true
+    required: true,
   },
-  owner: {
+  player: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "players"
-  }
-});
+    ref: "players",
+  },
+})
 
-module.exports = mongoose.model("characters", CharacterSchema);
+module.exports = mongoose.model("characters", CharacterSchema)
