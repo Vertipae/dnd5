@@ -4,6 +4,7 @@ const router = express.Router()
 const Player = require("../models/Player")
 const jwt = require("jsonwebtoken")
 const config = require("config")
+const auth = require("../middleware/auth")
 const { check, validationResult } = require("express-validator")
 const bcrypt = require("bcryptjs")
 
@@ -13,8 +14,16 @@ const bcrypt = require("bcryptjs")
 // @desc Get logged in player
 // @access Private
 // Validates the logged in user
-router.get("/", (req, res) => {
-  res.send("Get logged in player")
+router.get("/", auth, async (req, res) => {
+  try {
+    //.select('-password) so it won't return password
+    const user = await Player.findById(req.player.id).select("-password")
+    res.json(user)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send("Server error")
+  }
+  // res.send("Get logged in player")
 })
 
 // @route POST api/auth/login
