@@ -2,7 +2,8 @@ const express = require("express")
 const router = express.Router()
 
 const Player = require("../models/Player")
-
+const jwt = require("jsonwebtoken")
+const config = require("config")
 const { check, validationResult } = require("express-validator")
 const bcrypt = require("bcryptjs")
 
@@ -37,7 +38,27 @@ router.post("/", async (req, res) => {
     newPlayer.password = await bcrypt.hash(newPlayer.password, salt)
 
     const savedPlayer = await newPlayer.save()
-    res.send(savedPlayer)
+
+    const payload = {
+      savedPlayer: {
+        id: savedPlayer.id,
+      },
+    }
+
+    // Adding token & response with Json Web Token
+    jwt.sign(
+      payload,
+      config.get("jwtSecret"),
+      {
+        expiresIn: 360000,
+        // Callback that returns token and throws possible errors
+      },
+      (err, token) => {
+        if (err) throw err
+        res.send({ token })
+      }
+    )
+    // res.send(savedPlayer)
   } catch (err) {
     console.error(err.message)
     res.status(500).send("Server error")
