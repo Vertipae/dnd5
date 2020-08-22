@@ -13,7 +13,7 @@ const CharacterSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  class: {
+  characterClass: {
     type: String,
     required: true,
   },

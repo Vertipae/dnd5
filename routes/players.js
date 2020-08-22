@@ -68,16 +68,6 @@ router.post("/", async (req, res) => {
 // @route DELETE api/players
 // @desc Delete a player
 // @access Public
-router.delete("/", (req, res) => {
-  //   Player.findOneAndDelete({ // id myöhemmin }).then((player) => {
-  //     console.log(player)
-  //     if (!player) {
-  //       return res.status(400).json({ msg: "Ei onnistu" })
-  //     } else {
-  //       res.send(player)
-  //       console.log("Success")
-  //     }
-  //   })
-})
+router.delete("/", (req, res) => {})
 
 module.exports = router

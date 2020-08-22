@@ -25,12 +25,12 @@ router.get("/", auth, async (req, res) => {
 // @desc Add new character
 // @access Private
 router.post("/", auth, async (req, res) => {
-  const { name, race, level } = req.body
+  const { name, race, characterClass, level } = req.body
 
   const newCharacter = new Character({
     name,
     race,
-    class: req.body.class,
+    characterClass,
     level,
     player: req.player.id,
   })
@@ -41,15 +41,59 @@ router.post("/", auth, async (req, res) => {
 // @route PUT api/characters/:id
 // @desc Update character
 // @access Private
-router.put("/:id", (req, res) => {
-  res.send("Update character")
+router.put("/:id", auth, async (req, res) => {
+  const { name, race, characterClass, level } = req.body
+
+  const characterFields = {}
+  if (name) characterFields.name = name
+  if (race) characterFields.race = race
+  if (characterClass) characterFields.characterClass = characterClass
+  if (level) characterFields.level = level
+
+  try {
+    let character = await Character.findById(req.params.id)
+
+    if (!character) return res.status(404).json({ msg: "Character not found" })
+
+    // Checking that player owns character
+    if (character.player.toString() !== req.player.id) {
+      return res.status(401).json({ msg: "Not authorized" })
+    }
+
+    character = await Character.findByIdAndUpdate(
+      req.params.id,
+      { $set: characterFields },
+      { new: true }
+    )
+
+    res.send(character)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send("Server Error")
+  }
 })
 
 // @route DELETE api/characters/:id
 // @desc Delete character
 // @access Private
-router.delete("/:id", (req, res) => {
-  res.send("Delete character")
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    let character = await Character.findById(req.params.id)
+
+    if (!character) return res.status(404).json({ msg: "Character not found" })
+
+    // Checking that player owns character
+    if (character.player.toString() !== req.player.id) {
+      return res.status(401).json({ msg: "Not authorized" })
+    }
+
+    await Character.findByIdAndRemove(req.params.id)
+
+    res.send({ msg: "Character removed" })
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send("Server Error")
+  }
 })
 
 module.exports = router
