@@ -1,11 +1,29 @@
 const express = require("express")
 const router = express.Router()
-
+const auth = require("../middleware/auth")
 const Player = require("../models/Player")
 const jwt = require("jsonwebtoken")
 const config = require("config")
 const { check, validationResult } = require("express-validator")
 const bcrypt = require("bcryptjs")
+
+// @route GET api/players/games
+// @desc Get all users games
+// @access Private (Have to be logged in to see games)
+router.get("/games", auth, async (req, res) => {
+  try {
+    const playersGames = await Player.findById(req.player.id)
+      .select("games")
+      .populate("games")
+    res.send(playersGames)
+  } catch (err) {
+    err.message ? console.error(err.message) : console.error(err)
+    res.status(500).send("Server Error")
+  }
+})
+
+// @route GET api/players
+// @desc Get all players
 
 // @route POST api/players
 // @desc Register a player
@@ -60,7 +78,7 @@ router.post("/", async (req, res) => {
     )
     // res.send(savedPlayer)
   } catch (err) {
-    console.error(err.message)
+    err.message ? console.error(err.message) : console.error(err)
     res.status(500).send("Server error")
   }
 })

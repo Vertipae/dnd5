@@ -16,7 +16,7 @@ router.get("/", auth, async (req, res) => {
     const characters = await Character.find({ player: req.player.id })
     res.json(characters)
   } catch (err) {
-    console.error(err.message)
+    err.message ? console.error(err.message) : console.error(err)
     res.status(500).send("Server Error")
   }
 })
@@ -25,17 +25,31 @@ router.get("/", auth, async (req, res) => {
 // @desc Add new character
 // @access Private
 router.post("/", auth, async (req, res) => {
-  const { name, race, characterClass, level } = req.body
+  await check("name", "Name is required").not().isEmpty().run(req)
+  await check("race", "Race is required").not().isEmpty().run(req)
+  await check("characterClass", "Class is required").not().isEmpty().run(req)
+  await check("level", "Level is required").not().isEmpty().run(req)
 
-  const newCharacter = new Character({
-    name,
-    race,
-    characterClass,
-    level,
-    player: req.player.id,
-  })
-  const character = await newCharacter.save()
-  res.send(character)
+  // Get validation result after checks
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+  const { name, race, characterClass, level } = req.body
+  try {
+    const newCharacter = new Character({
+      name,
+      race,
+      characterClass,
+      level,
+      player: req.player.id,
+    })
+    const character = await newCharacter.save()
+    res.send(character)
+  } catch (err) {
+    err.message ? console.error(err.message) : console.error(err)
+    res.status(500).send("Save failed")
+  }
 })
 
 // @route PUT api/characters/:id
@@ -68,7 +82,7 @@ router.put("/:id", auth, async (req, res) => {
 
     res.send(character)
   } catch (err) {
-    console.error(err.message)
+    err.message ? console.error(err.message) : console.error(err)
     res.status(500).send("Server Error")
   }
 })
@@ -76,6 +90,7 @@ router.put("/:id", auth, async (req, res) => {
 // @route DELETE api/characters/:id
 // @desc Delete character
 // @access Private
+// TODO: Delete characters from the game
 router.delete("/:id", auth, async (req, res) => {
   try {
     let character = await Character.findById(req.params.id)
@@ -91,7 +106,7 @@ router.delete("/:id", auth, async (req, res) => {
 
     res.send({ msg: "Character removed" })
   } catch (err) {
-    console.error(err.message)
+    err.message ? console.error(err.message) : console.error(err)
     res.status(500).send("Server Error")
   }
 })
