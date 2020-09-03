@@ -5,3 +5,38 @@
   /* vertical-align: middle; */
   align-items: middle;
 }
+
+.container {
+  margin-top: 50px;
+}
+
+label {
+  font-size: 2.5rem;
+}
+
+.btn {
+  font-family: "MedievalSharp", cursive;
+  width: 120px;
+}
+/* Materializecss */
+/* input.input-field.my-inputfield {
+  border: #bbcfa1 0.1rem solid;
+  margin: 0px 0px 20px;
+  padding: 10px 20px;
+  width: 300px;
+} */
+/* .input-field.my-inputfield > input {
+  border-bottom: 0px;
+}
+
+.input-field.my-inputfield > input:focus {
+  border-bottom: 0px !important;
+  box-shadow: none !important;
+}
+
+.input-field.my-inputfield > label {
+  transition: none; 
+} 
+.input-field.my-inputfield > label.active {
+  transition: none; 
+}  */

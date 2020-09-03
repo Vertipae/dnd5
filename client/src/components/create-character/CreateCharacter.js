@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react"
 
 const CreateCharacter = () => {
   return (
     <form>
-      <div className='container' style={{ marginTop: "50px" }}>
+      <div className='container'>
         <div className='row'>
           {/* <div className='divider' /> */}
           <div className='col s6'>
@@ -75,7 +75,7 @@ const CreateCharacter = () => {
         </div>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default CreateCharacter;
+export default CreateCharacter
