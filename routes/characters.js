@@ -2,7 +2,6 @@ const express = require("express")
 const router = express.Router()
 const auth = require("../middleware/auth")
 const { check, validationResult } = require("express-validator")
-const Player = require("../models/Player")
 const Character = require("../models/Character")
 
 // @route GET api/characters
@@ -12,8 +11,9 @@ router.get("/", auth, async (req, res) => {
   // res.send("Get all characters");
   // Character.find().then((characters) => res.send(characters))
   try {
-    // Todo sort .sort({date: -1})
-    const characters = await Character.find({ player: req.player.id })
+    const characters = await Character.find({ player: req.player.id }).sort({
+      date: -1,
+    })
     res.json(characters)
   } catch (err) {
     err.message ? console.error(err.message) : console.error(err)
@@ -90,7 +90,7 @@ router.put("/:id", auth, async (req, res) => {
 // @route DELETE api/characters/:id
 // @desc Delete character
 // @access Private
-// TODO: Delete characters from the game
+// TODO: Delete the character from the games & player
 router.delete("/:id", auth, async (req, res) => {
   try {
     let character = await Character.findById(req.params.id)

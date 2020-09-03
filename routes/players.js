@@ -83,9 +83,27 @@ router.post("/", async (req, res) => {
   }
 })
 
-// @route DELETE api/players
+// @route DELETE api/players/:id
 // @desc Delete a player
-// @access Public
-router.delete("/", (req, res) => {})
+// @access Private
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    let player = await Player.findById(req.params.id)
+
+    if (!player) return res.status(404).json({ msg: "Player not found" })
+
+    // Checking that player owns the account
+    if (player.id.toString() !== req.player.id) {
+      return res.status(401).json({ msg: "Not authorized" })
+    }
+
+    await Player.findByIdAndRemove(req.params.id)
+
+    res.send({ msg: "Player removed" })
+  } catch (err) {
+    err.message ? console.error(err.message) : console.error(err)
+    res.status(500).send("Server Error")
+  }
+})
 
 module.exports = router
