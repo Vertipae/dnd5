@@ -14,8 +14,6 @@ import DungeonMaster from "./components/dungeonmaster/DungeonMaster"
 import "materialize-css/dist/css/materialize.min.css"
 import M from "materialize-css/dist/js/materialize.min.js"
 import "./App.css"
-import { Provider } from "react-redux"
-import store from "./store"
 
 function App() {
   useEffect(() => {
@@ -23,42 +21,38 @@ function App() {
     M.AutoInit()
   })
   return (
-    <Provider store={store}>
-      <Router>
-        <Fragment>
-          <Navbar />
-          <Switch>
-            <Route exact path='/' component={Login} />
-            <Route exact path='/register' component={Register} />
-            <Route
-              exact
-              path='/home'
-              render={() => (
-                <div className='container'>
-                  <SearchBar />
-                  <h1>
-                    Welcome!{" "}
-                    <span
-                      style={{ fontSize: "40px", color: "Mediumslateblue" }}
-                    >
-                      <i className='fas fa-hat-wizard'></i>
-                    </span>
-                  </h1>
-                  <Characters />
-                  <Games />
-                </div>
-              )}
-            />
+    <Router>
+      <Fragment>
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={Login} />
+          <Route exact path='/register' component={Register} />
+          <Route
+            exact
+            path='/home'
+            render={() => (
+              <div className='container'>
+                <SearchBar />
+                <h1>
+                  Welcome!{" "}
+                  <span style={{ fontSize: "40px", color: "Mediumslateblue" }}>
+                    <i className='fas fa-hat-wizard'></i>
+                  </span>
+                </h1>
+                <Characters />
+                <Games />
+              </div>
+            )}
+          />
 
-            <Route exact path='/test' component={Test} />
-            <Route exact path='/character/:id' component={Character} />
-            <Route exact path='/game/:id' component={Game} />
-            <Route exact path='/create-character' component={CreateCharacter} />
-            <Route exact path='/dungeonmaster' component={DungeonMaster} />
-          </Switch>
-        </Fragment>
-      </Router>
-    </Provider>
+          <Route exact path='/test' component={Test} />
+          <Route exact path='/character/:id' component={Character} />
+          <Route exact path='/game/:id' component={Game} />
+          <Route exact path='/create-character' component={CreateCharacter} />
+          <Route exact path='/dungeonmaster' component={DungeonMaster} />
+        </Switch>
+      </Fragment>
+    </Router>
   )
 }
 

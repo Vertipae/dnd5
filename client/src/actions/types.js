@@ -1,0 +1,1 @@
+export const SET_CURRENT_PLAYER = "SET_CURRENT_PLAYER"
