@@ -1,10 +1,11 @@
 import axios, {setToken} from "../utils/axiosService"
 import jwt_decode from "jwt-decode"
 import { SET_CURRENT_PLAYER } from "./types"
+// Todo better history
 
-export const registerUser = async (userData, history ) => dispatch => {
+export const registerUser = (userData, history) => async (dispatch) => {
     try {
-        const res = await axios.post('api/players', userData)
+        const res = await axios.post('http://localhost:5000/api/players', userData)
         setToken(res.data.token)
         history.push('/home')
     } catch(err) {
@@ -14,11 +15,11 @@ export const registerUser = async (userData, history ) => dispatch => {
 }
 
 // Login get user token
-export const loginUser = async (userData) => dispatch => {
+export const loginUser = (userData, history) => async (dispatch) => {
     try {
-        const res = await axios.post('api/auth/login', userData)
+        const res = await axios.post('http://localhost:5000/api/auth/login', userData)
         setToken(res.data.token)
-        const decoded = jwt_decode(token)
+        const decoded = jwt_decode(res.data.token)
         dispatch(setCurrentPlayer(decoded))
         history.push('/home')
     } catch(err) {

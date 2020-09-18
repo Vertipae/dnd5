@@ -1,7 +1,7 @@
 import { SET_CURRENT_PLAYER } from "../actions/types"
 
 const initialState = {
-  player: null,
+  player: null
 }
 
 export default function (state = initialState, action) {
