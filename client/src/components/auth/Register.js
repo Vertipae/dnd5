@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react"
-import { Link,useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../../actions/authActions'
 // Note to self withRouter doesn't work with functional components

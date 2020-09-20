@@ -14,6 +14,7 @@ import DungeonMaster from "./components/dungeonmaster/DungeonMaster"
 import "materialize-css/dist/css/materialize.min.css"
 import M from "materialize-css/dist/js/materialize.min.js"
 import "./App.css"
+import WelcomeBar from "./components/layouts/WelcomeBar"
 
 function App() {
   useEffect(() => {
@@ -33,12 +34,7 @@ function App() {
             render={() => (
               <div className='container'>
                 <SearchBar />
-                <h1>
-                  Welcome!{" "}
-                  <span style={{ fontSize: "40px", color: "Mediumslateblue" }}>
-                    <i className='fas fa-hat-wizard'></i>
-                  </span>
-                </h1>
+                <WelcomeBar/>
                 <Characters />
                 <Games />
               </div>

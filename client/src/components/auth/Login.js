@@ -1,13 +1,42 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import { Link, useHistory } from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux'
+import {loginUser} from '../../actions/authActions'
 
 const Login = () => {
+
+  const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    const userData = {
+      username,
+      password
+    }
+
+    dispatch(loginUser(userData, history))
+  }
+
+  useEffect(() => {
+    if(auth.player) {
+      history.push('/home')
+    }
+  }, [])
+
   return (
     <div className='container'>
-      <form>
+      <form onSubmit={onSubmit}>
         <h1>Sign in</h1>
         <label>Username</label>
         <input
+          value={username}
+          onChange={e => setUsername(e.target.value)}
           className='input-field my-inputfield'
           type='text'
           name='username'
@@ -15,6 +44,8 @@ const Login = () => {
         />
         <label>Password</label>
         <input
+          value={password}
+          onChange={e => setPassword(e.target.value)}
           className='input-field my-inputfield'
           type='password'
           name='password'
