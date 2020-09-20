@@ -27,6 +27,7 @@ const Login = () => {
     if(auth.player) {
       history.push('/home')
     }
+    // eslint-disable-next-line
   }, [])
 
   return (
