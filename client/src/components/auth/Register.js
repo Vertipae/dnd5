@@ -68,7 +68,7 @@ const Register = () => {
         />
 
         <button
-          className="btn waves-effect waves-light brown"
+          className="btn waves-effect waves-light brown myBtn"
           style={{ marginTop: "2em" }}
           type="submit"
           name="action"
@@ -80,7 +80,7 @@ const Register = () => {
         <div>
           <Link
             to="/"
-            className="btn waves-effect waves-light brown"
+            className="btn waves-effect waves-light brown myBtn"
             style={{ marginTop: "2em" }}
           >
             Login
