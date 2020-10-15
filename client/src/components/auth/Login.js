@@ -33,24 +33,28 @@ const Login = () => {
     <div className="container">
       <form onSubmit={onSubmit}>
         <h1>Sign in</h1>
-        <label>Username</label>
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="input-field my-inputfield"
-          type="text"
-          name="username"
-          required
-        />
-        <label>Password</label>
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="input-field my-inputfield"
-          type="password"
-          name="password"
-          required
-        />
+        <div className="input-field">
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="input-field my-inputfield"
+            type="text"
+            name="username"
+            required
+          />
+          <label>Username</label>
+        </div>
+        <div className="input-field">
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="input-field my-inputfield"
+            type="password"
+            name="password"
+            required
+          />
+          <label>Password</label>
+        </div>
         <button
           className="btn waves-effect waves-light brown myBtn"
           style={{ marginTop: "2em" }}

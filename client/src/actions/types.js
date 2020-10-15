@@ -1,1 +1,3 @@
 export const SET_CURRENT_PLAYER = "SET_CURRENT_PLAYER"
+export const GET_ERRORS = "GET ERRORS"
+export const CLEAR_ERRORS = "CLEAR_ERRORS"

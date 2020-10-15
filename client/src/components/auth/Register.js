@@ -7,6 +7,7 @@ import { registerUser } from "../../actions/authActions"
 
 const Register = () => {
   const auth = useSelector((state) => state.auth)
+  const errors = useSelector((state) => state.errors)
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -21,6 +22,7 @@ const Register = () => {
       username,
       password,
       passwordTwo,
+      errors: {},
     }
 
     dispatch(registerUser(newPlayer, history))
@@ -37,35 +39,40 @@ const Register = () => {
 
   return (
     <div className="container">
+      {errors.length > 0 && <h1>KAKKA</h1>}
       <form onSubmit={onSubmit}>
         <h1>Register</h1>
-        <label>Username</label>
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="input-field my-inputfield"
-          type="text"
-          name="username"
-          required
-        />
-        <label>Password</label>
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="input-field my-inputfield"
-          type="password"
-          name="password"
-          required
-        />
-        <label>Confirm password</label>
-        <input
-          value={passwordTwo}
-          onChange={(e) => setPasswordTwo(e.target.value)}
-          className="input-field my-inputfield"
-          type="password"
-          name="password"
-          required
-        />
+
+        <div className="input-field">
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="input-field my-inputfield"
+            type="text"
+            name="username"
+          />
+          <label>Username</label>
+        </div>
+        <div className="input-field">
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="input-field my-inputfield"
+            type="password"
+            name="password"
+          />
+          <label>Password</label>
+        </div>
+        <div className="input-field">
+          <input
+            value={passwordTwo}
+            onChange={(e) => setPasswordTwo(e.target.value)}
+            className="input-field my-inputfield"
+            type="password"
+            name="passwordTwo"
+          />
+          <label>Confirm password</label>
+        </div>
 
         <button
           className="btn waves-effect waves-light brown myBtn"
