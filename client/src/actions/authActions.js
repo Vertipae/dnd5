@@ -1,13 +1,13 @@
 import axios, { setToken } from "../utils/axiosService"
 import jwt_decode from "jwt-decode"
 import { GET_ERRORS, SET_CURRENT_PLAYER } from "./types"
-import { validateRegistration } from "../utils/validator"
+import { formatErrors, validateRegistration } from "../utils/validator"
 // Todo better history
 
 export const registerUser = (userData, history) => async (dispatch) => {
   try {
     const errors = validateRegistration(userData)
-    if (errors.length > 0) {
+    if (errors.username || errors.password) {
       dispatch({
         type: GET_ERRORS,
         payload: errors,
@@ -21,11 +21,10 @@ export const registerUser = (userData, history) => async (dispatch) => {
       history.push("/home")
     }
   } catch (err) {
-    // console.log(err)
-    // console.log(err.response)
+    const errors = formatErrors(err.response.data.errors)
     dispatch({
       type: GET_ERRORS,
-      payload: err.response.data,
+      payload: errors,
     })
   }
 }

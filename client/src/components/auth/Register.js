@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { registerUser } from "../../actions/authActions"
+import TextFieldGroup from "../common/TextFieldGroup"
 // Note to self withRouter doesn't work with functional components
 // Perhaps they work
 
@@ -36,23 +37,23 @@ const Register = () => {
     }
     // eslint-disable-next-line
   }, [])
-
+  console.log(errors)
   return (
     <div className="container">
-      {errors.length > 0 && <h1>KAKKA</h1>}
+      {/* {errors.length > 0 && <h1>KAKKA</h1>} */}
       <form onSubmit={onSubmit}>
         <h1>Register</h1>
 
-        <div className="input-field">
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="input-field my-inputfield"
-            type="text"
-            name="username"
-          />
-          <label>Username</label>
-        </div>
+        <TextFieldGroup
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="input-field my-inputfield"
+          type="text"
+          name="username"
+          label="Username"
+          error={errors.username}
+        />
+
         <div className="input-field">
           <input
             value={password}
