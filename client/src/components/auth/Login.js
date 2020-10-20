@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { loginUser } from "../../actions/authActions"
+import TextFieldGroup from "../common/TextFieldGroup"
 
 const Login = () => {
   const auth = useSelector((state) => state.auth)
+  const errors = useSelector((state) => state.errors)
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -17,6 +19,7 @@ const Login = () => {
     const userData = {
       username,
       password,
+      errors: {},
     }
 
     dispatch(loginUser(userData, history))
@@ -33,28 +36,26 @@ const Login = () => {
     <div className="container">
       <form onSubmit={onSubmit}>
         <h1>Sign in</h1>
-        <div className="input-field">
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="input-field my-inputfield"
-            type="text"
-            name="username"
-            required
-          />
-          <label>Username</label>
-        </div>
-        <div className="input-field">
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input-field my-inputfield"
-            type="password"
-            name="password"
-            required
-          />
-          <label>Password</label>
-        </div>
+        <TextFieldGroup
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="input-field my-inputfield"
+          type="text"
+          name="username"
+          label="Username"
+          error={errors.username}
+        />
+
+        <TextFieldGroup
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="input-field my-inputfield"
+          type="password"
+          name="password"
+          label="Password"
+          error={errors.password}
+        />
+
         <button
           className="btn waves-effect waves-light brown myBtn"
           style={{ marginTop: "2em" }}

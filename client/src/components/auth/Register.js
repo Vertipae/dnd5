@@ -54,26 +54,25 @@ const Register = () => {
           error={errors.username}
         />
 
-        <div className="input-field">
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input-field my-inputfield"
-            type="password"
-            name="password"
-          />
-          <label>Password</label>
-        </div>
-        <div className="input-field">
-          <input
-            value={passwordTwo}
-            onChange={(e) => setPasswordTwo(e.target.value)}
-            className="input-field my-inputfield"
-            type="password"
-            name="passwordTwo"
-          />
-          <label>Confirm password</label>
-        </div>
+        <TextFieldGroup
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="input-field my-inputfield"
+          type="password"
+          name="password"
+          label="Password"
+          error={errors.password}
+        />
+
+        <TextFieldGroup
+          value={passwordTwo}
+          onChange={(e) => setPasswordTwo(e.target.value)}
+          className="input-field my-inputfield"
+          type="password"
+          name="passwordTwo"
+          label="Confirm password"
+          error={errors.password}
+        />
 
         <button
           className="btn waves-effect waves-light brown myBtn"

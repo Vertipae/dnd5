@@ -23,4 +23,13 @@ export const validateRegistration = (userData) => {
   return errors
 }
 
+export const validateLogin = (userData) => {
+  let errors = { username: null, password: null }
+
+  if (isEmpty(userData.username)) errors.username = "Username is required"
+  if (isEmpty(userData.password)) errors.password = "Password is required"
+
+  return errors
+}
+
 export default { isEmpty, validateRegistration, formatErrors }
