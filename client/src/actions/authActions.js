@@ -25,11 +25,19 @@ export const registerUser = (userData, history) => async (dispatch) => {
       history.push("/home")
     }
   } catch (err) {
-    const errors = formatErrors(err.response.data.errors)
-    dispatch({
-      type: GET_ERRORS,
-      payload: errors,
-    })
+    console.log(err)
+    if (err.response.data.errors) {
+      const errors = formatErrors(err.response.data.errors)
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors,
+      })
+    } else {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data.msg,
+      })
+    }
   }
 }
 
@@ -37,7 +45,7 @@ export const registerUser = (userData, history) => async (dispatch) => {
 export const loginUser = (userData, history) => async (dispatch) => {
   try {
     const errors = validateLogin(userData)
-    console.log("errors_1", errors)
+    // console.log("errors_1", errors)
     if (errors.username || errors.password) {
       dispatch({
         type: GET_ERRORS,

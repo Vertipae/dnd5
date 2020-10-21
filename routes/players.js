@@ -45,7 +45,9 @@ router.post("/", async (req, res) => {
     const player = await Player.findOne({ username: req.body.username })
 
     if (player) {
-      return res.status(400).json({ msg: "User already exists" })
+      return res
+        .status(400)
+        .json({ errors: { username: { msg: "User already exists" } } })
     }
 
     const newPlayer = new Player({
