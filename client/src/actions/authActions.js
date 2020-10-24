@@ -1,12 +1,11 @@
 import axios, { setToken } from "../utils/axiosService"
 import jwt_decode from "jwt-decode"
-import { GET_ERRORS, SET_CURRENT_PLAYER } from "./types"
+import { GET_ERRORS, CLEAR_ERRORS, SET_CURRENT_PLAYER } from "./types"
 import {
   formatErrors,
   validateLogin,
   validateRegistration,
 } from "../utils/validator"
-// Todo better history
 
 export const registerUser = (userData, history) => async (dispatch) => {
   try {
@@ -16,6 +15,13 @@ export const registerUser = (userData, history) => async (dispatch) => {
         type: GET_ERRORS,
         payload: errors,
       })
+      setTimeout(() => {
+        // console.log("erroriactiontoimi")
+        dispatch({
+          type: CLEAR_ERRORS,
+          // payload: null,
+        })
+      }, 5000)
     } else {
       const res = await axios.post(
         "http://localhost:5000/api/players",
@@ -51,6 +57,11 @@ export const loginUser = (userData, history) => async (dispatch) => {
         type: GET_ERRORS,
         payload: errors,
       })
+      setTimeout(() => {
+        dispatch({
+          type: CLEAR_ERRORS,
+        })
+      }, 5000)
     } else {
       const res = await axios.post(
         "http://localhost:5000/api/auth/login",
@@ -68,6 +79,11 @@ export const loginUser = (userData, history) => async (dispatch) => {
       type: GET_ERRORS,
       payload: errors,
     })
+    setTimeout(() => {
+      dispatch({
+        type: CLEAR_ERRORS,
+      })
+    }, 5000)
   }
 }
 
