@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-// Todo: Subrace(Dwarf => Hill Dwarf) & languages
+// Todo: Subrace(Dwarf => Hill Dwarf) & languages, experience points, background
 
 const CreateCharacter = () => {
   return (
@@ -18,42 +18,8 @@ const CreateCharacter = () => {
             </div>
           </div>
 
-          <div className="col s6 row">
-            <div className="col s4 center">
-              <label>Class Select</label>
-              <select className="browser-default" defaultValue="0">
-                <option value="0" disabled>
-                  Classes
-                </option>
-                <option value="1">Bard</option>
-                <option value="2">Cleric</option>
-                <option value="3">Druid</option>
-                <option value="4">Other</option>
-                <option value="5">Paladin</option>
-                <option value="6">Ranger</option>
-                <option value="7">Sorcerer</option>
-                <option value="8">Warlock</option>
-                <option value="9">Wizard</option>
-              </select>
-            </div>
-            {/* <div className="col s4 center">
-              <label>Background Select</label>
-              <select className="browser-default" defaultValue="0">
-                <option value="0" disabled>
-                  Backgrounds
-                </option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select>
-            </div> */}
-            <div className="col s4 center">
-              <input placeholder="Player Name" />
-            </div>
-          </div>
-
-          <div className="col s6 row right">
-            <div className="col s4 center">
+          <div className="col s12 row">
+            <div className="col s4">
               <label>Race Select</label>
               <select className="browser-default" defaultValue="0">
                 <option value="0" disabled>
@@ -71,7 +37,26 @@ const CreateCharacter = () => {
                 <option value="10">Tiefling</option>
               </select>
             </div>
-            <div className="col s4 center">
+
+            <div className="col s4">
+              <label>Class Select</label>
+              <select className="browser-default" defaultValue="0">
+                <option value="0" disabled>
+                  Classes
+                </option>
+                <option value="1">Bard</option>
+                <option value="2">Cleric</option>
+                <option value="3">Druid</option>
+                <option value="4">Other</option>
+                <option value="5">Paladin</option>
+                <option value="6">Ranger</option>
+                <option value="7">Sorcerer</option>
+                <option value="8">Warlock</option>
+                <option value="9">Wizard</option>
+              </select>
+            </div>
+
+            <div className="col s4">
               <label>Alignment Select</label>
               <select className="browser-default" defaultValue="0">
                 <option value="0" disabled>
@@ -87,9 +72,6 @@ const CreateCharacter = () => {
                 <option value="8">Chaotic neutral</option>
                 <option value="9">Chaotic evil</option>
               </select>
-            </div>
-            <div className="col s4 center">
-              <input placeholder="Experience points" />
             </div>
           </div>
         </div>
