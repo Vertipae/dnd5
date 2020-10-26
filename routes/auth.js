@@ -47,13 +47,17 @@ router.post("/login", async (req, res) => {
     const player = await Player.findOne({ username })
 
     if (!player) {
-      return res.status(400).json({ msg: "Invalid Credentials" })
+      return res
+        .status(400)
+        .json({ errors: { username: { msg: "Invalid Credentials" } } })
     }
 
     const isMatch = await bcrypt.compare(password, player.password)
 
     if (!isMatch) {
-      return res.status(400).json({ msg: "Invalid Credentials" })
+      return res
+        .status(400)
+        .json({ errors: { username: { msg: "Invalid Credentials" } } })
     }
 
     const payload = {

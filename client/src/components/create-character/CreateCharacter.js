@@ -1,8 +1,39 @@
 import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { addCharacter } from "../../actions/characterActions"
 // Todo: Subrace(Dwarf => Hill Dwarf) & languages, experience points, background
 
 const CreateCharacter = () => {
+  const characters = useSelector((state) => state.characters)
+  const dispatch = useDispatch()
+
+  const testAddNewChar = (e) => {
+    e.preventDefault()
+    console.log("testAddNewChar-nappi painettu")
+    const character = {
+      name: "Seppo",
+      race: "Dwarf",
+      characterClass: "Paladin",
+      level: 100,
+    }
+
+    dispatch(addCharacter(character, null))
+  }
+
+  // const onSubmit = (e) => {
+  //   e.preventDefault()
+
+  //   const charaterData = {
+  //     name,
+  //     race,
+  //     characterClass,
+  //     level,
+  //   }
+  //   dispatch(addCharacter(charaterData, null))
+  // }
+
   return (
+    <div>
     <form>
       <div className="container">
         <div className="row">
@@ -100,6 +131,8 @@ const CreateCharacter = () => {
         </div>
       </div>
     </form>
+    <button onClick={(e) => testAddNewChar(e)}>Testbutton</button>
+    </div>
   )
 }
 

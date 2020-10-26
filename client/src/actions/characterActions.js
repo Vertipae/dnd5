@@ -11,6 +11,7 @@ export const addCharacter = (characterData, history) => async (dispatch) => {
       type: ADD_CHARACTER,
       newCharacter: res.data,
     })
+    console.log("Character added successfully")
   } catch (err) {
     console.log(err)
   }
