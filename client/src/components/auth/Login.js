@@ -26,11 +26,12 @@ const Login = () => {
   }
 
   useEffect(() => {
+    // console.log(auth)
     if (auth.player) {
       history.push("/home")
     }
     // eslint-disable-next-line
-  }, [])
+  }, [auth])
 
   return (
     <div className="container">

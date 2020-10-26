@@ -26,7 +26,7 @@ const Characters = () => {
         {characters.map(character => (
           <Link key={character._id} to={`character/${character._id}`}>
             <li className='collection-item'>
-              {character.name} {character.race} {character.class}
+              {character.name} {character.race} {character.characterClass}
             </li>
           </Link>
         ))}

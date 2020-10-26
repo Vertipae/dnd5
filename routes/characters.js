@@ -21,6 +21,19 @@ router.get("/", auth, async (req, res) => {
   }
 })
 
+// @route GET api/characters/:id
+// @desc Get one player character
+// @access Private (Have to be logged in to see character)
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const character = await Character.findById(req.params.id)
+    res.json(character)
+  } catch (err) {
+    err.message ? console.error(err.message) : console.error(err)
+    res.status(500).send("Server Error")
+  }
+})
+
 // @route POST api/characters
 // @desc Add new character
 // @access Private

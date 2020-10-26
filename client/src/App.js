@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect } from "react"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import jwt_decode from "jwt-decode";
+import { setToken } from './utils/axiosService'
 import Navbar from "./components/layouts/Navbar"
 import SearchBar from "./components/layouts/SearchBar"
 import Characters from "./components/characters/Characters"
@@ -15,8 +17,39 @@ import "materialize-css/dist/css/materialize.min.css"
 import M from "materialize-css/dist/js/materialize.min.js"
 import "./App.css"
 import WelcomeBar from "./components/layouts/WelcomeBar"
+import { setCurrentPlayer } from './actions/authActions'
+import { useDispatch } from "react-redux";
+
+
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(()=> {
+    // console.log(localStorage.accessToken)
+// Check for token from localStorage (logic for refreshing the page so the token doesn't disappear)
+if (localStorage.accessToken) {
+  // Set auth token header auth
+  setToken(localStorage.accessToken);
+  // Decode token and get user info and exp
+  const decoded = jwt_decode(localStorage.accessToken);
+  // Set user and isAuthenticated
+  // console.log(decoded)
+  dispatch(setCurrentPlayer(decoded));
+
+  //   // Check for expired token
+  //   const currentTime = Date.now() / 1000;
+  //   if (decoded.exp < currentTime) {
+  //     // If the expiration time is less than the current time
+  //     // Logout user
+  //     dispatch(logoutUser());
+  //     // TODO: Clear current profile
+  //     store.dispatch(clearCurrentProfile());
+  //     // Redirect to login
+  //     window.location.href = "/login";
+  //   }
+  }
+  }, [])
+
   useEffect(() => {
     // Init Materialize JS
     M.AutoInit()

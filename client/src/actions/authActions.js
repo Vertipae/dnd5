@@ -88,6 +88,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
 }
 
 export const setCurrentPlayer = (decoded) => {
+  // console.log(decoded)
   return {
     type: SET_CURRENT_PLAYER,
     payload: decoded,

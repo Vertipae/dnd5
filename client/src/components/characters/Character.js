@@ -12,7 +12,7 @@ const Character = ({ match }) => {
 
   const getCharacter = async () => {
     const res = await axios.get(
-      `http://localhost:5000/characters/${match.params.id}`
+      `http://localhost:5000/api/characters/${match.params.id}`
     );
     setCharacter(res.data);
     // console.log(res.data);
