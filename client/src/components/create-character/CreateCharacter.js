@@ -11,14 +11,16 @@ const CreateCharacter = () => {
     e.preventDefault()
     console.log("testAddNewChar-nappi painettu")
     const character = {
-      name: "Seppo",
-      race: "Dwarf",
-      characterClass: "Paladin",
+      name: "Seppoooo",
+      race: "Aasimar",
+      characterClass: "Bard",
       level: 100,
+      alignment: "Neutral evil"
     }
 
     dispatch(addCharacter(character, null))
   }
+
 
   // const onSubmit = (e) => {
   //   e.preventDefault()

@@ -21,6 +21,9 @@ const CharacterSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  alignment: {
+    type: String
+  },
   player: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "players",

@@ -48,13 +48,14 @@ router.post("/", auth, async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.mapped() })
   }
-  const { name, race, characterClass, level } = req.body
+  const { name, race, characterClass, level, alignment } = req.body
   try {
     const newCharacter = new Character({
       name,
       race,
       characterClass,
       level,
+      alignment,
       player: req.player.id,
     })
     const character = await newCharacter.save()
@@ -69,13 +70,15 @@ router.post("/", auth, async (req, res) => {
 // @desc Update character
 // @access Private
 router.put("/:id", auth, async (req, res) => {
-  const { name, race, characterClass, level } = req.body
+  const { name, race, characterClass, level, alignment } = req.body
 
+// Checking that if these fields exist so they can be updated
   const characterFields = {}
   if (name) characterFields.name = name
   if (race) characterFields.race = race
   if (characterClass) characterFields.characterClass = characterClass
   if (level) characterFields.level = level
+  if (alignment) characterFields.alignment = alignment
 
   try {
     let character = await Character.findById(req.params.id)
@@ -117,7 +120,8 @@ router.delete("/:id", auth, async (req, res) => {
 
     await Character.findByIdAndRemove(req.params.id)
 
-    res.send({ msg: "Character removed" })
+    // res.send({ msg: "Character removed" })
+    res.send(character)
   } catch (err) {
     err.message ? console.error(err.message) : console.error(err)
     res.status(500).send("Server Error")

@@ -19,6 +19,7 @@ import "./App.css"
 import WelcomeBar from "./components/layouts/WelcomeBar"
 import { setCurrentPlayer } from './actions/authActions'
 import { useDispatch } from "react-redux";
+import { getCharacters } from "./actions/characterActions";
 
 
 
@@ -48,6 +49,8 @@ if (localStorage.accessToken) {
   //     window.location.href = "/login";
   //   }
   }
+  // Get data from backend to Redux immediately on first render
+  dispatch(getCharacters())
   }, [])
 
   useEffect(() => {

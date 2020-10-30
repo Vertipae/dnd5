@@ -1,28 +1,54 @@
 // Todo single character page
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux"
+import { addCharacter, deleteCharacter } from "../../actions/characterActions"
 
 const Character = ({ match }) => {
-  const [character, setCharacter] = useState({});
-  const [characterLevel, setCharacterLevel] = useState({});
-  const [name, setName ] = useState("");
+  // const character = useSelector((state) => state.characters.filter(character => character._id === match.params.id)[0])
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    getCharacter(match.params.id);
-    console.log("Mounting")
-    // setCharacterName("Seppo")
-    // eslint-disable-next-line
-  }, []);
+  const [character, setCharacter] = useState(useSelector((state) => state.characters.characters.filter(character => character._id === match.params.id)[0]));
+  // const [character, setCharacter] = useState(useSelector((state) => state.characters));
+  console.log(character)
+  // const [characterLevel, setCharacterLevel] = useState(" ");
+  // const [name, setName ] = useState(" ");
+  // const [characterRace, setCharacterRace] = useState(" ")
+  // const [characterClass, setCharacterClass] = useState(" ")
+  // const [characterAlignment, setCharacterAlignment] = useState(" ")
 
-  const getCharacter = async () => {
-    const res = await axios.get(
-      `http://localhost:5000/api/characters/${match.params.id}`
-    );
-    //setCharacter(res.data);
-    setName(res.data.name)
-    console.log("CHARACTER FETCHED", res.data);
-  };
-  console.log("Render")
+  // useEffect(() => {
+  //   getCharacter(match.params.id);
+  //   // console.log("Mounting")
+  //   // setCharacterName("Seppo")
+  //   // eslint-disable-next-line
+  // }, []);
+
+  // const getCharacter = async () => {
+  //   const res = await axios.get(
+  //     `http://localhost:5000/api/characters/${match.params.id}`
+  //   );
+  //   //setCharacter(res.data);
+  //   setName(res.data.name)
+  //   setCharacterLevel(res.data.level)
+  //   setCharacterRace(res.data.race)
+  //   setCharacterClass(res.data.characterClass)
+  //   setCharacterAlignment(res.data.alignment)
+  //   console.log("CHARACTER FETCHED", res.data);
+  // };
+
+  const testDeleteChar = (e) => {
+    e.preventDefault()
+    console.log('Delete-nappi painettu')
+
+    dispatch(deleteCharacter(null, null))
+  }
+  // console.log("Render")
+
+  if(!character) {
+    return <div></div>
+  }
+
   return (
     <div>
     <form>
@@ -31,12 +57,12 @@ const Character = ({ match }) => {
           {/* <div className='divider' /> */}
           <div className="col s6">
             <div className="input-field col s4">
-              <input id="characterName" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+              <input id="characterName" type="text" value={character.name} onChange={(e) => setCharacter({...character, name: e.target.value})} />
               <label className="active">CHARACTER NAME:</label>
             </div>
             <div className="input-field col s4">
-              <input id="level" type="text" />
-              <label>LEVEL:</label>
+              <input id="level" type="text" value={character.level} onChange={(e) => setCharacter({...character, level: e.target.value})}/>
+              <label className="active">LEVEL:</label>
             </div>
           </div>
         </div>
@@ -44,56 +70,56 @@ const Character = ({ match }) => {
         <div className="col s12 row">
           <div className="col s4">
             <label>Race Select</label>
-            <select className="browser-default" defaultValue="0">
-              <option value="0" disabled>
+            <select className="browser-default" value={character.characterRace}  onChange={(e) => setCharacter({...character, characterRace: e.target.value})}>
+              {/* <option value={characterRace} disabled>
                 Races
-              </option>
-              <option value="1">Aasimar</option>
-              <option value="2">Dragonborn</option>
-              <option value="3">Dwarf</option>
-              <option value="4">Elf</option>
-              <option value="5">Gnome</option>
-              <option value="6">Half-Elf</option>
-              <option value="7">Half-Orc</option>
-              <option value="8">Halfling</option>
-              <option value="9">Human</option>
-              <option value="10">Tiefling</option>
+              </option> */}
+              <option value="Aasimar">Aasimar</option>
+              <option value="Dragonborn">Dragonborn</option>
+              <option value="Dwarf">Dwarf</option>
+              <option value="Elf">Elf</option>
+              <option value="Gnome">Gnome</option>
+              <option value="Half-Elf">Half-Elf</option>
+              <option value="Half-Orc">Half-Orc</option>
+              <option value="Halfling">Halfling</option>
+              <option value="Human">Human</option>
+              <option value="Tiefling">Tiefling</option>
             </select>
           </div>
 
           <div className="col s4">
             <label>Class Select</label>
-            <select className="browser-default" defaultValue="0">
-              <option value="0" disabled>
+            <select className="browser-default" value={character.characterClass} onChange={(e) => setCharacter({...character, characterClass: e.target.value})}>
+              {/* <option value={characterClass} disabled>
                 Classes
-              </option>
-              <option value="1">Bard</option>
-              <option value="2">Cleric</option>
-              <option value="3">Druid</option>
-              <option value="4">Other</option>
-              <option value="5">Paladin</option>
-              <option value="6">Ranger</option>
-              <option value="7">Sorcerer</option>
-              <option value="8">Warlock</option>
-              <option value="9">Wizard</option>
+              </option> */}
+              <option value="Bard">Bard</option>
+              <option value="Cleric">Cleric</option>
+              <option value="Druid">Druid</option>
+              <option value="Other">Other</option>
+              <option value="Paladin">Paladin</option>
+              <option value="Ranger">Ranger</option>
+              <option value="Sorcerer">Sorcerer</option>
+              <option value="Warlock">Warlock</option>
+              <option value="Wizard">Wizard</option>
             </select>
           </div>
 
           <div className="col s4">
             <label>Alignment Select</label>
-            <select className="browser-default" defaultValue="0">
-              <option value="0" disabled>
+            <select className="browser-default" value={character.characterAlignment} onChange={(e) => setCharacter({...character, characterAlignment: e.target.value})}>
+              {/* <option value={characterAlignment} disabled>
                 Alignments
-              </option>
-              <option value="1">Lawful good</option>
-              <option value="2">Lawful neutral</option>
-              <option value="3">Lawful evil</option>
-              <option value="4">Neutral good</option>
-              <option value="5">Neutral</option>
-              <option value="6">Neutral evil</option>
-              <option value="7">Chaotic good</option>
-              <option value="8">Chaotic neutral</option>
-              <option value="9">Chaotic evil</option>
+              </option> */}
+              <option value="Lawful good">Lawful good</option>
+              <option value="Lawful neutral">Lawful neutral</option>
+              <option value="Lawful evil">Lawful evil</option>
+              <option value="Neutral good">Neutral good</option>
+              <option value="Neutral">Neutral</option>
+              <option value="Neutral evil">Neutral evil</option>
+              <option value="Chaotic good">Chaotic good</option>
+              <option value="Chaotic neutral">Chaotic neutral</option>
+              <option value="Chaotic evil">Chaotic evil</option>
             </select>
           </div>
         </div>
@@ -133,7 +159,7 @@ const Character = ({ match }) => {
         </div>
       </div>
     </form>
-    
+    <button onClick={(e) => dispatch(deleteCharacter(character._id))}>TestDeletebutton</button>
     </div>
   )
 }
