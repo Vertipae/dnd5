@@ -137,6 +137,7 @@ const CreateCharacter = () => {
               className="btn waves-effect waves-light  grey darken-1 myBtn"
               style={{ marginTop: "2em" }}
               name="action"
+              onClick={() => history.push('/home')}
             >
               Cancel
               <i className="material-icons right">cancel</i>
