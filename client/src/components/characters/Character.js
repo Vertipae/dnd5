@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux"
-import { addCharacter, deleteCharacter } from "../../actions/characterActions"
+import { deleteCharacter, updateCharacter } from "../../actions/characterActions"
 
 const Character = ({ match }) => {
   // const character = useSelector((state) => state.characters.filter(character => character._id === match.params.id)[0])
@@ -12,6 +12,8 @@ const Character = ({ match }) => {
 
   const [character, setCharacter] = useState(useSelector((state) => state.characters.characters.filter(character => character._id === match.params.id)[0]));
   // const [character, setCharacter] = useState(useSelector((state) => state.characters));
+
+ 
   console.log(character)
   // const [characterLevel, setCharacterLevel] = useState(" ");
   // const [name, setName ] = useState(" ");
@@ -47,13 +49,20 @@ const Character = ({ match }) => {
   // }
   // console.log("Render")
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+ 
+    dispatch(updateCharacter(character, history))
+ 
+  }
+
   if(!character) {
     return <div></div>
   }
 
   return (
     <div>
-    <form>
+    <form onSubmit={onSubmit}>
       <div className="container">
         <div className="row">
           {/* <div className='divider' /> */}

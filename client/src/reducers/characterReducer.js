@@ -30,6 +30,13 @@ export default function (state = initialState, action) {
           // Asetetaan listaksi annettu lista (korvataan vanha lista uudella annetulla listalla)
           characters: action.payload
         }
+        case UPDATE_CHARACTER:
+          console.log(action.payload)
+          return {
+            ...state,
+            // Jos on sama id niin päivitetään characteria, jos ei ole niin annetaan olla vanha
+            characters: state.characters.map(character => character.id === action.payload._id ? action.payload : character)
+          }
     default:
       return state
   }

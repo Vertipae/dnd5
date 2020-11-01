@@ -18,6 +18,22 @@ export const addCharacter = (characterData, history) => async (dispatch) => {
   }
 }
 
+export const updateCharacter = (characterData, history) => async (dispatch) => {
+  try {
+    const res = await axios.put(`http://localhost:5000/api/characters/${characterData._id}`,
+    characterData
+    )
+    dispatch({
+      type: UPDATE_CHARACTER,
+      payload: res.data
+    })
+    console.log("Character updated successfully")
+    history.push("/home")
+  } catch(err) {
+    console.log(err)
+  }
+}
+
 export const deleteCharacter = (id, history) => async (dispatch) => {
   console.log("DeleteAction")
   try {
