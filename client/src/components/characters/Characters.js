@@ -20,10 +20,7 @@ const Characters = () => {
 
   console.log(characters)
 
-  // Return empty until characters loaded
-// if(!characters) {
-//  return <div></div>
-//  } 
+
   return (
     <div>
       <ul className='collection with-header'>

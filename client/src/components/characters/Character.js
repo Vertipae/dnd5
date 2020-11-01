@@ -1,5 +1,6 @@
 // Todo single character page
 import React, { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom'
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux"
 import { addCharacter, deleteCharacter } from "../../actions/characterActions"
@@ -7,6 +8,7 @@ import { addCharacter, deleteCharacter } from "../../actions/characterActions"
 const Character = ({ match }) => {
   // const character = useSelector((state) => state.characters.filter(character => character._id === match.params.id)[0])
   const dispatch = useDispatch()
+  const history  = useHistory()
 
   const [character, setCharacter] = useState(useSelector((state) => state.characters.characters.filter(character => character._id === match.params.id)[0]));
   // const [character, setCharacter] = useState(useSelector((state) => state.characters));
@@ -37,12 +39,12 @@ const Character = ({ match }) => {
   //   console.log("CHARACTER FETCHED", res.data);
   // };
 
-  const testDeleteChar = (e) => {
-    e.preventDefault()
-    console.log('Delete-nappi painettu')
+  // const testDeleteChar = (e) => {
+  //   e.preventDefault()
+  //   console.log('Delete-nappi painettu')
 
-    dispatch(deleteCharacter(null, null))
-  }
+  //   dispatch(deleteCharacter(null, null))
+  // }
   // console.log("Render")
 
   if(!character) {
@@ -70,7 +72,7 @@ const Character = ({ match }) => {
         <div className="col s12 row">
           <div className="col s4">
             <label>Race Select</label>
-            <select className="browser-default" value={character.characterRace}  onChange={(e) => setCharacter({...character, characterRace: e.target.value})}>
+            <select className="browser-default" value={character.race}  onChange={(e) => setCharacter({...character, race: e.target.value})}>
               {/* <option value={characterRace} disabled>
                 Races
               </option> */}
@@ -107,7 +109,7 @@ const Character = ({ match }) => {
 
           <div className="col s4">
             <label>Alignment Select</label>
-            <select className="browser-default" value={character.characterAlignment} onChange={(e) => setCharacter({...character, characterAlignment: e.target.value})}>
+            <select className="browser-default" value={character.alignment} onChange={(e) => setCharacter({...character, alignment: e.target.value})}>
               {/* <option value={characterAlignment} disabled>
                 Alignments
               </option> */}
@@ -140,6 +142,10 @@ const Character = ({ match }) => {
               style={{ marginTop: "2em" }}
               type="submit"
               name="action"
+              onClick={(e) => {
+                e.preventDefault()
+                dispatch(deleteCharacter(character._id, history))
+              }}
             >
               Delete
               <i className="material-icons right">delete</i>
@@ -159,7 +165,7 @@ const Character = ({ match }) => {
         </div>
       </div>
     </form>
-    <button onClick={(e) => dispatch(deleteCharacter(character._id))}>TestDeletebutton</button>
+    {/* <button onClick={(e) => dispatch(deleteCharacter(character._id))}>TestDeletebutton</button> */}
     </div>
   )
 }

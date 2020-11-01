@@ -12,6 +12,7 @@ export const addCharacter = (characterData, history) => async (dispatch) => {
       newCharacter: res.data,
     })
     console.log("Character added successfully")
+    history.push("/home")
   } catch (err) {
     console.log(err)
   }
@@ -26,6 +27,7 @@ export const deleteCharacter = (id, history) => async (dispatch) => {
       payload: res.data._id
     })
     console.log("Character deleted successfully")
+    history.push("/home")
   } catch(err) {
     console.log(err)
     // console.log('eroririririririr')

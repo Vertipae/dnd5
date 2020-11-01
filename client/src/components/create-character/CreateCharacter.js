@@ -1,4 +1,5 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { addCharacter } from "../../actions/characterActions"
 // Todo: Subrace(Dwarf => Hill Dwarf) & languages, experience points, background
@@ -6,20 +7,27 @@ import { addCharacter } from "../../actions/characterActions"
 const CreateCharacter = () => {
   const characters = useSelector((state) => state.characters)
   const dispatch = useDispatch()
+  const history = useHistory()
 
-  const testAddNewChar = (e) => {
-    e.preventDefault()
-    console.log("testAddNewChar-nappi painettu")
-    const character = {
-      name: "Seppoooo",
-      race: "Aasimar",
-      characterClass: "Bard",
-      level: 100,
-      alignment: "Neutral evil"
-    }
+  const [name, setName] = useState("")
+  const [race, setRace] = useState("0")
+  const [characterClass, setCharacterClass] = useState("0")
+  const [level, setLevel] = useState("")
+  const [alignment, setAlignment] = useState("0") 
 
-    dispatch(addCharacter(character, null))
-  }
+  // const testAddNewChar = (e) => {
+  //   e.preventDefault()
+  //   console.log("testAddNewChar-nappi painettu")
+  //   const character = {
+  //     name: "Seppoooo",
+  //     race: "Elf",
+  //     characterClass: "Druid",
+  //     level: 100,
+  //     alignment: "Neutral evil"
+  //   }
+
+  //   dispatch(addCharacter(character, null))
+  // }
 
 
   // const onSubmit = (e) => {
@@ -34,19 +42,34 @@ const CreateCharacter = () => {
   //   dispatch(addCharacter(charaterData, null))
   // }
 
+ const onSubmit = (e) => {
+   e.preventDefault()
+
+   const newCharacter = {
+     name,
+     race,
+     characterClass,
+     level,
+     alignment
+   }
+
+   dispatch(addCharacter(newCharacter, history))
+
+ }
+
   return (
     <div>
-    <form>
+    <form onSubmit={onSubmit}>
       <div className="container">
         <div className="row">
           {/* <div className='divider' /> */}
           <div className="col s6">
             <div className="input-field col s4">
-              <input id="characterName" type="text" />
+              <input id="characterName" type="text" value={name} onChange={(e) => setName(e.target.value)} />
               <label>CHARACTER NAME:</label>
             </div>
             <div className="input-field col s4">
-              <input id="level" type="text" />
+              <input id="level" type="text" value={level} onChange={(e) => setLevel(e.target.value)} />
               <label>LEVEL:</label>
             </div>
           </div>
@@ -55,56 +78,56 @@ const CreateCharacter = () => {
         <div className="col s12 row">
           <div className="col s4">
             <label>Race Select</label>
-            <select className="browser-default" defaultValue="0">
+            <select className="browser-default" value={race} onChange={(e) => setRace(e.target.value)}>
               <option value="0" disabled>
                 Races
               </option>
-              <option value="1">Aasimar</option>
-              <option value="2">Dragonborn</option>
-              <option value="3">Dwarf</option>
-              <option value="4">Elf</option>
-              <option value="5">Gnome</option>
-              <option value="6">Half-Elf</option>
-              <option value="7">Half-Orc</option>
-              <option value="8">Halfling</option>
-              <option value="9">Human</option>
-              <option value="10">Tiefling</option>
+              <option value="Aasimar">Aasimar</option>
+              <option value="Dragonborn">Dragonborn</option>
+              <option value="Dwarf">Dwarf</option>
+              <option value="Elf">Elf</option>
+              <option value="Gnome">Gnome</option>
+              <option value="Half-Elf">Half-Elf</option>
+              <option value="Half-Orc">Half-Orc</option>
+              <option value="Halfling">Halfling</option>
+              <option value="Human">Human</option>
+              <option value="Tiefling">Tiefling</option>
             </select>
           </div>
 
           <div className="col s4">
             <label>Class Select</label>
-            <select className="browser-default" defaultValue="0">
+            <select className="browser-default" value={characterClass} onChange={(e) => setCharacterClass(e.target.value)}>
               <option value="0" disabled>
                 Classes
               </option>
-              <option value="1">Bard</option>
-              <option value="2">Cleric</option>
-              <option value="3">Druid</option>
-              <option value="4">Other</option>
-              <option value="5">Paladin</option>
-              <option value="6">Ranger</option>
-              <option value="7">Sorcerer</option>
-              <option value="8">Warlock</option>
-              <option value="9">Wizard</option>
+              <option value="Bard">Bard</option>
+              <option value="Cleric">Cleric</option>
+              <option value="Druid">Druid</option>
+              <option value="Other">Other</option>
+              <option value="Paladin">Paladin</option>
+              <option value="Ranger">Ranger</option>
+              <option value="Sorcerer">Sorcerer</option>
+              <option value="Warlock">Warlock</option>
+              <option value="Wizard">Wizard</option>
             </select>
           </div>
 
           <div className="col s4">
             <label>Alignment Select</label>
-            <select className="browser-default" defaultValue="0">
+            <select className="browser-default" value={alignment} onChange={(e) => setAlignment(e.target.value)}>
               <option value="0" disabled>
                 Alignments
               </option>
-              <option value="1">Lawful good</option>
-              <option value="2">Lawful neutral</option>
-              <option value="3">Lawful evil</option>
-              <option value="4">Neutral good</option>
-              <option value="5">Neutral</option>
-              <option value="6">Neutral evil</option>
-              <option value="7">Chaotic good</option>
-              <option value="8">Chaotic neutral</option>
-              <option value="9">Chaotic evil</option>
+              <option value="Lawful good">Lawful good</option>
+              <option value="Lawful neutral">Lawful neutral</option>
+              <option value="Lawful evil">Lawful evil</option>
+              <option value="Neutral good">Neutral good</option>
+              <option value="Neutral">Neutral</option>
+              <option value="Neutral evil">Neutral evil</option>
+              <option value="Chaotic good">Chaotic good</option>
+              <option value="Chaotic neutral">Chaotic neutral</option>
+              <option value="Chaotic evil">Chaotic evil</option>
             </select>
           </div>
         </div>
@@ -133,7 +156,7 @@ const CreateCharacter = () => {
         </div>
       </div>
     </form>
-    <button onClick={(e) => testAddNewChar(e)}>Testbutton</button>
+    {/* <button onClick={(e) => testAddNewChar(e)}>Testbutton</button> */}
     </div>
   )
 }
