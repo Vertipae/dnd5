@@ -20,6 +20,7 @@ import WelcomeBar from "./components/layouts/WelcomeBar"
 import { setCurrentPlayer } from './actions/authActions'
 import { useDispatch } from "react-redux";
 import { getCharacters } from "./actions/characterActions";
+import { getGames } from "./actions/gameActions";
 
 
 
@@ -51,6 +52,7 @@ if (localStorage.accessToken) {
   }
   // Get data from backend to Redux immediately on first render
   dispatch(getCharacters())
+  dispatch(getGames())
   }, [])
 
   useEffect(() => {

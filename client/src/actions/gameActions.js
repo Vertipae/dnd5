@@ -17,7 +17,7 @@ export const getGames = () => async (dispatch) => {
 
 export const addGame = (gameData, history) => async (dispatch) => {
     try {
-        const res = await.post(
+        const res = await axios.post(
             "http://localhost:5000/api/games",
             gameData
           )
