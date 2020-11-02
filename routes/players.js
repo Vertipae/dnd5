@@ -64,6 +64,7 @@ router.post("/", async (req, res) => {
     const payload = {
       savedPlayer: {
         id: savedPlayer.id,
+        username: savedPlayer.username
       },
     }
 
