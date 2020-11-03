@@ -7,6 +7,7 @@ import SearchBar from "./components/layouts/SearchBar"
 import Characters from "./components/characters/Characters"
 import Character from "./components/characters/Character"
 import Test from "./components/dungeonmaster/Test"
+import Settings from './components/settings/Settings'
 import Games from "./components/games/Games"
 import Game from "./components/games/Game"
 import Login from "./components/auth/Login"
@@ -84,6 +85,7 @@ if (localStorage.accessToken) {
           <Route exact path='/game/:id' component={Game} />
           <Route exact path='/create-character' component={CreateCharacter} />
           <Route exact path='/dungeonmaster' component={DungeonMaster} />
+          <Route exact path="/settings" component={Settings} />
         </Switch>
       </Fragment>
     </Router>

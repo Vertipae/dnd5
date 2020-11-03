@@ -21,13 +21,20 @@ const Navbar = (props) => {
   const authLinks = (
     <nav>
       <div className="nav-wrapper brown">
+        <div className="left" style={{ marginLeft: "15px", display:"flex", flexDirection: "row", width:"5em", justifyContent:"space-around"}}>
+      <Link to="/" >
+          <i className="fas fa-home"></i>
+        </Link>
+        <Link to="/settings" >
+          <i className="material-icons">settings</i>
+        </Link>
+        </div>
+
         <Link to="/" className="brand-logo center">
           <i className="fas fa-dragon"></i>
           DnD5
         </Link>
-        <Link to="/" style={{ marginLeft: "15px" }}>
-          <i className="fas fa-home"></i>
-        </Link>
+
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li
             className={`align-center ${
@@ -46,6 +53,10 @@ const Navbar = (props) => {
           >
             <Link to="/dungeonmaster">Dungeon Master</Link>
           </li>
+          
+          {/* <li>
+
+        </li> */}
           <li
           //   className={`${
           //     props.location.pathname === "/logout" ? "active" : null

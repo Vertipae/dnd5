@@ -9,9 +9,9 @@ export default function WelcomeBar() {
         return <div></div>
     }
     return (
-        <div>
+        <div className="container" style={{ marginBottom: "1.5em"}}>
             <h5>
-            Welcome,{'  '}<span style={{color: "Highlight"}}>{auth.player.username}</span>! {'  '}Are you ready to start your adventure?
+            Welcome,{'  '}<span style={{color: "Highlight",  textTransform:"capitalize"}}>{auth.player.username}</span>. {'  '}Are you ready to start your adventure?{'  '}
             <span style={{ fontSize: "40px", color: "Mediumslateblue" }}>
             <i className='fas fa-hat-wizard'></i>
             </span>{'  '}
