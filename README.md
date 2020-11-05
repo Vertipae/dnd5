@@ -17,7 +17,7 @@ Todo:
 - Dark mode
 - Lots of features for characters
 
-![dnd5-front](https://raw.githubusercontent.com/Vertipae/dnd5/master/img/dnd5_front.png)
+![dnd5-front](https://raw.githubusercontent.com/Vertipae/dnd5/master/img/dnd5_front.PNG)
 
 ### Development Environment:
 
