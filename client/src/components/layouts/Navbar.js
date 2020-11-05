@@ -20,29 +20,38 @@ const Navbar = (props) => {
 
   const authLinks = (
     <nav>
-      <div className="nav-wrapper brown">
-        <div className="left" style={{ marginLeft: "15px", display:"flex", flexDirection: "row", width:"5em", justifyContent:"space-around"}}>
-      <Link to="/" >
-          <i className="fas fa-home"></i>
-        </Link>
-        <Link to="/settings" >
-          <i className="material-icons">settings</i>
-        </Link>
+      <div className='nav-wrapper brown'>
+        <div
+          className='left'
+          style={{
+            marginLeft: "15px",
+            display: "flex",
+            flexDirection: "row",
+            width: "5em",
+            justifyContent: "space-around",
+          }}
+        >
+          <Link to='/'>
+            <i className='fas fa-home'></i>
+          </Link>
+          <Link to='/settings'>
+            <i className='material-icons'>settings</i>
+          </Link>
         </div>
 
-        <Link to="/" className="brand-logo center">
-          <i className="fas fa-dragon"></i>
+        <Link to='/' className='brand-logo center'>
+          <i className='fas fa-dragon'></i>
           DnD5
         </Link>
 
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
+        <ul id='nav-mobile' className='right hide-on-med-and-down'>
           <li
             className={`align-center ${
               props.location.pathname === "/create-character" ? "active" : null
             }`}
           >
-            <Link to="/create-character" className="align-center">
-              <i className="material-icons">add</i>
+            <Link to='/create-character' className='align-center'>
+              <i className='material-icons'>add</i>
               Character
             </Link>
           </li>
@@ -51,9 +60,9 @@ const Navbar = (props) => {
               props.location.pathname === "/dungeonmaster" ? "active" : null
             }`}
           >
-            <Link to="/dungeonmaster">Dungeon Master</Link>
+            <Link to='/dungeonmaster'>Dungeon Master</Link>
           </li>
-          
+
           {/* <li>
 
         </li> */}
@@ -65,8 +74,8 @@ const Navbar = (props) => {
           //   <Link to="/login">Logout</Link>
           >
             <button
-              className="btn waves-effect waves-light brown"
-              style={{marginRight: "15px", marginLeft:"7px"}}
+              className='btn waves-effect waves-light brown'
+              style={{ marginRight: "15px", marginLeft: "7px" }}
               onClick={onLogoutClick}
             >
               Logout
@@ -80,13 +89,13 @@ const Navbar = (props) => {
   const guestLinks = (
     <nav>
       {" "}
-      <div className="nav-wrapper brown">
-        <Link to="/" className="brand-logo center">
-          <i className="fas fa-dragon"></i>
+      <div className='nav-wrapper brown'>
+        <Link to='/' className='brand-logo center'>
+          <i className='fas fa-dragon'></i>
           DnD5
         </Link>
-        <Link to="/" style={{ marginLeft: "15px" }}>
-          <i className="fas fa-home"></i>
+        <Link to='/' style={{ marginLeft: "15px" }}>
+          <i className='fas fa-home'></i>
         </Link>
       </div>
     </nav>
@@ -94,7 +103,7 @@ const Navbar = (props) => {
 
   return (
     <nav>
-      <div className="nav-wrapper brown">
+      <div className='nav-wrapper brown'>
         {/* <Link to="/" className="brand-logo center">
           <i className="fas fa-dragon"></i>
           DnD5
