@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux'
 
 const Games = () => {
-  const [games, setGames] = useState([]);
+  const games = useSelector(state => state.games.games);
 
-  useEffect(() => {
-    getGames();
-    // eslint-disable-next-line
-  }, []);
-
-  const getGames = async () => {
-    // const res = await axios.get("http://localhost:5000/games");
-    const res = await axios.get("http://localhost:5000/api/games");
-    setGames(res.data);
-    // console.log(res.data);
-  };
 
   return (
     <div>

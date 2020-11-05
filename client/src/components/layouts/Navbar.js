@@ -66,6 +66,7 @@ const Navbar = (props) => {
           >
             <button
               className="btn waves-effect waves-light brown"
+              style={{marginRight: "15px", marginLeft:"7px"}}
               onClick={onLogoutClick}
             >
               Logout
