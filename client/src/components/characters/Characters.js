@@ -1,24 +1,11 @@
-import React, { useState, useEffect } from "react"
-import axios from "axios"
+import React from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 const Characters = () => {
   const characters = useSelector((state) => state.characters.characters)
 
-  // useEffect(() => {
-  //   getCharacters();
-  //   // eslint-disable-next-line
-  // }, []);
-
-  // const getCharacters = async () => {
-  //   // const res = await axios.get("http://localhost:5000/characters");
-  //   const res = await axios.get("http://localhost:5000/api/characters");
-  //   setCharacters(res.data);
-  //   // console.log(res.data);
-  // };
-
-  console.log(characters)
+  // console.log(characters)
 
   return (
     <div>

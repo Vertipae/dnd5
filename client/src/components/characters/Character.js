@@ -1,7 +1,5 @@
-// Todo single character page
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
-import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import {
   deleteCharacter,
@@ -9,7 +7,6 @@ import {
 } from "../../actions/characterActions"
 
 const Character = ({ match }) => {
-  // const character = useSelector((state) => state.characters.filter(character => character._id === match.params.id)[0])
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -21,42 +18,8 @@ const Character = ({ match }) => {
         )[0]
     )
   )
-  // const [character, setCharacter] = useState(useSelector((state) => state.characters));
 
-  console.log(character)
-  // const [characterLevel, setCharacterLevel] = useState(" ");
-  // const [name, setName ] = useState(" ");
-  // const [characterRace, setCharacterRace] = useState(" ")
-  // const [characterClass, setCharacterClass] = useState(" ")
-  // const [characterAlignment, setCharacterAlignment] = useState(" ")
-
-  // useEffect(() => {
-  //   getCharacter(match.params.id);
-  //   // console.log("Mounting")
-  //   // setCharacterName("Seppo")
-  //   // eslint-disable-next-line
-  // }, []);
-
-  // const getCharacter = async () => {
-  //   const res = await axios.get(
-  //     `http://localhost:5000/api/characters/${match.params.id}`
-  //   );
-  //   //setCharacter(res.data);
-  //   setName(res.data.name)
-  //   setCharacterLevel(res.data.level)
-  //   setCharacterRace(res.data.race)
-  //   setCharacterClass(res.data.characterClass)
-  //   setCharacterAlignment(res.data.alignment)
-  //   console.log("CHARACTER FETCHED", res.data);
-  // };
-
-  // const testDeleteChar = (e) => {
-  //   e.preventDefault()
-  //   console.log('Delete-nappi painettu')
-
-  //   dispatch(deleteCharacter(null, null))
-  // }
-  // console.log("Render")
+  // console.log(character)
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -73,7 +36,6 @@ const Character = ({ match }) => {
       <form onSubmit={onSubmit}>
         <div className='container'>
           <div className='row'>
-            {/* <div className='divider' /> */}
             <div className='col s6'>
               <div className='input-field col s4'>
                 <input
