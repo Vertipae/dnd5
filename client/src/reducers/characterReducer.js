@@ -27,10 +27,11 @@ export default function (state = initialState, action) {
         ),
       }
     case SET_CHARACTERS:
+      console.log(action)
       return {
         ...state,
         // Asetetaan listaksi annettu lista (korvataan vanha lista uudella annetulla listalla)
-        characters: action.payload,
+        characters: [...action.payload],
       }
     case UPDATE_CHARACTER:
       console.log(action.payload)

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 const Characters = () => {
   const characters = useSelector((state) => state.characters.characters)
 
-  // console.log(characters)
+  console.log(characters)
 
   return (
     <div>

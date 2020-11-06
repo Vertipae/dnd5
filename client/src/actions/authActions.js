@@ -1,6 +1,12 @@
 import axios, { setToken } from "../utils/axiosService"
 import jwt_decode from "jwt-decode"
-import { GET_ERRORS, CLEAR_ERRORS, SET_CURRENT_PLAYER } from "./types"
+import {
+  GET_ERRORS,
+  CLEAR_ERRORS,
+  SET_CURRENT_PLAYER,
+  SET_CHARACTERS,
+  SET_GAMES,
+} from "./types"
 import {
   formatErrors,
   validateLogin,
@@ -99,4 +105,12 @@ export const logoutUser = () => (dispatch) => {
   // Remove token localStorage
   setToken(null)
   dispatch(setCurrentPlayer(null))
+  dispatch({
+    type: SET_CHARACTERS,
+    payload: [],
+  })
+  dispatch({
+    type: SET_GAMES,
+    payload: [],
+  })
 }

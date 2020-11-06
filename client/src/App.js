@@ -20,12 +20,13 @@ import M from "materialize-css/dist/js/materialize.min.js"
 import "./App.css"
 import WelcomeBar from "./components/layouts/WelcomeBar"
 import { setCurrentPlayer } from "./actions/authActions"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "./actions/characterActions"
 import { getGames } from "./actions/gameActions"
 
 function App() {
   const dispatch = useDispatch()
+  const player = useSelector((state) => state.auth.player)
   useEffect(() => {
     // console.log(localStorage.accessToken)
     // Check for token from localStorage (logic for refreshing the page so the token doesn't disappear)
@@ -50,11 +51,15 @@ function App() {
       //     window.location.href = "/login";
       //   }
     }
+  }, [])
+
+  useEffect(() => {
+    // If player is not logged in, do nothing
+    if (!player) return
     // Get data from backend to Redux immediately on first render
     dispatch(getCharacters())
     dispatch(getGames())
-  }, [])
-
+  }, [player])
   useEffect(() => {
     // Init Materialize JS
     M.AutoInit()

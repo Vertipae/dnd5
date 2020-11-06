@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react"
+import { useSelector } from "react-redux"
 
 const Game = ({ match }) => {
-  const [game, setGame] = useState({});
+  const game = useSelector(
+    (state) =>
+      state.games.games.filter((game) => game._id === match.params.id)[0]
+  )
 
-  useEffect(() => {
-    getGame(match.params.id);
-    // eslint-disable-next-line
-  }, []);
-
-  const getGame = async () => {
-    const res = await axios.get(
-      `http://localhost:5000/games/${match.params.id}`
-    );
-    setGame(res.data);
-    // console.log(res.data);
-  };
-
+  if (!game) {
+    return <div></div>
+  }
   return (
     <div>
       <p>
@@ -24,6 +17,6 @@ const Game = ({ match }) => {
         {/* {game.player} */}
       </p>
     </div>
-  );
-};
-export default Game;
+  )
+}
+export default Game

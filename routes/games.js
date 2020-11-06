@@ -4,6 +4,7 @@ const auth = require("../middleware/auth")
 const { check, validationResult } = require("express-validator")
 const Player = require("../models/Player")
 const Game = require("../models/Game")
+const ObjectId = require("mongoose").Types.ObjectId
 
 // @route GET api/games
 // @desc Get all users games
@@ -11,10 +12,18 @@ const Game = require("../models/Game")
 // Player can choose that if the game is private or not
 router.get("/", auth, async (req, res) => {
   try {
-    const games = await Game.find({ private: false })
+    const games = await Game.find({
+      private: false,
+      $or: [
+        { dungeonmaster: new ObjectId(req.player.id) },
+        { players: { $in: [new ObjectId(req.player.id)] } },
+      ],
+    })
       .populate("characters")
       .populate("players", "-password")
       .populate("dungeonmaster", "-password")
+
+    console.log(games)
     res.send(games)
   } catch (err) {
     err.message ? console.error(err.message) : console.error(err)

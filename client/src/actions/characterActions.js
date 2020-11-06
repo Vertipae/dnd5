@@ -60,14 +60,12 @@ export const getCharacters = () => async (dispatch) => {
   console.log("GetCharacterAction")
   try {
     const res = await axios.get("http://localhost:5000/api/characters")
+    console.log(res)
     dispatch({
       type: SET_CHARACTERS,
       payload: res.data,
     })
-
-    return res.data
   } catch (err) {
     console.log(err)
-    return []
   }
 }
