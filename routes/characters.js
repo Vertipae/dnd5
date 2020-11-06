@@ -72,7 +72,7 @@ router.post("/", auth, async (req, res) => {
 router.put("/:id", auth, async (req, res) => {
   const { name, race, characterClass, level, alignment } = req.body
 
-// Checking that if these fields exist so they can be updated
+  // Checking that if these fields exist so they can be updated
   const characterFields = {}
   if (name) characterFields.name = name
   if (race) characterFields.race = race
