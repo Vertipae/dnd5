@@ -1,11 +1,12 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addCharacter } from "../../actions/characterActions"
 // Todo: Subrace(Dwarf => Hill Dwarf) & languages, experience points, background
 
 const CreateCharacter = () => {
   // const characters = useSelector((state) => state.characters)
+  const errors = useSelector((state) => state.errors)
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -24,6 +25,7 @@ const CreateCharacter = () => {
       characterClass,
       level,
       alignment,
+      // errors: {},
     }
 
     dispatch(addCharacter(newCharacter, history))
@@ -37,6 +39,7 @@ const CreateCharacter = () => {
             <div className='col s6'>
               <div className='input-field col s4'>
                 <input
+                  className={errors.name ? "invalid" : ""}
                   id='characterName'
                   type='text'
                   value={name}
@@ -46,6 +49,7 @@ const CreateCharacter = () => {
               </div>
               <div className='input-field col s4'>
                 <input
+                  className={errors.level ? "invalid" : ""}
                   id='level'
                   type='text'
                   value={level}

@@ -3,21 +3,40 @@ import {
   ADD_CHARACTER,
   UPDATE_CHARACTER,
   DELETE_CHARACTER,
+  GET_ERRORS,
+  CLEAR_ERRORS,
 } from "./types"
 import axios from "axios"
+import { validateAddCharacter } from "../utils/validator"
 
 export const addCharacter = (characterData, history) => async (dispatch) => {
   try {
-    const res = await axios.post(
-      "http://localhost:5000/api/characters",
-      characterData
-    )
-    dispatch({
-      type: ADD_CHARACTER,
-      newCharacter: res.data,
-    })
-    console.log("Character added successfully")
-    history.push("/home")
+    const errors = validateAddCharacter(characterData)
+    console.log(errors)
+    if (errors.name || errors.level) {
+      console.log("errorijtn")
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors,
+      })
+      setTimeout(() => {
+        console.log("erroriactiontoimi")
+        dispatch({
+          type: CLEAR_ERRORS,
+        })
+      }, 5000)
+    } else {
+      const res = await axios.post(
+        "http://localhost:5000/api/characters",
+        characterData
+      )
+      dispatch({
+        type: ADD_CHARACTER,
+        newCharacter: res.data,
+      })
+      console.log("Character added successfully")
+      history.push("/home")
+    }
   } catch (err) {
     console.log(err)
   }

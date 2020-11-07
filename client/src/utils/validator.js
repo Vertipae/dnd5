@@ -32,4 +32,12 @@ export const validateLogin = (userData) => {
   return errors
 }
 
+export const validateAddCharacter = (characterData) => {
+  let errors = { name: null, level: null }
+  if (isEmpty(characterData.name)) errors.name = "Name is required"
+  if (isEmpty(characterData.level)) errors.level = "Level is required"
+
+  return errors
+}
+
 export default { isEmpty, validateRegistration, formatErrors }
