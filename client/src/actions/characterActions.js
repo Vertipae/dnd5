@@ -13,7 +13,7 @@ export const addCharacter = (characterData, history) => async (dispatch) => {
   try {
     const errors = validateAddCharacter(characterData)
     console.log(errors)
-    if (errors.name || errors.level) {
+    if (errors.name || errors.level || errors.race || errors.characterClass) {
       console.log("errorijtn")
       dispatch({
         type: GET_ERRORS,

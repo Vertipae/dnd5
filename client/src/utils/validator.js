@@ -33,10 +33,18 @@ export const validateLogin = (userData) => {
 }
 
 export const validateAddCharacter = (characterData) => {
-  let errors = { name: null, level: null }
+  let errors = {
+    name: null,
+    level: null,
+    race: null,
+    characterClass: null,
+    alignment: null,
+  }
   if (isEmpty(characterData.name)) errors.name = "Name is required"
   if (isEmpty(characterData.level)) errors.level = "Level is required"
-
+  if (characterData.race === "0") errors.race = "Race is required"
+  if (characterData.characterClass === "0")
+    errors.characterClass = "Class is required"
   return errors
 }
 

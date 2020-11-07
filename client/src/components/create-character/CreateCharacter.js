@@ -64,7 +64,9 @@ const CreateCharacter = () => {
             <div className='col s4'>
               <label>Race Select</label>
               <select
+                // className={`browser-default ${errors.race && "invalid"}`}
                 className='browser-default'
+                style={{ borderColor: errors.race ? "red" : "" }}
                 value={race}
                 onChange={(e) => setRace(e.target.value)}
               >
@@ -88,6 +90,7 @@ const CreateCharacter = () => {
               <label>Class Select</label>
               <select
                 className='browser-default'
+                style={{ borderColor: errors.characterClass ? "red" : "" }}
                 value={characterClass}
                 onChange={(e) => setCharacterClass(e.target.value)}
               >
