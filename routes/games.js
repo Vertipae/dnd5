@@ -40,7 +40,7 @@ router.post("/", auth, async (req, res) => {
   // Get validation result after checks
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() })
+    return res.status(400).json({ errors: errors.mapped() })
   }
 
   const { name, private } = req.body

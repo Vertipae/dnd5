@@ -48,4 +48,12 @@ export const validateAddCharacter = (characterData) => {
   return errors
 }
 
+export const validateAddGame = (gameData) => {
+  let errors = {
+    name: null,
+  }
+  if (isEmpty(gameData.name)) errors.name = "Name is required"
+  return errors
+}
+
 export default { isEmpty, validateRegistration, formatErrors }
