@@ -21,7 +21,8 @@ const DungeonMaster = () => {
     const newGame = {
       name,
     }
-    dispatch(addGame(newGame, history))
+    dispatch(addGame(newGame, history, true))
+    setName("")
   }
 
   return (
@@ -40,7 +41,7 @@ const DungeonMaster = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <label>Game Name</label>
+          <label className={name !== "" ? "active" : ""}>Game Name</label>
           <button
             className='btn waves-effect waves-light green darken-3 myBtn'
             style={{ marginTop: "2em" }}

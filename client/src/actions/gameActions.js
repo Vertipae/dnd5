@@ -16,7 +16,7 @@ export const getGames = () => async (dispatch) => {
   }
 }
 
-export const addGame = (gameData, history) => async (dispatch) => {
+export const addGame = (gameData, history, quick) => async (dispatch) => {
   try {
     const errors = validateAddGame(gameData)
     console.log(errors)
@@ -37,7 +37,7 @@ export const addGame = (gameData, history) => async (dispatch) => {
         payload: res.data,
       })
       console.log("Game added successfully")
-      history.push("/home")
+      if (!quick) history.push("/home")
     }
   } catch (err) {
     console.log(err)
