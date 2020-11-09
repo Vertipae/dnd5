@@ -6,7 +6,6 @@ import Navbar from "./components/layouts/Navbar"
 import SearchBar from "./components/layouts/SearchBar"
 import Characters from "./components/characters/Characters"
 import Character from "./components/characters/Character"
-import Test from "./components/dungeonmaster/Test"
 import Settings from "./components/settings/Settings"
 import Games from "./components/games/Games"
 import Game from "./components/games/Game"
@@ -23,6 +22,7 @@ import { setCurrentPlayer } from "./actions/authActions"
 import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "./actions/characterActions"
 import { getGames } from "./actions/gameActions"
+import GameInfo from "./components/games/GameInfo"
 
 function App() {
   const dispatch = useDispatch()
@@ -76,17 +76,21 @@ function App() {
             path='/home'
             render={() => (
               <div className='container'>
+                <div className='dragonIcon'>
+                  <i className='fas fa-dragon'></i>
+                </div>
                 <SearchBar />
                 <WelcomeBar />
+
                 <Characters />
                 <Games />
               </div>
             )}
           />
 
-          <Route exact path='/test' component={Test} />
           <Route exact path='/character/:id' component={Character} />
           <Route exact path='/game/:id' component={Game} />
+          <Route exact path='/game-info/:id' component={GameInfo} />
           <Route exact path='/create-character' component={CreateCharacter} />
           <Route exact path='/dungeonmaster' component={DungeonMaster} />
           <Route exact path='/settings' component={Settings} />

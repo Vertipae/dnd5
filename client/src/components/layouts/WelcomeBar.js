@@ -10,15 +10,16 @@ export default function WelcomeBar() {
   }
   return (
     <div className='container' style={{ marginBottom: "1.5em" }}>
-      <h5>
-        Welcome,{"  "}
-        <span style={{ color: "Highlight", textTransform: "capitalize" }}>
+      <h5 className='welcomeText'>
+        Welcome,{"  "}{" "}
+        <span className='playerWelcomeName'>
           {auth.player.username}
+          {"  "}{" "}
         </span>
-        . {"  "}Are you ready to start your adventure?{"  "}
-        <span style={{ fontSize: "40px", color: "Mediumslateblue" }}>
+        <span style={{ fontSize: "25px", color: "Mediumslateblue" }}>
           <i className='fas fa-hat-wizard'></i>
         </span>
+        <br></br>Are you ready to start your adventure?{"  "}
         {"  "}
       </h5>
     </div>

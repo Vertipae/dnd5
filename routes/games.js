@@ -22,6 +22,9 @@ router.get("/", auth, async (req, res) => {
       .populate("characters")
       .populate("players", "-password")
       .populate("dungeonmaster", "-password")
+      .sort({
+        date: -1,
+      })
 
     console.log(games)
     res.send(games)

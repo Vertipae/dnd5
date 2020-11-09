@@ -1,6 +1,4 @@
-// Todo: Create game
-// List my games(as a dungeon master)
-// Game characters
+// Todo: List my games(as a dungeon master)
 
 import React, { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
@@ -58,12 +56,20 @@ const DungeonMaster = () => {
         <li className='collection-header brown lighten-5'>
           <h5>Your adventures</h5>
         </li>
-        <li
-          className='collection-item'
-          style={{ fontSize: "1.1em", marginTop: "0.5em" }}
-        >
-          Tulossa
-        </li>
+        {games.map((game, i) => (
+          <Link key={game._id} to={`game-info/${game._id}`}>
+            <li
+              className='collection-item'
+              style={{
+                fontSize: "1.1em",
+                marginTop: "0.5em",
+                backgroundColor: i % 2 !== 0 ? "#efebe9" : "",
+              }}
+            >
+              {game.name}
+            </li>
+          </Link>
+        ))}
       </ul>
     </div>
   )

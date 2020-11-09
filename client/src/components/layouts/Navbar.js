@@ -31,15 +31,17 @@ const Navbar = (props) => {
             justifyContent: "space-around",
           }}
         >
-          <Link to='/'>
-            <i className='fas fa-home'></i>
+          <Link to='/home'>
+            <i className='fas fa-home' style={{ color: "Mediumslateblue" }}></i>
           </Link>
           <Link to='/settings'>
-            <i className='material-icons'>settings</i>
+            <i className='material-icons' style={{ color: "Mediumslateblue" }}>
+              settings
+            </i>
           </Link>
         </div>
 
-        <Link to='/' className='brand-logo center'>
+        <Link to='/home' className='brand-logo center mybrand-logo'>
           <i className='fas fa-dragon'></i>
           DnD5
         </Link>
@@ -51,7 +53,12 @@ const Navbar = (props) => {
             }`}
           >
             <Link to='/create-character' className='align-center'>
-              <i className='material-icons'>add</i>
+              <i
+                className='material-icons'
+                style={{ color: "Mediumslateblue" }}
+              >
+                add
+              </i>
               Character
             </Link>
           </li>
@@ -90,13 +97,13 @@ const Navbar = (props) => {
     <nav>
       {" "}
       <div className='nav-wrapper brown'>
-        <Link to='/' className='brand-logo center'>
+        <Link to='/' className='brand-logo center mybrand-logo'>
           <i className='fas fa-dragon'></i>
           DnD5
         </Link>
-        <Link to='/' style={{ marginLeft: "15px" }}>
-          <i className='fas fa-home'></i>
-        </Link>
+        {/* <Link to='/' style={{ marginLeft: "15px" }}>
+          <i className='fas fa-home' style={{ color: "Mediumslateblue" }}></i>
+        </Link> */}
       </div>
     </nav>
   )

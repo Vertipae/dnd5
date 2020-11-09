@@ -18,6 +18,29 @@ label {
   font-family: "MedievalSharp", cursive;
   width: 140px;
 }
+
+.dragonIcon {
+  font-size: 700px;
+  position: fixed;
+  margin-top: -150px;
+  z-index: -100;
+  color: orangered;
+  opacity: 0.15;
+}
+.brand-logo.center.mybrand-logo {
+  color: orangered;
+  font-size: 2.3em;
+  /* opacity: 0.85; */
+}
+.welcomeText {
+  line-height: 2;
+  text-align: center;
+}
+
+.playerWelcomeName {
+  color: orangered;
+  text-transform: capitalize;
+}
 /* Materializecss */
 /* input.input-field.my-inputfield {
   border: #bbcfa1 0.1rem solid;

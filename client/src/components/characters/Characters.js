@@ -8,7 +8,7 @@ const Characters = () => {
   console.log(characters)
 
   return (
-    <div>
+    <div className='container'>
       <ul className='collection with-header'>
         <li className='collection-header brown lighten-5'>
           <h5>Characters</h5>
