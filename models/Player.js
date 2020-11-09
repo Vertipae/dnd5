@@ -22,6 +22,9 @@ const PlayerSchema = new mongoose.Schema({
       ref: "games",
     },
   ],
+  lastLogin: {
+    type: String,
+  },
 })
 
 module.exports = mongoose.model("players", PlayerSchema)

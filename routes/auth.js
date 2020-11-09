@@ -63,9 +63,14 @@ router.post("/login", async (req, res) => {
     const payload = {
       player: {
         id: player.id,
-        username: player.username
+        username: player.username,
       },
     }
+    const newLoginTime = {
+      // .getTime()
+      lastLogin: new Date().toString(),
+    }
+    await Player.findByIdAndUpdate(player._id, { $set: newLoginTime })
 
     // Adding token & response with Json Web Token
     jwt.sign(
