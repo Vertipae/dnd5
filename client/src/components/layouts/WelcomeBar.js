@@ -2,10 +2,10 @@ import React from "react"
 import { useSelector } from "react-redux"
 
 export default function WelcomeBar() {
-  const auth = useSelector((state) => state.auth.player)
-  // console.log(auth)
+  const player = useSelector((state) => state.auth.player)
+  console.log(player)
 
-  if (!auth) {
+  if (!player) {
     return <div></div>
   }
   return (
@@ -13,7 +13,7 @@ export default function WelcomeBar() {
       <h5 className='welcomeText'>
         Welcome,{"  "}{" "}
         <span className='playerWelcomeName'>
-          {auth.player.username}
+          {player.username}
           {"  "}{" "}
         </span>
         <span style={{ fontSize: "25px", color: "Mediumslateblue" }}>

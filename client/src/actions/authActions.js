@@ -34,6 +34,10 @@ export const registerUser = (userData, history) => async (dispatch) => {
         userData
       )
       setToken(res.data.token)
+      // Log player in after registration
+      const decoded = jwt_decode(res.data.token)
+      console.log(decoded)
+      dispatch(setCurrentPlayer(decoded.player))
       history.push("/home")
     }
   } catch (err) {
@@ -75,7 +79,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
       )
       setToken(res.data.token)
       const decoded = jwt_decode(res.data.token)
-      dispatch(setCurrentPlayer(decoded))
+      dispatch(setCurrentPlayer(decoded.player))
       history.push("/home")
     }
   } catch (err) {

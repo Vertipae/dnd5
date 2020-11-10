@@ -37,7 +37,7 @@ function App() {
       const decoded = jwt_decode(localStorage.accessToken)
       // Set user and isAuthenticated
       // console.log(decoded)
-      dispatch(setCurrentPlayer(decoded))
+      dispatch(setCurrentPlayer(decoded.player))
 
       //   // Check for expired token
       //   const currentTime = Date.now() / 1000;

@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
     }
 
     const newPlayer = new Player({
-      username: req.body.username,
+      username: req.body.username.toLowerCase(),
       password: req.body.password,
     })
 
@@ -62,9 +62,9 @@ router.post("/", async (req, res) => {
     const savedPlayer = await newPlayer.save()
 
     const payload = {
-      savedPlayer: {
+      player: {
         id: savedPlayer.id,
-        username: savedPlayer.username
+        username: savedPlayer.username,
       },
     }
 

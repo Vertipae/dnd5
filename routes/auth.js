@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body
 
   try {
-    const player = await Player.findOne({ username })
+    const player = await Player.findOne({ username: username.toLowerCase() })
 
     if (!player) {
       return res

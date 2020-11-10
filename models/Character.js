@@ -22,11 +22,12 @@ const CharacterSchema = new mongoose.Schema({
     required: true,
   },
   alignment: {
-    type: String
+    type: String,
   },
   player: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "players",
+    required: true,
   },
 })
 
