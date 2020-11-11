@@ -41,6 +41,21 @@ label {
   color: orangered;
   text-transform: capitalize;
 }
+
+.gameName {
+  color: orangered;
+}
+.joinGame {
+  font-size: 1.3em;
+  margin-bottom: 3em;
+  margin-top: 3em;
+}
+
+label.joinGameHeader {
+  font-size: 1.3em;
+  color: orangered;
+}
+
 /* Materializecss */
 /* input.input-field.my-inputfield {
   border: #bbcfa1 0.1rem solid;

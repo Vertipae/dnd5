@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "./actions/characterActions"
 import { getGames } from "./actions/gameActions"
 import GameInfo from "./components/games/GameInfo"
+import JoinGame from "./components/games/JoinGame"
 
 function App() {
   const dispatch = useDispatch()
@@ -95,6 +96,7 @@ function App() {
           <Route exact path='/dungeonmaster' component={DungeonMaster} />
           <Route exact path='/settings' component={Settings} />
           <Route exact path='/create-game' component={CreateGame} />
+          <Route exact path='/joingame/:id' component={JoinGame} />
         </Switch>
       </Fragment>
     </Router>
