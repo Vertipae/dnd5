@@ -11,7 +11,7 @@ export default function JoinGame({ match, location }) {
 
   const [game, setGame] = useState(null)
   const secret = new URLSearchParams(location.search).get("secret")
-  console.log(secret)
+  // console.log(secret)
   const player = useSelector((state) => state.auth.player)
   const characters = useSelector((state) => state.characters.characters)
 

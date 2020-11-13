@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 
 export default function WelcomeBar() {
   const player = useSelector((state) => state.auth.player)
-  console.log(player)
+  // console.log(player)
 
   if (!player) {
     return <div></div>

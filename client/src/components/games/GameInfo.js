@@ -1,6 +1,7 @@
 // For DM to see
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import axios from "../../utils/axiosService"
 // Todo: Tarina (Peruskuvaus, karttakuva), Muut pelaajat,
 
 export default function GameInfo({ match }) {
@@ -24,7 +25,7 @@ export default function GameInfo({ match }) {
       </div>
 
       <div className='row'>
-        <div className='col s12 m5'>
+        <div className='col s6'>
           <div className='card-panel brown lighten-2'>
             <h6>Dungeon master</h6>
             <span className='white-text'>{player.username}</span>
@@ -35,7 +36,7 @@ export default function GameInfo({ match }) {
           </div>
         </div>
 
-        <div className='col s12 m5'>
+        <div className='col s6'>
           <div className='card-panel brown lighten-2'>
             <h6> Game description</h6>
             <span className='white-text'>
@@ -50,6 +51,27 @@ export default function GameInfo({ match }) {
           </div>
         </div>
       </div>
+
+      <div className='row'>
+        <div className='col s12'>
+          <div className='card-panel brown lighten-2'>
+            <h6> Share this invite to people to join:</h6>
+            <span className='white-text'>
+              {`http://localhost:3000/joingame/${game._id}?secret=${game.secret}`}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <button
+        className='btn waves-effect waves-light green darken-4 myBtn'
+        style={{ marginTop: "2em" }}
+        type='submit'
+        name='action'
+      >
+        Join
+        <i className='material-icons right'>send</i>
+      </button>
     </div>
   )
 }
