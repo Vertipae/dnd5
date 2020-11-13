@@ -85,10 +85,10 @@ router.put("/:id", auth, async (req, res) => {
     let character = await Character.findById(req.params.id)
 
     if (!character) return res.status(404).json({ msg: "Character not found" })
-
+    // console.log("höpöpönPÖLÖPPÖ", character.player)
     // Checking that player owns character
     if (character.player.toString() !== req.player.id) {
-      return res.status(401).json({ msg: "Not authorized" })
+      return res.status(401).json({ msg: "Access denied" })
     }
 
     character = await Character.findByIdAndUpdate(

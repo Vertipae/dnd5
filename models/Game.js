@@ -30,6 +30,13 @@ const GameSchema = new mongoose.Schema({
       ref: "players",
     },
   ],
+  secret: {
+    type: String,
+    required: true,
+    // default: () => {
+    //   return randToken.generate(32)
+    // },
+  },
 })
 
 module.exports = mongoose.model("games", GameSchema)

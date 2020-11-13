@@ -24,6 +24,7 @@
     "jsonwebtoken": "^8.5.1",
     "materialize-css": "^1.0.0",
     "mongoose": "^5.6.9",
+    "rand-token": "^1.0.1",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",

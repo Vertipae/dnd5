@@ -1,16 +1,34 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import axios from "../../utils/axiosService"
 
-export default function JoinGame({ match }) {
+export default function JoinGame({ match, location }) {
   // Filtteröi peleistä pelin, jonka id on sama kuin urlin id ja ottaa listasta ensimmäisen
-  const game = useSelector(
-    (state) =>
-      state.games.games.filter((game) => game._id === match.params.id)[0]
-  )
+  //   const game = useSelector(
+  //     (state) =>
+  //       state.games.games.filter((game) => game._id === match.params.id)[0]
+  //   )
 
+  const [game, setGame] = useState(null)
+  const secret = new URLSearchParams(location.search).get("secret")
+  console.log(secret)
   const player = useSelector((state) => state.auth.player)
   const characters = useSelector((state) => state.characters.characters)
-  //   console.log(game)
+
+  const getGame = async () => {
+    try {
+      const game = await axios.get(
+        `http://localhost:5000/api/games/${match.params.id}/${secret}`
+      )
+      setGame(game.data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  useEffect(() => {
+    getGame()
+  }, [])
+  console.log(game)
   if (!game) {
     return <div></div>
   }
