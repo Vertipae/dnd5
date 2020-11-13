@@ -28,7 +28,8 @@ export default function JoinGame({ match, location }) {
   useEffect(() => {
     getGame()
   }, [])
-  console.log(game)
+  // console.log(game)
+
   if (!game) {
     return <div></div>
   }
