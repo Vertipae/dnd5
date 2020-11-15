@@ -41,7 +41,7 @@ export default function JoinGame({ match, location }) {
       </div>
 
       <div className='row'>
-        <div className='col s12 m5'>
+        <div className='col s12 m6'>
           <div className='card-panel brown lighten-2'>
             <h6>Dungeon master</h6>
             <span className='white-text'>{player.username}</span>
@@ -50,7 +50,7 @@ export default function JoinGame({ match, location }) {
           </div>
         </div>
         {/*  */}
-        <div className='col s12 m5'>
+        <div className='col s12 m6'>
           <div className='card-panel brown lighten-2'>
             <h6> Game description</h6>
             <span className='white-text'>

@@ -59,11 +59,22 @@ export default function GameInfo({ match }) {
             <span className='white-text'>
               {`http://localhost:3000/joingame/${game._id}?secret=${game.secret}`}
             </span>
+            <button
+              className='waves-effect waves-light btn-small'
+              style={{ marginLeft: "3.5em", backgroundColor: "mediumpurple" }}
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  `http://localhost:3000/joingame/${game._id}?secret=${game.secret}`
+                )
+              }
+            >
+              Copy
+            </button>
           </div>
         </div>
       </div>
 
-      <button
+      {/* <button
         className='btn waves-effect waves-light green darken-4 myBtn'
         style={{ marginTop: "2em" }}
         type='submit'
@@ -71,7 +82,7 @@ export default function GameInfo({ match }) {
       >
         Join
         <i className='material-icons right'>send</i>
-      </button>
+      </button> */}
     </div>
   )
 }
