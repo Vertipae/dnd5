@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 import axios from "../../utils/axiosService"
+
+import { joinGame } from "../../actions/gameActions"
 
 export default function JoinGame({ match, location }) {
   // Filtteröi peleistä pelin, jonka id on sama kuin urlin id ja ottaa listasta ensimmäisen
-  //   const game = useSelector(
-  //     (state) =>
-  //       state.games.games.filter((game) => game._id === match.params.id)[0]
-  //   )
+  // const game = useSelector(
+  //   (state) =>
+  //     state.games.games.filter((game) => game._id === match.params.id)[0]
+  // )
 
   const [game, setGame] = useState(null)
   const secret = new URLSearchParams(location.search).get("secret")
   // console.log(secret)
   const player = useSelector((state) => state.auth.player)
   const characters = useSelector((state) => state.characters.characters)
+  const [character, setCharacter] = useState("")
+
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const onSubmit = () => {
+    dispatch(joinGame(game._id, character, history))
+  }
 
   const getGame = async () => {
     try {
@@ -33,7 +44,7 @@ export default function JoinGame({ match, location }) {
   if (!game) {
     return <div></div>
   }
-
+  console.log(game)
   return (
     <div className='container'>
       <div className='dragonIcon'>
@@ -44,7 +55,7 @@ export default function JoinGame({ match, location }) {
         <div className='col s12 m6'>
           <div className='card-panel brown lighten-2'>
             <h6>Dungeon master</h6>
-            <span className='white-text'>{player.username}</span>
+            <span className='white-text'>{game.dungeonmaster.username}</span>
             <h6>Game name</h6>
             <span className='white-text'>{game.name}</span>
           </div>
@@ -68,19 +79,28 @@ export default function JoinGame({ match, location }) {
       <label className='joinGameHeader'>
         Choose a character to join a game
       </label>
-      <select className='browser-default'>
+      <select
+        className='browser-default'
+        onChange={(e) => setCharacter(e.target.value)}
+        defaultValue=''
+      >
+        <option value='' disabled>
+          Choose your character
+        </option>
         {characters.map((character) => (
-          <option key={character._id} value=''>
+          <option key={character._id} value={character._id}>
             {character.name}, {character.race} {character.characterClass}
           </option>
         ))}
       </select>
       <div className='row right'>
         <button
+          onClick={onSubmit}
           className='btn waves-effect waves-light green darken-4 myBtn'
           style={{ marginTop: "2em" }}
           type='submit'
           name='action'
+          disabled={character === ""}
         >
           Join
           <i className='material-icons right'>send</i>

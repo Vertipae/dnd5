@@ -6,15 +6,12 @@ const Game = ({ match }) => {
     (state) =>
       state.games.games.filter((game) => game._id === match.params.id)[0]
   )
-  const character = useSelector(
-    (state) =>
-      state.characters.characters.filter(
-        (character) => character._id === match.params.id
-      )[0]
-  )
+  const character = useSelector((state) => state.characters.characters)
   const player = useSelector((state) => state.auth.player)
 
-  if (!game) {
+  console.log(game)
+  console.log(character)
+  if (!game || !character) {
     return <div></div>
   }
 
@@ -27,11 +24,11 @@ const Game = ({ match }) => {
         <div className='col s12 m5'>
           <div className='card-panel brown lighten-2'>
             <h6>Dungeon master</h6>
-            <span className='white-text'>{player.username}</span>
+            <span className='white-text'>{game.dungeonmaster.username}</span>
             <h6>Game name</h6>
             <span className='white-text'>{game.name}</span>
             <h6>Your character in this game</h6>
-            <span className='white-text'>{game.name}</span>
+            <span className='white-text'>{character.name}</span>
           </div>
         </div>
         {/*  */}

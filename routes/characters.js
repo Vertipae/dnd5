@@ -10,7 +10,7 @@ const Character = require("../models/Character")
 router.get("/", auth, async (req, res) => {
   // res.send("Get all characters");
   // Character.find().then((characters) => res.send(characters))
-  console.log(req.player)
+  // console.log(req.player)
   try {
     const characters = await Character.find({ player: req.player.id }).sort({
       date: -1,

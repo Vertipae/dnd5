@@ -20,7 +20,7 @@ export const addCharacter = (characterData, history) => async (dispatch) => {
         payload: errors,
       })
       setTimeout(() => {
-        console.log("erroriactiontoimi")
+        // console.log("erroriactiontoimi")
         dispatch({
           type: CLEAR_ERRORS,
         })
@@ -60,14 +60,14 @@ export const updateCharacter = (characterData, history) => async (dispatch) => {
 }
 
 export const deleteCharacter = (id, history) => async (dispatch) => {
-  console.log("DeleteAction")
+  // console.log("DeleteAction")
   try {
     const res = await axios.delete(`http://localhost:5000/api/characters/${id}`)
     dispatch({
       type: DELETE_CHARACTER,
       payload: res.data._id,
     })
-    console.log("Character deleted successfully")
+    // console.log("Character deleted successfully")
     history.push("/home")
   } catch (err) {
     console.log(err)

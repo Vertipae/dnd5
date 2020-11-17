@@ -22,22 +22,30 @@ router.get("/", auth, async (req, res) => {
       ],
     })
       .populate("characters")
-      .populate("players", "-password")
-      .populate("dungeonmaster", "-password")
+      .populate("players", "-password -lastLogin -characters -games -_id")
+      .populate("dungeonmaster", "-password -lastLogin -characters -games")
       .sort({
         date: -1,
       })
 
+    const resultGames = []
     games.forEach((game) => {
+      console.log("asdfgsasdf", game.dungeonmaster)
       // If not the DM of the game, nullify secret to disable players sending invitations
       // console.log(typeof game.dungeonmaster._id)
       // console.log(typeof req.player.id)
-      if (game.dungeonmaster._id.toString() !== req.player.id)
-        game.secret = null
+      // Muutetaan mongoosen dokumentti objektiksi, jotta voidaan muokata yhden pelin arvoja
+      const gameObject = game.toObject()
+      if (gameObject.dungeonmaster._id.toString() !== req.player.id) {
+        // Se joka hakee pelejä ei ole sen pelin DM niin se ei saa salaisia tietoja(id jne)
+        gameObject.secret = null
+        gameObject.dungeonmaster._id = null
+      }
+      resultGames.push(gameObject)
     })
 
-    console.log(games)
-    res.send(games)
+    // console.log(games)
+    res.send(resultGames)
   } catch (err) {
     err.message ? console.error(err.message) : console.error(err)
     res.status(500).send("Server Error")
@@ -120,9 +128,12 @@ router.put("/:id", auth, async (req, res) => {
 // @access Private
 router.get("/:id/:secret", auth, async (req, res) => {
   try {
-    console.log(req.params.id)
-    console.log(req.params.secret)
-    const game = await Game.findById(req.params.id)
+    // console.log(req.params.id)
+    // console.log(req.params.secret)
+    const game = await Game.findById(req.params.id).populate(
+      "dungeonmaster",
+      "-password -lastLogin -characters -games -_id"
+    )
     // Check if the user is DM of the game or has provided valid secret
     // console.log(req.params.secret)
     // console.log(game.secret)
@@ -162,11 +173,13 @@ router.post("/join/:id", auth, async (req, res) => {
     const players = [...game.players, new ObjectId(req.player.id)]
     const characters = [...game.characters, new ObjectId(character._id)]
 
-    Game.findByIdAndUpdate(
+    const updatedGame = await Game.findByIdAndUpdate(
       game.id,
       { $set: { players, characters } },
       { new: true }
     )
+
+    console.log(updatedGame)
 
     res.json({ ...game, players, characters })
   } catch (err) {
@@ -201,7 +214,7 @@ router.delete("/:id", auth, async (req, res) => {
     })
     await Game.findByIdAndRemove(req.params.id)
 
-    res.send({ msg: "Game removed" })
+    res.send(game)
   } catch (err) {
     err.message ? console.error(err.message) : console.error(err)
     res.status(500).send("Server Error")

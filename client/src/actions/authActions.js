@@ -36,7 +36,7 @@ export const registerUser = (userData, history) => async (dispatch) => {
       setToken(res.data.token)
       // Log player in after registration
       const decoded = jwt_decode(res.data.token)
-      console.log(decoded)
+      // console.log(decoded)
       dispatch(setCurrentPlayer(decoded.player))
       history.push("/home")
     }
@@ -75,6 +75,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
     } else {
       const res = await axios.post(
         "http://localhost:5000/api/auth/login",
+        // Se body
         userData
       )
       setToken(res.data.token)

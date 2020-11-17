@@ -1,10 +1,14 @@
 // For DM to see
-import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import axios from "../../utils/axiosService"
+import React from "react"
+import { useHistory } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { deleteGame } from "../../actions/gameActions"
 // Todo: Tarina (Peruskuvaus, karttakuva), Muut pelaajat,
+// Ehtolause jos DM näyttää  DM jutut, delete button
 
 export default function GameInfo({ match }) {
+  const dispatch = useDispatch()
+  const history = useHistory()
   // Filtteröi peleistä pelin, jonka id on sama kuin urlin id ja ottaa listasta ensimmäisen
   const game = useSelector(
     (state) =>
@@ -28,11 +32,12 @@ export default function GameInfo({ match }) {
         <div className='col s6'>
           <div className='card-panel brown lighten-2'>
             <h6>Dungeon master</h6>
-            <span className='white-text'>{player.username}</span>
+            <span className='white-text'>{game.dungeonmaster.username}</span>
             <h6>Game name</h6>
             <span className='white-text'>{game.name}</span>
             <h6>Characters in this game</h6>
-            <span className='white-text'>{game.name}</span>
+            {/* game.characters.map */}
+            <span className='white-text'>{characters.name}</span>
           </div>
         </div>
 
@@ -74,15 +79,21 @@ export default function GameInfo({ match }) {
         </div>
       </div>
 
-      {/* <button
-        className='btn waves-effect waves-light green darken-4 myBtn'
-        style={{ marginTop: "2em" }}
-        type='submit'
-        name='action'
-      >
-        Join
-        <i className='material-icons right'>send</i>
-      </button> */}
+      <div className='col '>
+        <button
+          className='btn waves-effect waves-light red darken-4 myBtn'
+          style={{ marginTop: "2em" }}
+          type='submit'
+          name='action'
+          onClick={(e) => {
+            e.preventDefault()
+            dispatch(deleteGame(game._id, history))
+          }}
+        >
+          Delete
+          <i className='material-icons right'>delete</i>
+        </button>
+      </div>
     </div>
   )
 }
