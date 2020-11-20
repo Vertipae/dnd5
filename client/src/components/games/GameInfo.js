@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteGame } from "../../actions/gameActions"
 // Todo: Tarina (Peruskuvaus, karttakuva), Muut pelaajat,
-// Ehtolause jos DM näyttää  DM jutut, delete button
+// Ehtolause jos DM näyttää  DM jutut
 
 export default function GameInfo({ match }) {
   const dispatch = useDispatch()
@@ -36,8 +36,9 @@ export default function GameInfo({ match }) {
             <h6>Game name</h6>
             <span className='white-text'>{game.name}</span>
             <h6>Characters in this game</h6>
-            {/* game.characters.map */}
-            <span className='white-text'>{characters.name}</span>
+            {game.characters.map((character) => (
+              <span className='white-text'>{character.name} - </span>
+            ))}
           </div>
         </div>
 

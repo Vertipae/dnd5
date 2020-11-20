@@ -57,7 +57,7 @@ const DungeonMaster = () => {
           <h5>Your adventures</h5>
         </li>
         {games.map((game, i) => (
-          <Link key={game._id} to={`game-info/${game._id}`}>
+          <Link key={i} to={`game-info/${game._id}`}>
             <li
               className='collection-item'
               style={{

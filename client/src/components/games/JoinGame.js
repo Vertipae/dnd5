@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import axios from "../../utils/axiosService"
 
 import { joinGame } from "../../actions/gameActions"
+// Todo: Kato et onko hahmo jo siinä pelissä liittyneenä
 
 export default function JoinGame({ match, location }) {
   // Filtteröi peleistä pelin, jonka id on sama kuin urlin id ja ottaa listasta ensimmäisen
