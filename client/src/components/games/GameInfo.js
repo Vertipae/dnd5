@@ -32,9 +32,19 @@ export default function GameInfo({ match }) {
         <div className='col s6'>
           <div className='card-panel brown lighten-2'>
             <h6>Dungeon master</h6>
-            <span className='white-text'>{game.dungeonmaster.username}</span>
+            <span
+              className='white-text'
+              style={{ textTransform: "capitalize" }}
+            >
+              {game.dungeonmaster.username}
+            </span>
             <h6>Game name</h6>
-            <span className='white-text'>{game.name}</span>
+            <span
+              className='white-text'
+              style={{ textTransform: "capitalize" }}
+            >
+              {game.name}
+            </span>
             <h6>Characters in this game</h6>
             {game.characters.map((character) => (
               <span className='white-text'>{character.name} - </span>

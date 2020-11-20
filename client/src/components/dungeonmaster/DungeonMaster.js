@@ -7,9 +7,15 @@ import { addGame } from "../../actions/gameActions"
 
 const DungeonMaster = () => {
   const errors = useSelector((state) => state.errors)
-  const games = useSelector((state) => state.games.games)
+  // const games = useSelector((state) => state.games.games)
+  const player = useSelector((state) => state.auth.player)
+  const games = useSelector((state) =>
+    state.games.games.filter((game) => game.dungeonmaster._id === player.id)
+  )
   const dispatch = useDispatch()
   const history = useHistory()
+
+  console.log(games)
 
   const [name, setName] = useState("")
 
