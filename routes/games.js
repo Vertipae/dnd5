@@ -170,6 +170,19 @@ router.post("/join/:id", auth, async (req, res) => {
       res.status(400).json({ msg: "Game or character not found" })
     }
 
+    console.log("PAKJSHJDGDGDH", game.characters)
+    if (
+      game.characters.some(
+        (char) => char.toString() === character._id.toString()
+      )
+    ) {
+      return res.status(400).json({
+        errors: {
+          name: { msg: "This character has already joined this game" },
+        },
+      })
+    }
+
     const players = [...game.players, new ObjectId(req.player.id)]
     const characters = [...game.characters, new ObjectId(character._id)]
 
@@ -179,9 +192,9 @@ router.post("/join/:id", auth, async (req, res) => {
       { new: true }
     )
 
-    console.log(updatedGame)
+    // console.log(updatedGame)
 
-    res.json({ ...game, players, characters })
+    res.json(updatedGame)
   } catch (err) {
     err.message ? console.error(err.message) : console.error(err)
     res.status(500).send("Save failed")
