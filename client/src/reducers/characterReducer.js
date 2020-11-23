@@ -18,7 +18,7 @@ export default function (state = initialState, action) {
         characters: [action.newCharacter, ...state.characters],
       }
     case DELETE_CHARACTER:
-      console.log("Delete Rducer")
+      // console.log("Delete Rducer")
       return {
         ...state,
         // Vanhasta listasta filtteröidään pois character, jonka id on annettu action.payloadina
@@ -27,7 +27,7 @@ export default function (state = initialState, action) {
         ),
       }
     case SET_CHARACTERS:
-      console.log(action)
+      // console.log(action)
       return {
         ...state,
         // Asetetaan listaksi annettu lista (korvataan vanha lista uudella annetulla listalla)

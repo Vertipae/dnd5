@@ -15,7 +15,7 @@ const DungeonMaster = () => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  console.log(games)
+  // console.log(games)
 
   const [name, setName] = useState("")
 

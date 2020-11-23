@@ -12,10 +12,10 @@ export default function (state = initialState, action) {
         games: action.payload,
       }
     case ADD_GAME:
-      // console.log('ADD REDUCER')
+      console.log("ADD REDUCER", action)
       return {
         ...state,
-        games: [...state.games, action.payload],
+        games: [action.payload, ...state.games],
       }
     case DELETE_GAME:
       return {

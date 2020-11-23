@@ -30,7 +30,7 @@ router.get("/", auth, async (req, res) => {
 
     const resultGames = []
     games.forEach((game) => {
-      console.log("asdfgsasdf", game.dungeonmaster)
+      // console.log("asdfgsasdf", game.dungeonmaster)
       // If not the DM of the game, nullify secret to disable players sending invitations
       // console.log(typeof game.dungeonmaster._id)
       // console.log(typeof req.player.id)
@@ -74,7 +74,8 @@ router.post("/", auth, async (req, res) => {
       characters: [],
       secret: randToken.generate(32),
     })
-    const game = await newGame.save()
+    const savedGame = await newGame.save()
+    const game = await Game.findById(savedGame._id).populate("dungeonmaster")
     res.send(game)
   } catch (err) {
     err.message ? console.error(err.message) : console.error(err)
@@ -170,7 +171,7 @@ router.post("/join/:id", auth, async (req, res) => {
       res.status(400).json({ msg: "Game or character not found" })
     }
 
-    console.log("PAKJSHJDGDGDH", game.characters)
+    // console.log("PAKJSHJDGDGDH", game.characters)
     if (
       game.characters.some(
         (char) => char.toString() === character._id.toString()
@@ -191,10 +192,13 @@ router.post("/join/:id", auth, async (req, res) => {
       { $set: { players, characters } },
       { new: true }
     )
+    game = await Game.findById(updatedGame._id)
+      .populate("dungeonmaster", "username")
+      .populate("characters")
 
     // console.log(updatedGame)
 
-    res.json(updatedGame)
+    res.json(game)
   } catch (err) {
     err.message ? console.error(err.message) : console.error(err)
     res.status(500).send("Save failed")

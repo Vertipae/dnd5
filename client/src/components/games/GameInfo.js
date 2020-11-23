@@ -46,8 +46,10 @@ export default function GameInfo({ match }) {
               {game.name}
             </span>
             <h6>Characters in this game</h6>
-            {game.characters.map((character) => (
-              <span className='white-text'>{character.name} - </span>
+            {game.characters.map((character, i) => (
+              <span key={i} className='white-text'>
+                {character.name} -{" "}
+              </span>
             ))}
           </div>
         </div>
