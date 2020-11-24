@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { Fragment, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import axios from "../../utils/axiosService"
+import Login from "../auth/Login"
 
 import { joinGame } from "../../actions/gameActions"
-// Todo: Kato et onko hahmo jo siinä pelissä liittyneenä
+// Todo: Näytä punanen korostus errori, jos hahmo on liittyny peliin
 
 export default function JoinGame({ match, location }) {
   // Filtteröi peleistä pelin, jonka id on sama kuin urlin id ja ottaa listasta ensimmäisen
@@ -13,16 +14,18 @@ export default function JoinGame({ match, location }) {
   //     state.games.games.filter((game) => game._id === match.params.id)[0]
   // )
 
+  const auth = useSelector((state) => state.auth)
+
   const [game, setGame] = useState(null)
   const secret = new URLSearchParams(location.search).get("secret")
   // console.log(secret)
-  const player = useSelector((state) => state.auth.player)
+  // const player = useSelector((state) => state.auth.player)
   const characters = useSelector((state) => state.characters.characters)
   const [character, setCharacter] = useState("")
 
   const dispatch = useDispatch()
   const history = useHistory()
-
+  console.log(history.location)
   const onSubmit = () => {
     dispatch(joinGame(game._id, character, history))
   }
@@ -39,14 +42,21 @@ export default function JoinGame({ match, location }) {
   }
   useEffect(() => {
     getGame()
-  }, [])
+  }, [auth])
   // console.log(game)
 
-  if (!game) {
-    return <div></div>
+  const notAuthed = () => {
+    if (!auth.player) {
+      return (
+        // <Login redirect={history.location.pathname + history.location.search} />
+        <Login redirect={false} />
+      )
+    }
   }
-  console.log(game)
-  return (
+  // Palauttaa tyhjän kunnes peli on haettu
+  const authLinks = !game ? (
+    <div></div>
+  ) : (
     <div className='container'>
       <div className='dragonIcon'>
         <i className='fas fa-dragon'></i>
@@ -109,4 +119,6 @@ export default function JoinGame({ match, location }) {
       </div>
     </div>
   )
+  // console.log(game)
+  return <div>{auth.player ? authLinks : notAuthed()}</div>
 }

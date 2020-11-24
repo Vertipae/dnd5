@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { loginUser } from "../../actions/authActions"
 import TextFieldGroup from "../common/TextFieldGroup"
 
-const Login = () => {
+const Login = ({ redirect = "/home" }) => {
   const auth = useSelector((state) => state.auth)
   const errors = useSelector((state) => state.errors)
   const dispatch = useDispatch()
@@ -22,7 +22,7 @@ const Login = () => {
       errors: {},
     }
 
-    dispatch(loginUser(userData, history))
+    dispatch(loginUser(userData, history, redirect))
   }
 
   useEffect(() => {
@@ -34,42 +34,42 @@ const Login = () => {
   }, [auth])
 
   return (
-    <div className="container">
+    <div className='container'>
       <form onSubmit={onSubmit}>
         <h1>Sign in</h1>
         <TextFieldGroup
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="input-field my-inputfield"
-          type="text"
-          name="username"
-          label="Username"
+          className='input-field my-inputfield'
+          type='text'
+          name='username'
+          label='Username'
           error={errors.username}
         />
 
         <TextFieldGroup
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="input-field my-inputfield"
-          type="password"
-          name="password"
-          label="Password"
+          className='input-field my-inputfield'
+          type='password'
+          name='password'
+          label='Password'
           error={errors.password}
         />
 
         <button
-          className="btn waves-effect waves-light brown myBtn"
+          className='btn waves-effect waves-light brown myBtn'
           style={{ marginTop: "2em" }}
-          type="submit"
-          name="action"
+          type='submit'
+          name='action'
         >
           Login
-          <i className="material-icons right">send</i>
+          <i className='material-icons right'>send</i>
         </button>
         <div>
           <Link
-            to="/register"
-            className="btn waves-effect waves-light brown myBtn"
+            to='/register'
+            className='btn waves-effect waves-light brown myBtn'
             style={{ marginTop: "2em" }}
           >
             Register

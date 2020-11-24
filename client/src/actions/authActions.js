@@ -58,7 +58,9 @@ export const registerUser = (userData, history) => async (dispatch) => {
 }
 
 // Login get user token
-export const loginUser = (userData, history) => async (dispatch) => {
+export const loginUser = (userData, history, redirect = "/home") => async (
+  dispatch
+) => {
   try {
     const errors = validateLogin(userData)
     // console.log("errors_1", errors)
@@ -81,7 +83,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
       setToken(res.data.token)
       const decoded = jwt_decode(res.data.token)
       dispatch(setCurrentPlayer(decoded.player))
-      history.push("/home")
+      if (redirect) history.push(redirect)
     }
   } catch (err) {
     console.log("kakka", err)
