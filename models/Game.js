@@ -37,6 +37,13 @@ const GameSchema = new mongoose.Schema({
     //   return randToken.generate(32)
     // },
   },
+  description: {
+    type: String,
+  },
+  gameFile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "gameFile",
+  },
 })
 
 module.exports = mongoose.model("games", GameSchema)

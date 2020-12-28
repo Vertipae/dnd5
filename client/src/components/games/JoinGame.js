@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import axios from "../../utils/axiosService"
@@ -6,6 +6,7 @@ import Login from "../auth/Login"
 
 import { joinGame } from "../../actions/gameActions"
 // Todo: Näytä punanen korostus errori, jos hahmo on liittyny peliin
+// Todo: luo hahmo vaihtoehto, jos ei ole hahmoa
 
 export default function JoinGame({ match, location }) {
   // Filtteröi peleistä pelin, jonka id on sama kuin urlin id ja ottaa listasta ensimmäisen
@@ -75,15 +76,7 @@ export default function JoinGame({ match, location }) {
         <div className='col s12 m6'>
           <div className='card-panel brown lighten-2'>
             <h6> Game description</h6>
-            <span className='white-text'>
-              I am a very simple card. I am good at containing small bits of
-              information. I am convenient because I require little markup to
-              use effectively. I am similar to what is called a panel in other
-              frameworks. I am a very simple card. I am good at containing small
-              bits of information. I am convenient because I require little
-              markup to use effectively. I am similar to what is called a panel
-              in other frameworks.
-            </span>
+            <span className='white-text'>{game.description}</span>
           </div>
         </div>
       </div>

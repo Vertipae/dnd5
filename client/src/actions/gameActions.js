@@ -13,6 +13,7 @@ export const getGames = () => async (dispatch) => {
   console.log("GetGamesAction")
   try {
     const res = await axios.get("http://localhost:5000/api/games")
+    console.log("GET_GAMES:", res.data)
     dispatch({
       type: SET_GAMES,
       payload: res.data,

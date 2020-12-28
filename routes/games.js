@@ -4,6 +4,7 @@ const auth = require("../middleware/auth")
 const { check, validationResult } = require("express-validator")
 const Player = require("../models/Player")
 const Game = require("../models/Game")
+const GameFile = require("../models/File")
 const Character = require("../models/Character")
 const ObjectId = require("mongoose").Types.ObjectId
 const randToken = require("rand-token")
@@ -24,10 +25,11 @@ router.get("/", auth, async (req, res) => {
       .populate("characters")
       .populate("players", "-password -lastLogin -characters -games -_id")
       .populate("dungeonmaster", "-password -lastLogin -characters -games")
+      .populate("gameFile")
       .sort({
         date: -1,
       })
-
+    console.log(games[0])
     const resultGames = []
     games.forEach((game) => {
       // console.log("asdfgsasdf", game.dungeonmaster)
@@ -63,9 +65,15 @@ router.post("/", auth, async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.mapped() })
   }
+  // Alustaminen avain ja arvo
+  const { name, private, description, gameFile } = req.body
 
-  const { name, private } = req.body
+  console.log(typeof gameFile)
   try {
+    const newFile = new GameFile(JSON.parse(gameFile))
+    console.log(newFile)
+    const savedFile = await newFile.save()
+    // console.log(savedFile)
     const newGame = new Game({
       name,
       dungeonmaster: req.player.id,
@@ -73,10 +81,15 @@ router.post("/", auth, async (req, res) => {
       players: [],
       characters: [],
       secret: randToken.generate(32),
+      description,
+      gameFile: savedFile._id,
     })
     const savedGame = await newGame.save()
-    const game = await Game.findById(savedGame._id).populate("dungeonmaster")
-    res.send(game)
+    const game = await Game.findById(savedGame._id)
+      .populate("dungeonmaster")
+      .populate("gameFile")
+
+    res.send(game.toObject())
   } catch (err) {
     err.message ? console.error(err.message) : console.error(err)
     res.status(500).send("Save failed")

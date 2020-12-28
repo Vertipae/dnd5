@@ -26,6 +26,10 @@ label {
   z-index: -100;
   color: orangered;
   opacity: 0.15;
+  /* center */
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%);
 }
 .brand-logo.center.mybrand-logo {
   color: orangered;

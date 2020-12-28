@@ -21,7 +21,7 @@ const Game = ({ match }) => {
         <i className='fas fa-dragon'></i>
       </div>
       <div className='row'>
-        <div className='col s12 m5'>
+        <div className='col s12 m6'>
           <div className='card-panel brown lighten-2'>
             <h6>Dungeon master</h6>
             <span className='white-text'>{game.dungeonmaster.username}</span>
@@ -41,18 +41,10 @@ const Game = ({ match }) => {
           </div>
         </div>
         {/*  */}
-        <div className='col s12 m5'>
+        <div className='col s12 m6'>
           <div className='card-panel brown lighten-2'>
             <h6> Game description</h6>
-            <span className='white-text'>
-              I am a very simple card. I am good at containing small bits of
-              information. I am convenient because I require little markup to
-              use effectively. I am similar to what is called a panel in other
-              frameworks. I am a very simple card. I am good at containing small
-              bits of information. I am convenient because I require little
-              markup to use effectively. I am similar to what is called a panel
-              in other frameworks.
-            </span>
+            <span className='white-text'>{game.description}</span>
           </div>
         </div>
       </div>

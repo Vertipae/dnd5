@@ -18,16 +18,16 @@ export default function GameInfo({ match }) {
   const characters = useSelector((state) => state.characters.characters)
 
   // Räyh
-  if (!game) {
+  if (!game || !game.gameFile) {
     return <div></div>
   }
-
+  console.log("GAMEFILE:", game.gameFile)
+  // console.log("Herepeli")
   return (
     <div className='container'>
       <div className='dragonIcon'>
         <i className='fas fa-dragon'></i>
       </div>
-
       <div className='row'>
         <div className='col s6'>
           <div className='card-panel brown lighten-2'>
@@ -57,19 +57,15 @@ export default function GameInfo({ match }) {
         <div className='col s6'>
           <div className='card-panel brown lighten-2'>
             <h6> Game description</h6>
-            <span className='white-text'>
-              I am a very simple card. I am good at containing small bits of
-              information. I am convenient because I require little markup to
-              use effectively. I am similar to what is called a panel in other
-              frameworks. I am a very simple card. I am good at containing small
-              bits of information. I am convenient because I require little
-              markup to use effectively. I am similar to what is called a panel
-              in other frameworks.
-            </span>
+            <span className='white-text'>{game.description}</span>
           </div>
         </div>
       </div>
 
+      <img
+        src={`data:${game.gameFile.type};base64,${atob(game.gameFile.data)}`}
+        alt='image'
+      />
       <div className='row'>
         <div className='col s12'>
           <div className='card-panel brown lighten-2'>
@@ -91,7 +87,6 @@ export default function GameInfo({ match }) {
           </div>
         </div>
       </div>
-
       <div className='col '>
         <button
           className='btn waves-effect waves-light red darken-4 myBtn'
