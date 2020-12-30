@@ -75,7 +75,7 @@ export default function CreateGame() {
               type='text'
               name='name'
               className={errors.name ? "invalid" : ""}
-              value={name}
+              // value={name}
               // onChange={(e) => setName(e.target.value)}
             />
             <label className={name !== "" ? "active" : ""}>Game Name</label>
@@ -103,7 +103,7 @@ export default function CreateGame() {
           <textarea
             id='icon_prefix2'
             className='materialize-textarea'
-            value={description}
+            // value={description}
             name='description'
             // onChange={(e) => setDescription(e.target.value)}
           ></textarea>

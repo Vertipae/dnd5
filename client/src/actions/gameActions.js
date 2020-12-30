@@ -10,10 +10,10 @@ import { validateAddGame } from "../utils/validator"
 
 // Ei tartte id tai gamesData parametria, koska axios middleware lähettää tokenin automaattisesti
 export const getGames = () => async (dispatch) => {
-  console.log("GetGamesAction")
+  // console.log("GetGamesAction")
   try {
     const res = await axios.get("http://localhost:5000/api/games")
-    console.log("GET_GAMES:", res.data)
+    // console.log("GET_GAMES:", res.data)
     dispatch({
       type: SET_GAMES,
       payload: res.data,

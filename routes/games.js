@@ -68,28 +68,45 @@ router.post("/", auth, async (req, res) => {
   // Alustaminen avain ja arvo
   const { name, private, description, gameFile } = req.body
 
-  console.log(typeof gameFile)
+  // console.log(typeof gameFile)
   try {
-    const newFile = new GameFile(JSON.parse(gameFile))
-    console.log(newFile)
-    const savedFile = await newFile.save()
-    // console.log(savedFile)
-    const newGame = new Game({
-      name,
-      dungeonmaster: req.player.id,
-      private,
-      players: [],
-      characters: [],
-      secret: randToken.generate(32),
-      description,
-      gameFile: savedFile._id,
-    })
-    const savedGame = await newGame.save()
-    const game = await Game.findById(savedGame._id)
-      .populate("dungeonmaster")
-      .populate("gameFile")
+    if (gameFile) {
+      const newFile = new GameFile(JSON.parse(gameFile))
+      // console.log(newFile)
+      const savedFile = await newFile.save()
+      // console.log(savedFile)
 
-    res.send(game.toObject())
+      const newGame = new Game({
+        name,
+        dungeonmaster: req.player.id,
+        private,
+        players: [],
+        characters: [],
+        secret: randToken.generate(32),
+        description,
+        gameFile: savedFile._id,
+      })
+      const savedGame = await newGame.save()
+      const game = await Game.findById(savedGame._id)
+        .populate("dungeonmaster")
+        .populate("gameFile")
+
+      res.send(game.toObject())
+    } else {
+      const newGame = new Game({
+        name,
+        dungeonmaster: req.player.id,
+        private,
+        players: [],
+        characters: [],
+        secret: randToken.generate(32),
+        description,
+      })
+      const savedGame = await newGame.save()
+      const game = await Game.findById(savedGame._id).populate("dungeonmaster")
+
+      res.send(game.toObject())
+    }
   } catch (err) {
     err.message ? console.error(err.message) : console.error(err)
     res.status(500).send("Save failed")

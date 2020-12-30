@@ -76,7 +76,7 @@ export const deleteCharacter = (id, history) => async (dispatch) => {
 }
 
 export const getCharacters = () => async (dispatch) => {
-  console.log("GetCharacterAction")
+  // console.log("GetCharacterAction")
   try {
     const res = await axios.get("http://localhost:5000/api/characters")
     // console.log(res)

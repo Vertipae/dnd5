@@ -18,10 +18,10 @@ export default function GameInfo({ match }) {
   const characters = useSelector((state) => state.characters.characters)
 
   // Räyh
-  if (!game || !game.gameFile) {
+  if (!game) {
     return <div></div>
   }
-  console.log("GAMEFILE:", game.gameFile)
+  // console.log("GAMEFILE:", game.gameFile)
   // console.log("Herepeli")
   return (
     <div className='container'>
@@ -61,11 +61,13 @@ export default function GameInfo({ match }) {
           </div>
         </div>
       </div>
-
-      <img
-        src={`data:${game.gameFile.type};base64,${atob(game.gameFile.data)}`}
-        alt='image'
-      />
+      {/* Piirtää kuvan, jos ehto täyttyy ei enään erroria gameFile.type */}
+      {game.gameFile && (
+        <img
+          src={`data:${game.gameFile.type};base64,${atob(game.gameFile.data)}`}
+          alt='image'
+        />
+      )}
       <div className='row'>
         <div className='col s12'>
           <div className='card-panel brown lighten-2'>
