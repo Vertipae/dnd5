@@ -6,19 +6,17 @@ const axios = require("axios")
 const express = require("express")
 const router = express.Router()
 const auth = require("../middleware/auth")
-const { check, validationResult } = require("express-validator")
 
 const BASE_API_URL = "https://www.dnd5eapi.co/api/"
 axios.defaults.headers.common["Content-Type"] = "application/json"
-router.get("/classes", async (req, res) => {
+router.get("/:endpoint", auth, async (req, res) => {
   try {
-    const response = await axios.get(BASE_API_URL + "classes")
+    const response = await axios.get(BASE_API_URL + req.params.endpoint)
     // console.log(response.data)
     res.send(response.data)
   } catch (err) {
-    // console.log(err)
-    err.message ? console.error(err.message) : console.error(err)
-    res.status(500).send("Server Error")
+    console.log(err.response)
+    res.status(err.response.status).send(err.response.statusText)
   }
 })
 
