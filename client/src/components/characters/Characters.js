@@ -21,6 +21,7 @@ const Characters = () => {
                 fontSize: "1.1em",
                 marginTop: "0.5em",
                 backgroundColor: i % 2 !== 0 ? "#efebe9" : "",
+                textTransform: "capitalize",
               }}
             >
               {character.name}, {character.race} {character.characterClass}

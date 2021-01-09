@@ -1,7 +1,8 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addCharacter } from "../../actions/characterActions"
+import axios from "axios"
 // Todo: Subrace(Dwarf => Hill Dwarf) & languages, experience points, background
 
 const CreateCharacter = () => {
@@ -12,9 +13,24 @@ const CreateCharacter = () => {
 
   const [name, setName] = useState("")
   const [race, setRace] = useState("0")
-  const [characterClass, setCharacterClass] = useState("0")
+  const [characterClass, setCharacterClass] = useState("")
+  // Cannot read property 'map' of undefined. Ylhäältä alas, koska characterClasses.result ei ole vielä olemassa ni tyhjä divi
+  const [characterClasses, setCharacterClasses] = useState(null)
   const [level, setLevel] = useState("")
   const [alignment, setAlignment] = useState("0")
+
+  const getClass = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/classes`)
+      setCharacterClasses(response.data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  useEffect(() => {
+    getClass()
+  }, [])
+  // console.log(characterClass)
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -29,6 +45,10 @@ const CreateCharacter = () => {
     }
 
     dispatch(addCharacter(newCharacter, history))
+  }
+  // || characterClasses.length === 0)
+  if (!characterClasses) {
+    return <div></div>
   }
 
   return (
@@ -94,10 +114,15 @@ const CreateCharacter = () => {
                 value={characterClass}
                 onChange={(e) => setCharacterClass(e.target.value)}
               >
-                <option value='0' disabled>
+                <option value='' disabled>
                   Classes
                 </option>
-                <option value='Bard'>Bard</option>
+                {characterClasses.results.map((c, i) => (
+                  <option key={i} value={c.index}>
+                    {c.name}
+                  </option>
+                ))}
+                {/* <option value='Bard'>Bard</option>
                 <option value='Cleric'>Cleric</option>
                 <option value='Druid'>Druid</option>
                 <option value='Other'>Other</option>
@@ -105,7 +130,7 @@ const CreateCharacter = () => {
                 <option value='Ranger'>Ranger</option>
                 <option value='Sorcerer'>Sorcerer</option>
                 <option value='Warlock'>Warlock</option>
-                <option value='Wizard'>Wizard</option>
+                <option value='Wizard'>Wizard</option> */}
               </select>
             </div>
 

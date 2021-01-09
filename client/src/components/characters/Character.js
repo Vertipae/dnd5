@@ -1,10 +1,11 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import {
   deleteCharacter,
   updateCharacter,
 } from "../../actions/characterActions"
+import axios from "axios"
 
 const Character = ({ match }) => {
   const dispatch = useDispatch()
@@ -19,7 +20,25 @@ const Character = ({ match }) => {
     )
   )
 
+  const [characterClasses, setCharacterClasses] = useState(null)
+
+  const getClass = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/classes`)
+      setCharacterClasses(response.data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  useEffect(() => {
+    getClass()
+  }, [])
+
+  // console.log(characterClass)
   // console.log(character)
+  if (!characterClasses) {
+    return <div></div>
+  }
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -97,18 +116,11 @@ const Character = ({ match }) => {
                   setCharacter({ ...character, characterClass: e.target.value })
                 }
               >
-                {/* <option value={characterClass} disabled>
-                Classes
-              </option> */}
-                <option value='Bard'>Bard</option>
-                <option value='Cleric'>Cleric</option>
-                <option value='Druid'>Druid</option>
-                <option value='Other'>Other</option>
-                <option value='Paladin'>Paladin</option>
-                <option value='Ranger'>Ranger</option>
-                <option value='Sorcerer'>Sorcerer</option>
-                <option value='Warlock'>Warlock</option>
-                <option value='Wizard'>Wizard</option>
+                {characterClasses.results.map((c, i) => (
+                  <option key={i} value={c.index}>
+                    {c.name}
+                  </option>
+                ))}
               </select>
             </div>
 
