@@ -21,8 +21,11 @@ router.get("/:endpoint", auth, async (req, res) => {
 })
 
 router.get("/classes/:class/:endpoint", auth, async (req, res) => {
+  // console.log("IHANMITÄVAA")
   try {
-    const response = await axios.get(BASE_API_URL + req.params.endpoint)
+    const response = await axios.get(
+      BASE_API_URL + "classes/" + req.params.class + "/" + req.params.endpoint
+    )
     // console.log(response.data)
     res.send(response.data)
   } catch (err) {
