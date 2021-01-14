@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addCharacter } from "../../actions/characterActions"
+import M from "materialize-css/dist/js/materialize.min.js"
 import axios from "axios"
 // Todo: Subrace(Dwarf => Hill Dwarf) & languages, experience points, background
 
@@ -16,8 +17,26 @@ const CreateCharacter = () => {
   const [characterClass, setCharacterClass] = useState("")
   // Cannot read property 'map' of undefined. Ylhäältä alas, koska characterClasses.result ei ole vielä olemassa ni tyhjä divi
   const [characterClasses, setCharacterClasses] = useState(null)
+  const [characterSpells, setCharacterSpells] = useState(null)
   const [level, setLevel] = useState("")
   const [alignment, setAlignment] = useState("0")
+  // Reffiä ei voi käyttää useEffectissä, koska se ei re-renderöi
+  const collapsibleRef = useCallback((elem) => {
+    M.Collapsible.init(elem, { inDuration: 3000 })
+    // console.log(elem)
+  })
+
+  let instance = null
+
+  const modalRef = useCallback((elem) => {
+    instance = M.Modal.init(elem)
+    // i.open()
+  })
+
+  // document.addEventListener('DOMContentLoaded', function() {
+  //   var elems = document.querySelectorAll('.modal');
+  //   var instances = M.Modal.init(elems, options);
+  // });
 
   const getClass = async () => {
     try {
@@ -27,10 +46,31 @@ const CreateCharacter = () => {
       console.log(e)
     }
   }
+
+  const getSpell = async () => {
+    if (characterClass === "") return
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/classes/${characterClass}/spells`
+      )
+      setCharacterSpells(response.data)
+      console.log(response.data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  // Hateaan spellit vasta kun valitaan joku classi
   useEffect(() => {
     getClass()
+    // getSpell()
   }, [])
+
+  useEffect(() => {
+    // getClass()
+    getSpell()
+  }, [characterClass])
   // console.log(characterClass)
+  // console.log(characterSpells)
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -156,6 +196,86 @@ const CreateCharacter = () => {
               </select>
             </div>
           </div>
+          {/* <!-- Modal Trigger --> */}
+          <a
+            className='waves-effect waves-light btn'
+            onClick={() => instance.open()}
+            // href='#modal1'
+          >
+            {/* {characterSpells & characterSpells.count} */}
+            Spells ({characterSpells ? characterSpells.count : 0})
+          </a>
+
+          {/* <!-- Modal Structure --> */}
+          <div id='modal1' className='modal modal-fixed-footer' ref={modalRef}>
+            <div className='modal-content'>
+              {/* <h4>{c.index}</h4> */}
+              <ul className='collapsible' ref={collapsibleRef}>
+                {characterClasses.results.map((c, i) => (
+                  <li key={i} value={c.index}>
+                    <div className='collapsible-header'>
+                      <i className='material-icons'>filter_drama</i>
+                      {c.name}
+                    </div>
+                    <div className='collapsible-body'>
+                      <span>Lorem ipsum dolor sit amet.</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className='modal-footer'>
+              <a
+                href='#!'
+                className='modal-close waves-effect waves-green btn-flat'
+              >
+                Accept
+              </a>
+            </div>
+          </div>
+          {/* {characterClasses.results.map((c, i) => (
+                  <option key={i} value={c.index}>
+                    {c.name}
+                  </option>
+                ))} */}
+          {/* <ul className='collapsible' ref={collapsibleRef}>
+            {characterClasses.results.map((c, i) => (
+              <li key={i} value={c.index}>
+                <div className='collapsible-header'>
+                  <i className='material-icons'>filter_drama</i>
+                  {c.name}
+                </div>
+                <div className='collapsible-body'>
+                  <span>Lorem ipsum dolor sit amet.</span>
+                </div>
+              </li>
+            ))} */}
+          {/* <li>
+              <div className='collapsible-header'>
+                <i className='material-icons'>filter_drama</i>First
+              </div>
+              <div className='collapsible-body'>
+                <span>Lorem ipsum dolor sit amet.</span>
+              </div>
+            </li> */}
+          {/* <li>
+              <div className='collapsible-header'>
+                <i className='material-icons'>place</i>Second
+              </div>
+              <div className='collapsible-body'>
+                <span>Lorem ipsum dolor sit amet.</span>
+              </div>
+            </li>
+            <li>
+              <div className='collapsible-header'>
+                <i className='material-icons'>whatshot</i>Third
+              </div>
+              <div className='collapsible-body'>
+                <span>Lorem ipsum dolor sit amet.</span>
+              </div>
+            </li> */}
+          {/* </ul> */}
+
           <div className='row right'>
             <div className='col'>
               <button

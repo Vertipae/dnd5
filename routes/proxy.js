@@ -20,4 +20,15 @@ router.get("/:endpoint", auth, async (req, res) => {
   }
 })
 
+router.get("/classes/:class/:endpoint", auth, async (req, res) => {
+  try {
+    const response = await axios.get(BASE_API_URL + req.params.endpoint)
+    // console.log(response.data)
+    res.send(response.data)
+  } catch (err) {
+    console.log(err.response)
+    res.status(err.response.status).send(err.response.statusText)
+  }
+})
+
 module.exports = router

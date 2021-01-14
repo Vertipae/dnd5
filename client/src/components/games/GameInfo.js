@@ -65,7 +65,7 @@ export default function GameInfo({ match }) {
       {game.gameFile && (
         <img
           src={`data:${game.gameFile.type};base64,${atob(game.gameFile.data)}`}
-          alt='image'
+          alt='uploaded'
         />
       )}
       <div className='row'>
