@@ -20,16 +20,35 @@ const CreateCharacter = () => {
   const [characterSpells, setCharacterSpells] = useState(null)
   const [level, setLevel] = useState("")
   const [alignment, setAlignment] = useState("0")
+  const [activeSpell, setActiveSpell] = useState(null)
   // Reffiä ei voi käyttää useEffectissä, koska se ei re-renderöi
   const collapsibleRef = useCallback((elem) => {
-    M.Collapsible.init(elem, { inDuration: 3000 })
+    M.Collapsible.init(elem, {
+      inDuration: 3000,
+      onOpenStart: async (elem) => {
+        console.log(elem.id)
+        try {
+          const res = await axios.get(
+            "http://localhost:5000/api/spells/" + elem.id
+          )
+          setActiveSpell(res.data)
+        } catch (e) {
+          console.log(e)
+          setActiveSpell(null)
+        }
+      },
+    })
     // console.log(elem)
   })
 
   let instance = null
 
   const modalRef = useCallback((elem) => {
-    instance = M.Modal.init(elem)
+    instance = M.Modal.init(elem, {
+      inDuration: 0,
+      outDuration: 0,
+    })
+    activeSpell && instance && instance.open()
     // i.open()
   })
 
@@ -211,17 +230,20 @@ const CreateCharacter = () => {
             <div className='modal-content'>
               {/* <h4>{c.index}</h4> */}
               <ul className='collapsible' ref={collapsibleRef}>
-                {characterClasses.results.map((c, i) => (
-                  <li key={i} value={c.index}>
-                    <div className='collapsible-header'>
-                      <i className='material-icons'>filter_drama</i>
-                      {c.name}
-                    </div>
-                    <div className='collapsible-body'>
-                      <span>Lorem ipsum dolor sit amet.</span>
-                    </div>
-                  </li>
-                ))}
+                {characterSpells &&
+                  characterSpells.results.map((c, i) => (
+                    <li key={i} value={c.index} id={c.index}>
+                      <div className='collapsible-header'>
+                        <i className='material-icons'>filter_drama</i>
+                        {c.name}
+                      </div>
+                      <div className='collapsible-body'>
+                        <span>
+                          {activeSpell ? activeSpell.desc : "No data found"}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
               </ul>
             </div>
             <div className='modal-footer'>
