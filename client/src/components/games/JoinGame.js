@@ -43,6 +43,7 @@ export default function JoinGame({ match, location }) {
   }
   useEffect(() => {
     getGame()
+    // eslint-disable-next-line
   }, [auth])
   // console.log(game)
 
@@ -97,6 +98,7 @@ export default function JoinGame({ match, location }) {
           </option>
         ))}
       </select>
+
       <div className='row right'>
         <button
           onClick={onSubmit}

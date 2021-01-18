@@ -38,16 +38,36 @@ const Game = ({ match }) => {
                 )
               }
             })}
-          </div>
-        </div>
-        {/*  */}
-        <div className='col s12 m6'>
-          <div className='card-panel brown lighten-2'>
             <h6> Game description</h6>
             <span className='white-text'>{game.description}</span>
           </div>
         </div>
+        {/* Piirtää kuvan, jos ehto täyttyy ei enään erroria gameFile.type */}
+        {game.gameFile && (
+          <img
+            className='uploadImg'
+            src={`data:${game.gameFile.type};base64,${atob(
+              game.gameFile.data
+            )}`}
+            alt='uploaded'
+          />
+        )}
+        {/*  */}
+        {/* <div className='col s12 m6'>
+          <div className='card-panel brown lighten-2'>
+            <h6> Game description</h6>
+            <span className='white-text'>{game.description}</span>
+          </div>
+        </div> */}
       </div>
+      {/* Piirtää kuvan, jos ehto täyttyy ei enään erroria gameFile.type
+      {game.gameFile && (
+        <img
+          className='uploadImg'
+          src={`data:${game.gameFile.type};base64,${atob(game.gameFile.data)}`}
+          alt='uploaded'
+        />
+      )} */}
     </div>
   )
 }

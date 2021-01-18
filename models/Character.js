@@ -29,6 +29,11 @@ const CharacterSchema = new mongoose.Schema({
     ref: "players",
     required: true,
   },
+  spells: [
+    {
+      type: String,
+    },
+  ],
 })
 
 module.exports = mongoose.model("characters", CharacterSchema)

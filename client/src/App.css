@@ -60,6 +60,13 @@ label.joinGameHeader {
   color: orangered;
 }
 
+.uploadImg {
+  width: 50%;
+  /* display: block;
+  margin-left: auto;
+  margin-right: auto; */
+  margin: 0.5rem 0 1rem 0;
+}
 /* Materializecss */
 /* input.input-field.my-inputfield {
   border: #bbcfa1 0.1rem solid;

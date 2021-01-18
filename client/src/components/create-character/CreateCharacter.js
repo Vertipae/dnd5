@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { addCharacter } from "../../actions/characterActions"
 import M from "materialize-css/dist/js/materialize.min.js"
 import axios from "axios"
+import Spinner from "../common/Spinner"
 // Todo: Subrace(Dwarf => Hill Dwarf) & languages, experience points, background
 
 const CreateCharacter = () => {
@@ -24,7 +25,7 @@ const CreateCharacter = () => {
   // Reffiä ei voi käyttää useEffectissä, koska se ei re-renderöi
   const collapsibleRef = useCallback((elem) => {
     M.Collapsible.init(elem, {
-      inDuration: 3000,
+      // inDuration: 3000,
       onOpenStart: async (elem) => {
         console.log(elem.id)
         try {
@@ -219,7 +220,6 @@ const CreateCharacter = () => {
           <a
             className='waves-effect waves-light btn'
             onClick={() => instance.open()}
-            // href='#modal1'
           >
             {/* {characterSpells & characterSpells.count} */}
             Spells ({characterSpells ? characterSpells.count : 0})
@@ -229,17 +229,30 @@ const CreateCharacter = () => {
           <div id='modal1' className='modal modal-fixed-footer' ref={modalRef}>
             <div className='modal-content'>
               {/* <h4>{c.index}</h4> */}
+
               <ul className='collapsible' ref={collapsibleRef}>
                 {characterSpells &&
                   characterSpells.results.map((c, i) => (
                     <li key={i} value={c.index} id={c.index}>
-                      <div className='collapsible-header'>
-                        <i className='material-icons'>filter_drama</i>
-                        {c.name}
+                      <div
+                        className='collapsible-header'
+                        style={{ justifyContent: "space-between" }}
+                      >
+                        {/* <i className='material-icons'>star_border</i> */}
+                        <div>{c.name}</div>
+                        <label>
+                          <input
+                            type='checkbox'
+                            className='filled-in'
+                            // checked='checked'
+                            // onChange={(e) => e.stopPropagation()}
+                          />
+                          <span className='right'></span>
+                        </label>
                       </div>
                       <div className='collapsible-body'>
                         <span>
-                          {activeSpell ? activeSpell.desc : "No data found"}
+                          {activeSpell ? activeSpell.desc : <Spinner />}
                         </span>
                       </div>
                     </li>
@@ -247,12 +260,13 @@ const CreateCharacter = () => {
               </ul>
             </div>
             <div className='modal-footer'>
-              <a
-                href='#!'
+              <button
+                onClick={(e) => e.preventDefault()}
+                // href='#!'
                 className='modal-close waves-effect waves-green btn-flat'
               >
                 Accept
-              </a>
+              </button>
             </div>
           </div>
           {/* {characterClasses.results.map((c, i) => (

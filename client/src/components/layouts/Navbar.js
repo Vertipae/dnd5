@@ -32,10 +32,10 @@ const Navbar = (props) => {
           }}
         >
           <Link to='/home'>
-            <i className='fas fa-home' style={{ color: "Mediumslateblue" }}></i>
+            <i className='fas fa-home' style={{ color: "#fbe2dd" }}></i>
           </Link>
           <Link to='/settings'>
-            <i className='material-icons' style={{ color: "Mediumslateblue" }}>
+            <i className='material-icons' style={{ color: "#fbe2dd" }}>
               settings
             </i>
           </Link>

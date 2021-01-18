@@ -49,7 +49,7 @@ router.post("/", auth, async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.mapped() })
   }
-  const { name, race, characterClass, level, alignment } = req.body
+  const { name, race, characterClass, level, alignment, spells } = req.body
   try {
     const newCharacter = new Character({
       name,
@@ -58,6 +58,7 @@ router.post("/", auth, async (req, res) => {
       level,
       alignment,
       player: req.player.id,
+      spells,
     })
     const character = await newCharacter.save()
     res.send(character)
@@ -71,7 +72,7 @@ router.post("/", auth, async (req, res) => {
 // @desc Update character
 // @access Private
 router.put("/:id", auth, async (req, res) => {
-  const { name, race, characterClass, level, alignment } = req.body
+  const { name, race, characterClass, level, alignment, spells } = req.body
 
   // Checking that if these fields exist so they can be updated
   const characterFields = {}
@@ -80,6 +81,7 @@ router.put("/:id", auth, async (req, res) => {
   if (characterClass) characterFields.characterClass = characterClass
   if (level) characterFields.level = level
   if (alignment) characterFields.alignment = alignment
+  if (spells) characterFields.spells = spells
 
   try {
     let character = await Character.findById(req.params.id)
