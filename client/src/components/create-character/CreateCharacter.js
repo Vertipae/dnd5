@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addCharacter } from "../../actions/characterActions"
 import M from "materialize-css/dist/js/materialize.min.js"
 import axios from "axios"
-import Spinner from "../common/Spinner"
+// import Spinner from "../common/Spinner"
+import SpellsModal from "./SpellsModal"
 
 // Todo: Subrace(Dwarf => Hill Dwarf) & languages, experience points, background
 
@@ -23,43 +24,7 @@ const CreateCharacter = () => {
   const [level, setLevel] = useState("")
   const [spells, setSpells] = useState([])
   const [alignment, setAlignment] = useState("0")
-  const [activeSpell, setActiveSpell] = useState(null)
-  // Reffiä ei voi käyttää useEffectissä, koska se ei re-renderöi
-  const collapsibleRef = useCallback((elem) => {
-    M.Collapsible.init(elem, {
-      // inDuration: 3000,
-      onOpenStart: async (elem) => {
-        // console.log(elem.id)
-
-        try {
-          const res = await axios.get(
-            "http://localhost:5000/api/spells/" + elem.id
-          )
-          setActiveSpell(res.data)
-        } catch (e) {
-          console.log(e)
-          setActiveSpell(null)
-        }
-      },
-    })
-    // console.log(elem)
-  })
-
-  let instance = null
-
-  const modalRef = useCallback((elem) => {
-    instance = M.Modal.init(elem, {
-      inDuration: 0,
-      outDuration: 0,
-    })
-    activeSpell && instance && instance.open()
-    // i.open()
-  })
-
-  // document.addEventListener('DOMContentLoaded', function() {
-  //   var elems = document.querySelectorAll('.modal');
-  //   var instances = M.Modal.init(elems, options);
-  // });
+  // const [activeSpell, setActiveSpell] = useState(null)
 
   const getClass = async () => {
     try {
@@ -82,6 +47,10 @@ const CreateCharacter = () => {
       console.log(e)
     }
   }
+  useEffect(() => {
+    // Init Materialize JS
+    M.AutoInit()
+  })
   // Hateaan spellit vasta kun valitaan joku classi
   useEffect(() => {
     getClass()
@@ -223,142 +192,7 @@ const CreateCharacter = () => {
               </select>
             </div>
           </div>
-          {/* <!-- Modal Trigger --> */}
-          <a
-            className='waves-effect waves-light btn'
-            onClick={(e) => {
-              instance.open()
-              // e.stopPropagation()
-            }}
-            // onChange={(e) => e.stopPropagation()}
-          >
-            {/* {characterSpells & characterSpells.count} */}
-            Spells ({characterSpells ? characterSpells.count : 0})
-          </a>
-
-          {/* <!-- Modal Structure --> */}
-          <div id='modal1' className='modal modal-fixed-footer' ref={modalRef}>
-            <div className='modal-content'>
-              {/* <h4>{c.index}</h4> */}
-
-              <ul className='collapsible' ref={collapsibleRef}>
-                {characterSpells &&
-                  characterSpells.results.map((c, i) => (
-                    <li key={i} value={c.index} id={c.index}>
-                      <div className='row'>
-                        <div className='col s11'>
-                          <div
-                            className='collapsible-header'
-                            style={{ justifyContent: "space-between" }}
-                            // onClick={() => console.log("headerklik")}
-                          >
-                            {/* <i className='material-icons'>star_border</i> */}
-                            <div>{c.name}</div>
-                          </div>
-                        </div>
-                        <div
-                          className='col s1 valign-wrapper'
-                          style={{ height: "53px" }}
-                        >
-                          <label>
-                            <input
-                              type='checkbox'
-                              className='filled-in'
-                              style={{ zIndex: 99 }}
-                              //value={c.index}
-                              onChange={(e) => {
-                                //e.preventDefault()
-
-                                // Checkboxin tila muuttuu on/off, jos spells-listalta
-                                // löytyy tämä spelli, tiedetään että checkbox on
-                                // menossa off-asentoon, joten poistetaan kyseinen spelli
-                                // listalta, muussa tapauksessa lisätään
-                                if (spells.includes(c.index)) {
-                                  setSpells(
-                                    spells.filter((spell) =>
-                                      spell === c.index ? false : true
-                                    )
-                                  )
-                                } else {
-                                  setSpells([...spells, c.index])
-                                }
-                                console.log(spells)
-                              }}
-                              checked={spells.includes(c.index) ? true : false}
-                              // onChange={(e) => e.stopPropagation()}
-                              // onClick={(e) => {
-                              //   console.log("klikcheckbox")
-                              //   e.stopPropagation()
-                              // }}
-                            />
-                            <span
-                              // onClick={(e) => e.stopPropagation()}
-                              className='right'
-                            ></span>
-                          </label>
-                        </div>
-                      </div>
-                      <div className='collapsible-body'>
-                        <span>
-                          {activeSpell ? activeSpell.desc : <Spinner />}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-              </ul>
-            </div>
-            <div className='modal-footer'>
-              <button
-                onClick={(e) => e.preventDefault()}
-                // href='#!'
-                className='modal-close waves-effect waves-green btn-flat'
-              >
-                Accept
-              </button>
-            </div>
-          </div>
-          {/* {characterClasses.results.map((c, i) => (
-                  <option key={i} value={c.index}>
-                    {c.name}
-                  </option>
-                ))} */}
-          {/* <ul className='collapsible' ref={collapsibleRef}>
-            {characterClasses.results.map((c, i) => (
-              <li key={i} value={c.index}>
-                <div className='collapsible-header'>
-                  <i className='material-icons'>filter_drama</i>
-                  {c.name}
-                </div>
-                <div className='collapsible-body'>
-                  <span>Lorem ipsum dolor sit amet.</span>
-                </div>
-              </li>
-            ))} */}
-          {/* <li>
-              <div className='collapsible-header'>
-                <i className='material-icons'>filter_drama</i>First
-              </div>
-              <div className='collapsible-body'>
-                <span>Lorem ipsum dolor sit amet.</span>
-              </div>
-            </li> */}
-          {/* <li>
-              <div className='collapsible-header'>
-                <i className='material-icons'>place</i>Second
-              </div>
-              <div className='collapsible-body'>
-                <span>Lorem ipsum dolor sit amet.</span>
-              </div>
-            </li>
-            <li>
-              <div className='collapsible-header'>
-                <i className='material-icons'>whatshot</i>Third
-              </div>
-              <div className='collapsible-body'>
-                <span>Lorem ipsum dolor sit amet.</span>
-              </div>
-            </li> */}
-          {/* </ul> */}
+          <SpellsModal characterSpells={characterSpells} />
 
           <div className='row right'>
             <div className='col'>
