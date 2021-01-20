@@ -5,6 +5,7 @@ import { addCharacter } from "../../actions/characterActions"
 import M from "materialize-css/dist/js/materialize.min.js"
 import axios from "axios"
 import Spinner from "../common/Spinner"
+
 // Todo: Subrace(Dwarf => Hill Dwarf) & languages, experience points, background
 
 const CreateCharacter = () => {
@@ -20,6 +21,7 @@ const CreateCharacter = () => {
   const [characterClasses, setCharacterClasses] = useState(null)
   const [characterSpells, setCharacterSpells] = useState(null)
   const [level, setLevel] = useState("")
+  const [spells, setSpells] = useState([])
   const [alignment, setAlignment] = useState("0")
   const [activeSpell, setActiveSpell] = useState(null)
   // Reffiä ei voi käyttää useEffectissä, koska se ei re-renderöi
@@ -27,7 +29,8 @@ const CreateCharacter = () => {
     M.Collapsible.init(elem, {
       // inDuration: 3000,
       onOpenStart: async (elem) => {
-        console.log(elem.id)
+        // console.log(elem.id)
+
         try {
           const res = await axios.get(
             "http://localhost:5000/api/spells/" + elem.id
@@ -74,7 +77,7 @@ const CreateCharacter = () => {
         `http://localhost:5000/api/classes/${characterClass}/spells`
       )
       setCharacterSpells(response.data)
-      console.log(response.data)
+      // console.log(response.data)
     } catch (e) {
       console.log(e)
     }
@@ -101,6 +104,7 @@ const CreateCharacter = () => {
       characterClass,
       level,
       alignment,
+      spells,
       // errors: {},
     }
 
@@ -172,7 +176,10 @@ const CreateCharacter = () => {
                 className='browser-default'
                 style={{ borderColor: errors.characterClass ? "red" : "" }}
                 value={characterClass}
-                onChange={(e) => setCharacterClass(e.target.value)}
+                onChange={(e) => {
+                  setCharacterClass(e.target.value)
+                  setSpells("")
+                }}
               >
                 <option value='' disabled>
                   Classes
@@ -219,7 +226,11 @@ const CreateCharacter = () => {
           {/* <!-- Modal Trigger --> */}
           <a
             className='waves-effect waves-light btn'
-            onClick={() => instance.open()}
+            onClick={(e) => {
+              instance.open()
+              // e.stopPropagation()
+            }}
+            // onChange={(e) => e.stopPropagation()}
           >
             {/* {characterSpells & characterSpells.count} */}
             Spells ({characterSpells ? characterSpells.count : 0})
@@ -234,21 +245,58 @@ const CreateCharacter = () => {
                 {characterSpells &&
                   characterSpells.results.map((c, i) => (
                     <li key={i} value={c.index} id={c.index}>
-                      <div
-                        className='collapsible-header'
-                        style={{ justifyContent: "space-between" }}
-                      >
-                        {/* <i className='material-icons'>star_border</i> */}
-                        <div>{c.name}</div>
-                        <label>
-                          <input
-                            type='checkbox'
-                            className='filled-in'
-                            // checked='checked'
-                            // onChange={(e) => e.stopPropagation()}
-                          />
-                          <span className='right'></span>
-                        </label>
+                      <div className='row'>
+                        <div className='col s11'>
+                          <div
+                            className='collapsible-header'
+                            style={{ justifyContent: "space-between" }}
+                            // onClick={() => console.log("headerklik")}
+                          >
+                            {/* <i className='material-icons'>star_border</i> */}
+                            <div>{c.name}</div>
+                          </div>
+                        </div>
+                        <div
+                          className='col s1 valign-wrapper'
+                          style={{ height: "53px" }}
+                        >
+                          <label>
+                            <input
+                              type='checkbox'
+                              className='filled-in'
+                              style={{ zIndex: 99 }}
+                              //value={c.index}
+                              onChange={(e) => {
+                                //e.preventDefault()
+
+                                // Checkboxin tila muuttuu on/off, jos spells-listalta
+                                // löytyy tämä spelli, tiedetään että checkbox on
+                                // menossa off-asentoon, joten poistetaan kyseinen spelli
+                                // listalta, muussa tapauksessa lisätään
+                                if (spells.includes(c.index)) {
+                                  setSpells(
+                                    spells.filter((spell) =>
+                                      spell === c.index ? false : true
+                                    )
+                                  )
+                                } else {
+                                  setSpells([...spells, c.index])
+                                }
+                                console.log(spells)
+                              }}
+                              checked={spells.includes(c.index) ? true : false}
+                              // onChange={(e) => e.stopPropagation()}
+                              // onClick={(e) => {
+                              //   console.log("klikcheckbox")
+                              //   e.stopPropagation()
+                              // }}
+                            />
+                            <span
+                              // onClick={(e) => e.stopPropagation()}
+                              className='right'
+                            ></span>
+                          </label>
+                        </div>
                       </div>
                       <div className='collapsible-body'>
                         <span>

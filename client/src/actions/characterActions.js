@@ -10,6 +10,7 @@ import axios from "axios"
 import { validateAddCharacter } from "../utils/validator"
 
 export const addCharacter = (characterData, history) => async (dispatch) => {
+  console.log("ChaeactterData:", characterData)
   try {
     const errors = validateAddCharacter(characterData)
     console.log(errors)
