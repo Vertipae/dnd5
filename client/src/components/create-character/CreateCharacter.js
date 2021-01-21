@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addCharacter } from "../../actions/characterActions"
@@ -58,8 +58,12 @@ const CreateCharacter = () => {
   }, [])
 
   useEffect(() => {
+    console.log(spells)
+  }, [spells])
+  useEffect(() => {
     // getClass()
     getSpell()
+    setSpells([])
   }, [characterClass])
   // console.log(characterClass)
   // console.log(characterSpells)
@@ -147,7 +151,6 @@ const CreateCharacter = () => {
                 value={characterClass}
                 onChange={(e) => {
                   setCharacterClass(e.target.value)
-                  setSpells("")
                 }}
               >
                 <option value='' disabled>
@@ -192,7 +195,11 @@ const CreateCharacter = () => {
               </select>
             </div>
           </div>
-          <SpellsModal characterSpells={characterSpells} />
+          <SpellsModal
+            characterSpells={characterSpells}
+            setParentSpells={setSpells}
+            parentSpells={spells}
+          />
 
           <div className='row right'>
             <div className='col'>

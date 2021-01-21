@@ -3,11 +3,26 @@ import M from "materialize-css/dist/js/materialize.min.js"
 import axios from "axios"
 import Spinner from "../common/Spinner"
 
-function SpellsModal({ characterSpells }) {
+function SpellsModal({ characterSpells, setParentSpells, parentSpells }) {
   const [activeSpell, setActiveSpell] = useState(null)
-  const [spells, setSpells] = useState([])
+  // Tässä komponentissa pidetään kirjaa valituista spelleistä. Acceptissa lähetetään parentcomponenttiin
+  const [spells, setSpells] = useState(parentSpells)
+  // Fail cleanup try
+  //   useEffect(() => {
+  //     return () => {
+  //       setParentSpells(spells)
+  //     }
+  //   }, [])
 
-  let instance = null
+  // Kun parentSpells muuttuu niin kutsumalla setSpells päivitetään spells
+  useEffect(() => {
+    setSpells(parentSpells)
+  }, [parentSpells])
+
+  useEffect(() => {
+    console.log(spells)
+  }, [spells])
+  //   let instance = null
 
   //   const modalRef = useCallback((elem) => {
   //     instance = M.Modal.init(elem, {
@@ -60,7 +75,11 @@ function SpellsModal({ characterSpells }) {
       </a>
 
       {/* <!-- Modal Structure --> */}
-      <div id='spells-modal' className='modal modal-fixed-footer'>
+      <div
+        id='spells-modal'
+        className='modal modal-fixed-footer'
+        style={modalStyle}
+      >
         <div className='modal-content'>
           {/* <h4>{c.index}</h4> */}
 
@@ -105,7 +124,7 @@ function SpellsModal({ characterSpells }) {
                             } else {
                               setSpells([...spells, c.index])
                             }
-                            console.log(spells)
+                            // console.log(spells)
                           }}
                           checked={spells.includes(c.index) ? true : false}
                           // onChange={(e) => e.stopPropagation()}
@@ -130,8 +149,11 @@ function SpellsModal({ characterSpells }) {
         </div>
         <div className='modal-footer'>
           <button
-            onClick={(e) => e.preventDefault()}
-            // href='#!'
+            onClick={(e) => {
+              e.preventDefault()
+              setParentSpells(spells)
+            }}
+            href='#!'
             className='modal-close waves-effect waves-green btn-flat'
           >
             Accept
@@ -140,6 +162,11 @@ function SpellsModal({ characterSpells }) {
       </div>
     </div>
   )
+}
+
+const modalStyle = {
+  width: "75%",
+  height: "75%",
 }
 
 export default SpellsModal
