@@ -58,7 +58,7 @@ const CreateCharacter = () => {
   }, [])
 
   useEffect(() => {
-    console.log(spells)
+    // console.log(spells)
   }, [spells])
   useEffect(() => {
     // getClass()

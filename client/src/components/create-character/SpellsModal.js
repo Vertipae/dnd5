@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react"
 import M from "materialize-css/dist/js/materialize.min.js"
 import axios from "axios"
 import Spinner from "../common/Spinner"
-
+// Modalin ongelma aluksi oli se että se häiriinty muista tiloista ja sammu. Fixattu että se kutsuu parent componentin tilaa vasta, kun se suljettaan.
 function SpellsModal({ characterSpells, setParentSpells, parentSpells }) {
   const [activeSpell, setActiveSpell] = useState(null)
   // Tässä komponentissa pidetään kirjaa valituista spelleistä. Acceptissa lähetetään parentcomponenttiin
