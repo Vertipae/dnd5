@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("")
@@ -35,15 +36,13 @@ const SearchBar = () => {
             </label>
             <i className='material-icons'>close</i>
             {searchResults.length < 1 ? null : (
-              <ul className='collection'>
+              <ul className='collection' style={{ backgroundColor: "white" }}>
                 {searchResults.map((item, i) => (
-                  <li
-                    key={i}
-                    className='collection-item'
-                    style={{ color: "black" }}
-                  >
-                    {item.name}
-                  </li>
+                  <Link key={i} to={`character/${item._id}`}>
+                    <li className='collection-item' style={{ color: "black" }}>
+                      {item.name}
+                    </li>
+                  </Link>
                 ))}
               </ul>
             )}
