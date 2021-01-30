@@ -71,11 +71,14 @@ router.post("/login", async (req, res) => {
       lastLogin: new Date().toString(),
     }
     await Player.findByIdAndUpdate(player._id, { $set: newLoginTime })
-
+    const secret =
+      process.env.NODE_ENV === "production"
+        ? config.util.getEnv("jwtSecret")
+        : config.get("jwtSecret")
     // Adding token & response with Json Web Token
     jwt.sign(
       payload,
-      config.get("jwtSecret"),
+      secret,
       {
         expiresIn: 360000,
         // Callback that returns token and throws possible errors
