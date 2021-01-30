@@ -13,6 +13,11 @@ import {
   validateRegistration,
 } from "../utils/validator"
 
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://vankiloitajalohkuja.herokuapp.com"
+    : "http://localhost:5000"
+
 export const registerUser = (userData, history) => async (dispatch) => {
   try {
     const errors = validateRegistration(userData)
@@ -29,10 +34,7 @@ export const registerUser = (userData, history) => async (dispatch) => {
         })
       }, 5000)
     } else {
-      const res = await axios.post(
-        "http://localhost:5000/api/players",
-        userData
-      )
+      const res = await axios.post(BASE_URL + "/api/players", userData)
       setToken(res.data.token)
       // Log player in after registration
       const decoded = jwt_decode(res.data.token)
@@ -76,7 +78,7 @@ export const loginUser = (userData, history, redirect = "/home") => async (
       }, 5000)
     } else {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        BASE_URL + "/api/auth/login",
         // Se body
         userData
       )
@@ -86,7 +88,7 @@ export const loginUser = (userData, history, redirect = "/home") => async (
       if (redirect) history.push(redirect)
     }
   } catch (err) {
-    console.log("kakka", err)
+    console.log("err", err)
     const errors = formatErrors(err.response.data.errors)
     dispatch({
       type: GET_ERRORS,

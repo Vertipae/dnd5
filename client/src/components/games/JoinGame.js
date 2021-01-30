@@ -5,6 +5,7 @@ import axios from "../../utils/axiosService"
 import Login from "../auth/Login"
 
 import { joinGame } from "../../actions/gameActions"
+import BASE_URL from "../../utils/baseurl"
 // Todo: Näytä punanen korostus errori, jos hahmo on liittyny peliin
 // Todo: luo hahmo vaihtoehto, jos ei ole hahmoa
 
@@ -34,7 +35,7 @@ export default function JoinGame({ match, location }) {
   const getGame = async () => {
     try {
       const game = await axios.get(
-        `http://localhost:5000/api/games/${match.params.id}/${secret}`
+        BASE_URL + `/api/games/${match.params.id}/${secret}`
       )
       setGame(game.data)
     } catch (e) {

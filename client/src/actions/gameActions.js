@@ -7,12 +7,13 @@ import {
 } from "./types"
 import axios from "axios"
 import { validateAddGame } from "../utils/validator"
+import BASE_URL from "../utils/baseurl"
 
 // Ei tartte id tai gamesData parametria, koska axios middleware lähettää tokenin automaattisesti
 export const getGames = () => async (dispatch) => {
   // console.log("GetGamesAction")
   try {
-    const res = await axios.get("http://localhost:5000/api/games")
+    const res = await axios.get(BASE_URL + "/api/games")
     // console.log("GET_GAMES:", res.data)
     dispatch({
       type: SET_GAMES,
@@ -38,7 +39,7 @@ export const addGame = (gameData, history, quick) => async (dispatch) => {
         })
       }, 5000)
     } else {
-      const res = await axios.post("http://localhost:5000/api/games", gameData)
+      const res = await axios.post(BASE_URL + "/api/games", gameData)
       dispatch({
         type: ADD_GAME,
         payload: res.data,
@@ -66,7 +67,7 @@ export const joinGame = (gameId, characterId, history) => async (dispatch) => {
     } else {
       const res = await axios.post(
         // se body {character: characterId}
-        `http://localhost:5000/api/games/join/${gameId}`,
+        BASE_URL + `/api/games/join/${gameId}`,
         { character: characterId }
       )
       dispatch({
@@ -83,7 +84,7 @@ export const joinGame = (gameId, characterId, history) => async (dispatch) => {
 
 export const deleteGame = (id, history) => async (dispatch) => {
   try {
-    const res = await axios.delete(`http://localhost:5000/api/games/${id}`)
+    const res = await axios.delete(BASE_URL + `/api/games/${id}`)
     dispatch({
       type: DELETE_GAME,
       payload: res.data._id,

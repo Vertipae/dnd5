@@ -25,7 +25,9 @@ app.use("/api/characters", require("./routes/characters"))
 app.use("/api/games", require("./routes/games"))
 app.use("/api/auth", require("./routes/auth"))
 app.use("/api", require("./routes/proxy"))
-app.use(static("build"))
+// app.use(static("build"))
+
+app.use(static("client/build"))
 
 const PORT = process.env.PORT || 5000
 

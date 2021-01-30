@@ -8,6 +8,7 @@ import {
 } from "./types"
 import axios from "axios"
 import { validateAddCharacter } from "../utils/validator"
+import BASE_URL from "../utils/baseurl"
 
 export const addCharacter = (characterData, history) => async (dispatch) => {
   console.log("ChaeactterData:", characterData)
@@ -27,10 +28,7 @@ export const addCharacter = (characterData, history) => async (dispatch) => {
         })
       }, 5000)
     } else {
-      const res = await axios.post(
-        "http://localhost:5000/api/characters",
-        characterData
-      )
+      const res = await axios.post(BASE_URL + "/api/characters", characterData)
       dispatch({
         type: ADD_CHARACTER,
         newCharacter: res.data,
@@ -46,7 +44,7 @@ export const addCharacter = (characterData, history) => async (dispatch) => {
 export const updateCharacter = (characterData, history) => async (dispatch) => {
   try {
     const res = await axios.put(
-      `http://localhost:5000/api/characters/${characterData._id}`,
+      BASE_URL + `/api/characters/${characterData._id}`,
       characterData
     )
     dispatch({
@@ -63,7 +61,7 @@ export const updateCharacter = (characterData, history) => async (dispatch) => {
 export const deleteCharacter = (id, history) => async (dispatch) => {
   // console.log("DeleteAction")
   try {
-    const res = await axios.delete(`http://localhost:5000/api/characters/${id}`)
+    const res = await axios.delete(BASE_URL + `/api/characters/${id}`)
     dispatch({
       type: DELETE_CHARACTER,
       payload: res.data._id,
@@ -79,7 +77,7 @@ export const deleteCharacter = (id, history) => async (dispatch) => {
 export const getCharacters = () => async (dispatch) => {
   // console.log("GetCharacterAction")
   try {
-    const res = await axios.get("http://localhost:5000/api/characters")
+    const res = await axios.get(BASE_URL + "/api/characters")
     // console.log(res)
     dispatch({
       type: SET_CHARACTERS,
