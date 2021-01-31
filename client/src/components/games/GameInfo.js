@@ -3,6 +3,7 @@ import React from "react"
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteGame } from "../../actions/gameActions"
+import BASE_URL from "../../utils/baseurl"
 // Todo: Tarina (Peruskuvaus, karttakuva), Muut pelaajat,
 // Ehtolause jos DM näyttää  DM jutut
 
@@ -88,14 +89,14 @@ export default function GameInfo({ match }) {
           <div className='card-panel brown lighten-2'>
             <h6> Share this invite to people to join:</h6>
             <span className='white-text'>
-              {`http://localhost:3000/joingame/${game._id}?secret=${game.secret}`}
+              {BASE_URL + `/joingame/${game._id}?secret=${game.secret}`}
             </span>
             <button
               className='waves-effect waves-light btn-small'
               style={{ marginLeft: "3.5em", backgroundColor: "mediumpurple" }}
               onClick={() =>
                 navigator.clipboard.writeText(
-                  `http://localhost:3000/joingame/${game._id}?secret=${game.secret}`
+                  BASE_URL + `/joingame/${game._id}?secret=${game.secret}`
                 )
               }
             >
