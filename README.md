@@ -1,5 +1,10 @@
 ## dnd5 (In development)
 
+Username: test
+Password: test123456
+
+https://vankiloitajalohkuja.herokuapp.com/
+
 This application is implemented with Reactjs, Node.js, Express and MongoDB.
 
 Classes / Spells comes from https://www.dnd5eapi.co/docs/#intro
