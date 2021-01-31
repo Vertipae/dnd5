@@ -40,7 +40,7 @@ const CreateCharacter = () => {
     if (characterClass === "") return
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/classes/${characterClass}/spells`
+        BASE_URL + `/api/classes/${characterClass}/spells`
       )
       setCharacterSpells(response.data)
       // console.log(response.data)
