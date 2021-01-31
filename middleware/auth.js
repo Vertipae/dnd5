@@ -3,6 +3,7 @@
 
 const jwt = require("jsonwebtoken")
 const config = require("config")
+const envConfig = require("../config/envConfig")
 
 module.exports = function (req, res, next) {
   // Get token from header
@@ -14,10 +15,7 @@ module.exports = function (req, res, next) {
   }
 
   try {
-    const secret =
-      process.env.NODE_ENV === "production"
-        ? config.util.getEnv("jwtSecret")
-        : config.get("jwtSecret")
+    const secret = envConfig.JWT_SECRET
     const decoded = jwt.verify(token, secret)
     // console.log(decoded)
     req.player = decoded.player

@@ -7,6 +7,7 @@ const config = require("config")
 const auth = require("../middleware/auth")
 const { check, validationResult } = require("express-validator")
 const bcrypt = require("bcryptjs")
+const envConfig = require("../config/envConfig")
 
 // const { check, validationResult } = require("express-validator")
 
@@ -71,10 +72,7 @@ router.post("/login", async (req, res) => {
       lastLogin: new Date().toString(),
     }
     await Player.findByIdAndUpdate(player._id, { $set: newLoginTime })
-    const secret =
-      process.env.NODE_ENV === "production"
-        ? config.util.getEnv("jwtSecret")
-        : config.get("jwtSecret")
+    const secret = envConfig.JWT_SECRET
     // Adding token & response with Json Web Token
     jwt.sign(
       payload,

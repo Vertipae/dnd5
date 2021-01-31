@@ -2,11 +2,9 @@
 
 const mongoose = require("mongoose")
 const config = require("config")
+const envConfig = require("./envConfig")
 // from default.json value mongoURI
-const db =
-  process.env.NODE_ENV === "production"
-    ? config.util.getEnv("mongoURI")
-    : config.get("mongoURI")
+const db = envConfig.MONGO_URI
 
 const connectDB = () => {
   mongoose
