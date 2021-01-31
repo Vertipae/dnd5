@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addCharacter } from "../../actions/characterActions"
 import M from "materialize-css/dist/js/materialize.min.js"
+import BASE_URL from "../../utils/baseurl"
 import axios from "axios"
 // import Spinner from "../common/Spinner"
 import SpellsModal from "./SpellsModal"
@@ -28,7 +29,7 @@ const CreateCharacter = () => {
 
   const getClass = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/classes`)
+      const response = await axios.get(BASE_URL + `/api/classes`)
       setCharacterClasses(response.data)
     } catch (e) {
       console.log(e)
