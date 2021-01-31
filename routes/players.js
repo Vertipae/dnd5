@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken")
 const config = require("config")
 const { check, validationResult } = require("express-validator")
 const bcrypt = require("bcryptjs")
+const envConfig = require("../config/envConfig")
 
 // @route GET api/players/games
 // @desc Get all users games
@@ -71,7 +72,7 @@ router.post("/", async (req, res) => {
     // Adding token & response with Json Web Token
     jwt.sign(
       payload,
-      config.get("jwtSecret"),
+      envConfig.JWT_SECRET,
       {
         expiresIn: 360000,
         // Callback that returns token and throws possible errors
