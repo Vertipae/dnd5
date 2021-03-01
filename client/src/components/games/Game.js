@@ -1,5 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useSelector } from "react-redux"
+import PictureModal from "./PictureModal"
+import M from "materialize-css/dist/js/materialize.min.js"
 
 const Game = ({ match }) => {
   const game = useSelector(
@@ -9,11 +11,17 @@ const Game = ({ match }) => {
   const characters = useSelector((state) => state.characters.characters)
   const player = useSelector((state) => state.auth.player)
 
+  useEffect(() => {
+    // Init Materialize JS
+    M.AutoInit()
+  })
+
   // console.log(game)
   // console.log(character)
   if (!game || !characters) {
     return <div></div>
   }
+
   // console.log("Peli", game)
   return (
     <div className='container'>
@@ -42,32 +50,8 @@ const Game = ({ match }) => {
             <span className='white-text'>{game.description}</span>
           </div>
         </div>
-        {/* Piirtää kuvan, jos ehto täyttyy ei enään erroria gameFile.type */}
-        {game.gameFile && (
-          <img
-            className='uploadImg'
-            src={`data:${game.gameFile.type};base64,${atob(
-              game.gameFile.data
-            )}`}
-            alt='uploaded'
-          />
-        )}
-        {/*  */}
-        {/* <div className='col s12 m6'>
-          <div className='card-panel brown lighten-2'>
-            <h6> Game description</h6>
-            <span className='white-text'>{game.description}</span>
-          </div>
-        </div> */}
+        <PictureModal game={game} />
       </div>
-      {/* Piirtää kuvan, jos ehto täyttyy ei enään erroria gameFile.type
-      {game.gameFile && (
-        <img
-          className='uploadImg'
-          src={`data:${game.gameFile.type};base64,${atob(game.gameFile.data)}`}
-          alt='uploaded'
-        />
-      )} */}
     </div>
   )
 }

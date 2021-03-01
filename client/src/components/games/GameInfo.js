@@ -1,9 +1,11 @@
 // For DM to see
-import React from "react"
+import React, { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteGame } from "../../actions/gameActions"
-import BASE_URL from "../../utils/baseurl"
+import BASE_URL, { BASE_URL_FRONT } from "../../utils/baseurl"
+import PictureModal from "./PictureModal"
+import M from "materialize-css/dist/js/materialize.min.js"
 // Todo: Tarina (Peruskuvaus, karttakuva), Muut pelaajat,
 // Ehtolause jos DM näyttää  DM jutut
 
@@ -17,6 +19,11 @@ export default function GameInfo({ match }) {
   )
   const player = useSelector((state) => state.auth.player)
   const characters = useSelector((state) => state.characters.characters)
+
+  useEffect(() => {
+    // Init Materialize JS
+    M.AutoInit()
+  })
 
   // Räyh
   if (!game) {
@@ -57,46 +64,21 @@ export default function GameInfo({ match }) {
             <span className='white-text'>{game.description}</span>
           </div>
         </div>
-
-        {/* Piirtää kuvan, jos ehto täyttyy ei enään erroria gameFile.type */}
-        {game.gameFile && (
-          <img
-            className='uploadImg'
-            src={`data:${game.gameFile.type};base64,${atob(
-              game.gameFile.data
-            )}`}
-            alt='uploaded'
-          />
-        )}
-
-        {/* <div className='col s6'>
-          <div className='card-panel brown lighten-2'>
-            <h6> Game description</h6>
-            <span className='white-text'>{game.description}</span>
-          </div>
-        </div> */}
+        <PictureModal game={game} />
       </div>
-      {/* Piirtää kuvan, jos ehto täyttyy ei enään erroria gameFile.type
-      {game.gameFile && (
-        <img
-          className='uploadImg'
-          src={`data:${game.gameFile.type};base64,${atob(game.gameFile.data)}`}
-          alt='uploaded'
-        />
-      )} */}
       <div className='row'>
         <div className='col s12'>
           <div className='card-panel brown lighten-2'>
             <h6> Share this invite to people to join:</h6>
             <span className='white-text'>
-              {BASE_URL + `/joingame/${game._id}?secret=${game.secret}`}
+              {BASE_URL_FRONT + `/joingame/${game._id}?secret=${game.secret}`}
             </span>
             <button
               className='waves-effect waves-light btn-small'
               style={{ marginLeft: "3.5em", backgroundColor: "mediumpurple" }}
               onClick={() =>
                 navigator.clipboard.writeText(
-                  BASE_URL + `/joingame/${game._id}?secret=${game.secret}`
+                  BASE_URL_FRONT + `/joingame/${game._id}?secret=${game.secret}`
                 )
               }
             >
