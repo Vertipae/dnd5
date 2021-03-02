@@ -45,7 +45,9 @@ const Navbar = (props) => {
           <i className='fas fa-dragon'></i>
           DnD5
         </Link>
-
+        <a href='#' data-target='mobile-demo' className='sidenav-trigger right'>
+          <i className='material-icons'>menu</i>
+        </a>
         <ul id='nav-mobile' className='right hide-on-med-and-down'>
           <li
             className={`align-center ${
@@ -70,16 +72,7 @@ const Navbar = (props) => {
             <Link to='/dungeonmaster'>Dungeon Master</Link>
           </li>
 
-          {/* <li>
-
-        </li> */}
-          <li
-          //   className={`${
-          //     props.location.pathname === "/logout" ? "active" : null
-          //   }`}
-          // >
-          //   <Link to="/login">Logout</Link>
-          >
+          <li>
             <button
               className='btn waves-effect waves-light brown'
               style={{ marginRight: "15px", marginLeft: "7px" }}
@@ -90,6 +83,25 @@ const Navbar = (props) => {
           </li>
         </ul>
       </div>
+      <ul className='sidenav' id='mobile-demo'>
+        <li>
+          <Link to='/create-character'>Character</Link>
+        </li>
+
+        <li>
+          <Link to='/dungeonmaster'>Dungeon Master</Link>
+        </li>
+
+        <li>
+          <button
+            className='btn waves-effect waves-light brown'
+            style={{ marginLeft: "20px" }}
+            onClick={onLogoutClick}
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
     </nav>
   )
 

@@ -10,7 +10,7 @@ const Characters = () => {
   return (
     <div className='container'>
       <ul className='collection with-header'>
-        <li className='collection-header brown lighten-5'>
+        <li className='collection-header brown lighten-3'>
           <h5>Characters</h5>
         </li>
         {characters.map((character, i) => (

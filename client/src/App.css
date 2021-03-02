@@ -19,6 +19,10 @@ label {
   width: 140px;
 }
 
+.fas {
+  line-height: 50px;
+}
+
 .dragonIcon {
   font-size: 700px;
   position: fixed;
@@ -32,7 +36,7 @@ label {
   transform: translate(-50%);
 }
 .brand-logo.center.mybrand-logo {
-  color: orangered;
+  color: #e0f436;
   font-size: 2.3em;
   /* opacity: 0.85; */
 }
