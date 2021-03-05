@@ -78,7 +78,7 @@ router.post("/login", async (req, res) => {
       payload,
       secret,
       {
-        expiresIn: 360000,
+        expiresIn: 3600,
         // Callback that returns token and throws possible errors
       },
       (err, token) => {

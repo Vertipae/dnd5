@@ -16,7 +16,7 @@ const SearchBar = () => {
     )
     setSearchResults(results)
   }, [searchTerm])
-  console.log(searchResults)
+  // console.log(searchResults)
 
   return (
     <nav style={{ marginTop: "30px" }} className='brown lighten-5 container'>
