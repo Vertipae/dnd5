@@ -6,7 +6,7 @@ import {
   updateCharacter,
 } from "../../actions/characterActions"
 import axios from "axios"
-import BASE_URL from "../utils/baseurl"
+import BASE_URL from "../../utils/baseurl"
 
 const Character = ({ match }) => {
   const dispatch = useDispatch()

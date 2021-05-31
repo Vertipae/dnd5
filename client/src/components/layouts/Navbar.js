@@ -74,7 +74,7 @@ const Navbar = (props) => {
 
           <li>
             <button
-              className='btn waves-effect waves-light brown'
+              className='btn waves-effect waves-light'
               style={{ marginRight: "15px", marginLeft: "7px" }}
               onClick={onLogoutClick}
             >
@@ -94,7 +94,7 @@ const Navbar = (props) => {
 
         <li>
           <button
-            className='btn waves-effect waves-light brown'
+            className='btn waves-effect waves-light'
             style={{ marginLeft: "20px" }}
             onClick={onLogoutClick}
           >
