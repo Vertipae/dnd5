@@ -6,6 +6,7 @@ import {
   updateCharacter,
 } from "../../actions/characterActions"
 import axios from "axios"
+import BASE_URL from "../utils/baseurl"
 
 const Character = ({ match }) => {
   const dispatch = useDispatch()
@@ -24,7 +25,7 @@ const Character = ({ match }) => {
 
   const getClass = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/classes`)
+      const response = await axios.get(`${BASE_URL}/api/classes`)
       setCharacterClasses(response.data)
     } catch (e) {
       console.log(e)
